@@ -22,7 +22,6 @@ export default function LessonPage() {
   const [tutorResponse, setTutorResponse] = useState('');
   const [tutorLoading, setTutorLoading] = useState(false);
 
-  // Portfolio save state
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState('');
 
@@ -67,29 +66,18 @@ export default function LessonPage() {
   const askTutor = async () => {
     if (!tutorQuestion.trim()) return;
     setTutorLoading(true);
-    setTutorResponse("");
+    setTutorResponse('');
     try {
       const res = await fetch(
-        `http://localhost:8000/api/tutor?question=${encodeURIComponent(tutorQuestion)}&lesson_context=${encodeURIComponent(lesson?.content || "")}`,
-        { method: "POST" }
-      );
-      const data = await res.text();
-      try { const json = JSON.parse(data); setTutorResponse(json.message || json.detail || JSON.stringify(json)); }
-      catch { setTutorResponse(data); }
-    } catch (err) {
-      setTutorResponse("Error contacting tutor. Please try again.");
-    }
-    setTutorLoading(false);
-  }
+        `http://localhost:8000/api/tutor?question=${encodeURIComponent(tutorQuestion)}&lesson_context=${encodeURIComponent(lesson?.content || '')}`,
         { method: 'POST' }
       );
-      const data = await res.json();
-      if (typeof data === 'string') {
+      const data = await res.text();
+      try {
+        const json = JSON.parse(data);
+        setTutorResponse(json.message || json.detail || JSON.stringify(json));
+      } catch {
         setTutorResponse(data);
-      } else if (data.detail) {
-        setTutorResponse(data.detail);
-      } else {
-        setTutorResponse(JSON.stringify(data));
       }
     } catch (err) {
       setTutorResponse('Error contacting tutor. Please try again.');
@@ -182,7 +170,6 @@ export default function LessonPage() {
           ))
         )}
 
-        {/* Save to Portfolio Button */}
         <div className="mt-6 flex items-center gap-4">
           <button
             onClick={saveToPortfolio}
@@ -194,7 +181,6 @@ export default function LessonPage() {
           {saveMessage && <span className="text-sm">{saveMessage}</span>}
         </div>
 
-        {/* AI Tutor */}
         <div className="mt-10 bg-gray-800 p-6 rounded-lg">
           <h2 className="text-2xl font-bold mb-4">🤖 AI Tutor</h2>
           <p className="text-gray-400 mb-4">Ask a question about this lesson.</p>
