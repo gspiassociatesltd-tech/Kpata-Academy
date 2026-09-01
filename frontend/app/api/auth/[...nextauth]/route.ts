@@ -27,7 +27,7 @@ const handler = NextAuth({
   ],
   callbacks: {
     async session({ session, token }) {
-      if (token?.sub) {
+      if (token?.sub && session.user) {
         session.user.id = token.sub
       }
       return session
@@ -35,7 +35,7 @@ const handler = NextAuth({
   },
   pages: {
     signIn: '/login',
-    signUp: '/register',
+    newUser: '/register',
   },
   session: { strategy: 'jwt' },
   secret: process.env.NEXTAUTH_SECRET,
