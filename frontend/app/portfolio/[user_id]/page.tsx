@@ -15,7 +15,7 @@ export default function PublicPortfolioPage() {
     const fetchProjects = async () => {
       try {
         // Fetch public projects only
-        const res = await fetch(`http://localhost:8000/api/projects?user_id=${user_id}`);
+        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/projects?user_id=${user_id}`);
         const data = await res.json();
         // Filter only public projects
         const publicProjects = data.filter((p: any) => p.portfolio_ready === true);

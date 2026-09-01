@@ -12,7 +12,7 @@ export default function CoursePage() {
 
   useEffect(() => {
     if (!id) return;
-    fetch(`http://localhost:8000/api/courses/${id}/lessons`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/courses/${id}/lessons`)
       .then(res => res.json())
       .then(data => setLessons(data))
       .catch(err => setError('Failed to load lessons'))

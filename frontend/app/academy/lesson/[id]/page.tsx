@@ -27,7 +27,7 @@ export default function LessonPage() {
 
   useEffect(() => {
     if (!id) return;
-    fetch(`http://localhost:8000/api/lessons/${id}`)
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/lessons/${id}`)
       .then(res => res.json())
       .then(data => {
         setLesson(data.lesson);
@@ -69,7 +69,7 @@ export default function LessonPage() {
     setTutorResponse('');
     try {
       const res = await fetch(
-        `http://localhost:8000/api/tutor?question=${encodeURIComponent(tutorQuestion)}&lesson_context=${encodeURIComponent(lesson?.content || '')}`,
+        `${process.env.NEXT_PUBLIC_API_URL}/api/tutor?question=${encodeURIComponent(tutorQuestion)}&lesson_context=${encodeURIComponent(lesson?.content || '')}`,
         { method: 'POST' }
       );
       const data = await res.text();
