@@ -3,6 +3,7 @@ import Layout from '@/components/Layout';
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import Link from 'next/link';
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'https://kpata-academy-backend.onrender.com';
 
 export default function CoursePage() {
   const { id } = useParams();
@@ -12,7 +13,7 @@ export default function CoursePage() {
 
   useEffect(() => {
     if (!id) return;
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/courses/${id}/lessons`)
+    fetch(`${API_BASE}/api/courses/${id}/lessons`)
       .then(res => res.json())
       .then(data => setLessons(data))
       .catch(err => setError('Failed to load lessons'))

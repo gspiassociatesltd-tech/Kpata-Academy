@@ -2,6 +2,7 @@
 import Layout from '@/components/Layout';
 import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'https://kpata-academy-backend.onrender.com';
 
 export default function PublicPortfolioPage() {
   const { user_id } = useParams();
@@ -15,7 +16,7 @@ export default function PublicPortfolioPage() {
     const fetchProjects = async () => {
       try {
         // Fetch public projects only
-        const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/projects?user_id=${user_id}`);
+        const res = await fetch(`${API_BASE}/api/projects?user_id=${user_id}`);
         const data = await res.json();
         // Filter only public projects
         const publicProjects = data.filter((p: any) => p.portfolio_ready === true);

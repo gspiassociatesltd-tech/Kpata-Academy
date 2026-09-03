@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { createProject } from '@/lib/api';
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'https://kpata-academy-backend.onrender.com';
 
 export default function LessonPage() {
   const { id } = useParams();
@@ -27,7 +28,7 @@ export default function LessonPage() {
 
   useEffect(() => {
     if (!id) return;
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/lessons/${id}`)
+    fetch(`${API_BASE}/api/lessons/${id}`)
       .then(res => res.json())
       .then(data => {
         setLesson(data.lesson);
@@ -69,7 +70,7 @@ export default function LessonPage() {
     setTutorResponse('');
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_API_URL}/api/tutor?question=${encodeURIComponent(tutorQuestion)}&lesson_context=${encodeURIComponent(lesson?.content || '')}`,
+        `${API_BASE}/api/tutor?question=${encodeURIComponent(tutorQuestion)}&lesson_context=${encodeURIComponent(lesson?.content || '')}`,
         { method: 'POST' }
       );
       const data = await res.text();

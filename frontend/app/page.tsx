@@ -1,7 +1,11 @@
+'use client'
 import Layout from '@/components/Layout';
 
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'https://kpata-academy-backend.onrender.com';
+
 export default async function Home() {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/`, { cache: 'no-store' });
+  console.log('API_BASE in page:', API_BASE);
+  const res = await fetch(`${API_BASE}/`, { cache: 'no-store' });
   const data = await res.json();
 
   return (
@@ -19,4 +23,3 @@ export default async function Home() {
     </Layout>
   );
 }
-// dummy change to force rebuild

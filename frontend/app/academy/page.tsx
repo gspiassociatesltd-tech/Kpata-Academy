@@ -1,4 +1,5 @@
 'use client';
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'https://kpata-academy-backend.onrender.com';
 import Layout from '@/components/Layout';
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
@@ -9,7 +10,7 @@ export default function AcademyPage() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/courses`)
+    fetch(`${API_BASE}/api/courses`)
       .then(res => res.json())
       .then(data => setCourses(data))
       .catch(err => setError('Failed to load courses'))

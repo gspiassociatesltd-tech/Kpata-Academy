@@ -1,6 +1,7 @@
 'use client';
 import Layout from '@/components/Layout';
 import { useState, useEffect } from 'react';
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'https://kpata-academy-backend.onrender.com';
 
 export default function AdminPage() {
   const [courses, setCourses] = useState<any[]>([]);
@@ -13,7 +14,7 @@ export default function AdminPage() {
 
   const fetchCourses = async () => {
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/courses`);
+      const res = await fetch(`${API_BASE}/api/courses`);
       const data = await res.json();
       setCourses(data);
     } catch (err) {
@@ -28,7 +29,7 @@ export default function AdminPage() {
     setLoading(true);
     setMessage('');
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/courses?title=${encodeURIComponent(newCourse.title)}&description=${encodeURIComponent(newCourse.description)}&difficulty=${newCourse.difficulty}&is_published=${newCourse.is_published}`, { method: 'POST' });
+      const res = await fetch(`${API_BASE}/api/admin/courses?title=${encodeURIComponent(newCourse.title)}&description=${encodeURIComponent(newCourse.description)}&difficulty=${newCourse.difficulty}&is_published=${newCourse.is_published}`, { method: 'POST' });
       const data = await res.json();
       if (data.message) {
         setMessage('✅ Course created!');
@@ -48,7 +49,7 @@ export default function AdminPage() {
     setLoading(true);
     setMessage('');
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/lessons?course_id=${newLesson.course_id}&title=${encodeURIComponent(newLesson.title)}&content=${encodeURIComponent(newLesson.content)}&order_index=${newLesson.order_index}`, { method: 'POST' });
+      const res = await fetch(`${API_BASE}/api/admin/lessons?course_id=${newLesson.course_id}&title=${encodeURIComponent(newLesson.title)}&content=${encodeURIComponent(newLesson.content)}&order_index=${newLesson.order_index}`, { method: 'POST' });
       const data = await res.json();
       if (data.message) {
         setMessage('✅ Lesson created!');
@@ -68,7 +69,7 @@ export default function AdminPage() {
     setMessage('');
     try {
       const options = JSON.parse(newExercise.options);
-      const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/admin/exercises?lesson_id=${newExercise.lesson_id}&question=${encodeURIComponent(newExercise.question)}&question_type=${newExercise.question_type}&correct_answer=${encodeURIComponent(newExercise.correct_answer)}`, {
+      const res = await fetch(`${API_BASE}/api/admin/exercises?lesson_id=${newExercise.lesson_id}&question=${encodeURIComponent(newExercise.question)}&question_type=${newExercise.question_type}&correct_answer=${encodeURIComponent(newExercise.correct_answer)}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ options })
