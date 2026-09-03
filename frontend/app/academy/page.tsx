@@ -9,7 +9,7 @@ export default function AcademyPage() {
   const [error, setError] = useState('');
 
   useEffect(() => {
-    fetch('${process.env.NEXT_PUBLIC_API_URL}/api/courses')
+    fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/courses`)
       .then(res => res.json())
       .then(data => setCourses(data))
       .catch(err => setError('Failed to load courses'))
