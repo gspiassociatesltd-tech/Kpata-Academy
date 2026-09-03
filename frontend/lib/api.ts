@@ -1,4 +1,4 @@
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || '${process.env.NEXT_PUBLIC_API_URL}';
+const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'https://kpata-academy-backend.onrender.com';
 
 async function fetchAPI(endpoint: string, options?: RequestInit) {
   const res = await fetch(`${API_BASE}${endpoint}`, {
@@ -15,16 +15,14 @@ async function fetchAPI(endpoint: string, options?: RequestInit) {
   return res.json();
 }
 
-// Competitions
 export const getCompetitions = () => fetchAPI('/api/competitions');
 export const discoverCompetitions = () => fetchAPI('/api/competitions/discover', { method: 'POST' });
 export const generateProposal = (competition_id: string) =>
-  fetchAPI('/api/submissions/generate?competition_id=' + competition_id, { method: 'POST' });
+  fetchAPI(`/api/submissions/generate?competition_id=${competition_id}`, { method: 'POST' });
 export const getSubmissions = () => fetchAPI('/api/submissions');
 export const updateSubmissionStatus = (id: string, status: string) =>
   fetchAPI(`/api/submissions/${id}/status?status=${status}`, { method: 'PUT' });
 
-// Improvements
 export const getProposals = () => fetchAPI('/api/improvements/proposals');
 export const analyzeImprovements = () => fetchAPI('/api/improvements/analyze', { method: 'POST' });
 export const approveProposal = (id: string) =>
@@ -32,7 +30,6 @@ export const approveProposal = (id: string) =>
 export const rejectProposal = (id: string) =>
   fetchAPI(`/api/improvements/proposals/${id}/reject`, { method: 'POST' });
 
-// Learn & Earn
 export const getWalletBalance = (userId: string) => fetchAPI(`/api/wallet/balance?user_id=${userId}`);
 export const getEarnings = (userId: string) => fetchAPI(`/api/wallet/earnings?user_id=${userId}`);
 export const requestWithdrawal = (userId: string, amount: number, method: string, phone?: string, account_details?: string) =>
@@ -59,9 +56,7 @@ export const getReferralEarnings = (userId: string) =>
 export const requestMentorship = (userId: string, mentor_id: string) =>
   fetchAPI(`/api/mentorships/request?user_id=${userId}&mentor_id=${mentor_id}`, { method: 'POST' });
 
-// ============================================================
-// PORTFOLIO API
-// ============================================================
+// Portfolio
 export const getProjects = (userId: string) => fetchAPI(`/api/projects?user_id=${userId}`);
 export const createProject = (userId: string, data: any) =>
   fetchAPI(`/api/projects?user_id=${userId}`, {
