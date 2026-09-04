@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'next/navigation';
 import { useSession } from 'next-auth/react';
 import { createProject } from '@/lib/api';
+import Link from 'next/link';
+
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'https://kpata-academy-backend.onrender.com';
 
 export default function LessonPage() {
@@ -26,6 +28,10 @@ export default function LessonPage() {
   const [saving, setSaving] = useState(false);
   const [saveMessage, setSaveMessage] = useState('');
 
+  // Navigation state
+  const [nextLesson, setNextLesson] = useState<any>(null);
+  const [prevLesson, setPrevLesson] = useState<any>(null);
+
   useEffect(() => {
     if (!id) return;
     fetch(`${API_BASE}/api/lessons/${id}`)
@@ -45,6 +51,22 @@ export default function LessonPage() {
       .catch(err => setError('Failed to load lesson'))
       .finally(() => setLoading(false));
   }, [id]);
+
+  // Fetch course lessons to determine next/prev
+  useEffect(() => {
+    if (!lesson) return;
+    fetch(`${API_BASE}/api/courses/${lesson.course_id}/lessons`)
+      .then(res => res.json())
+      .then(data => {
+        const sorted = data.sort((a: any, b: any) => a.order_index - b.order_index);
+        const currentIndex = sorted.findIndex((l: any) => l.id === lesson.id);
+        if (currentIndex !== -1) {
+          setNextLesson(currentIndex < sorted.length - 1 ? sorted[currentIndex + 1] : null);
+          setPrevLesson(currentIndex > 0 ? sorted[currentIndex - 1] : null);
+        }
+      })
+      .catch(err => console.error('Failed to load course lessons', err));
+  }, [lesson]);
 
   const handleAnswerChange = (exerciseId: string, value: string) => {
     setAnswers(prev => ({ ...prev, [exerciseId]: value }));
@@ -180,6 +202,33 @@ export default function LessonPage() {
             {saving ? 'Saving...' : '💾 Save to Portfolio'}
           </button>
           {saveMessage && <span className="text-sm">{saveMessage}</span>}
+        </div>
+
+        {/* Navigation buttons */}
+        <div className="mt-8 flex justify-between items-center border-t border-gray-700 pt-6">
+          <div>
+            {prevLesson && (
+              <Link
+                href={`/academy/lesson/${prevLesson.id}`}
+                className="bg-gray-700 px-4 py-2 rounded hover:bg-gray-600 inline-block"
+              >
+                ← Previous Lesson
+              </Link>
+            )}
+          </div>
+          <div>
+            {nextLesson && (
+              <Link
+                href={`/academy/lesson/${nextLesson.id}`}
+                className="bg-blue-600 px-4 py-2 rounded hover:bg-blue-700 inline-block"
+              >
+                Next Lesson →
+              </Link>
+            )}
+            {!nextLesson && (
+              <span className="text-gray-500">You've completed this course!</span>
+            )}
+          </div>
         </div>
 
         <div className="mt-10 bg-gray-800 p-6 rounded-lg">
