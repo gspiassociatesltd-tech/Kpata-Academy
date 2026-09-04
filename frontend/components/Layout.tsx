@@ -30,7 +30,7 @@ export default function Layout({ children }: { children: React.ReactNode }) {
             <option value="yo">Yorùbá</option><option value="ig">Igbo</option><option value="pcm">Pidgin</option>
           </select>
           {session ? (
-            <button onClick={() => signOut()} className="bg-red-600 px-3 py-1 rounded">Sign Out</button>
+            <button onClick={() => signOut({ callbackUrl: '/' })} className="bg-red-600 px-3 py-1 rounded">Sign Out</button>
           ) : (
             <Link href="/login" className="bg-blue-600 px-3 py-1 rounded">Login</Link>
           )}
