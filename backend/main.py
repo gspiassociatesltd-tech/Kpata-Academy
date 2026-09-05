@@ -556,6 +556,153 @@ def admin_create_exercise(lesson_id: str, question: str, question_type: str, opt
     if result.data:
         return {"message": "Exercise created", "exercise": result.data[0]}
     return {"error": "Failed to create exercise"}, 500
+# ============================================================
+# CERTIFICATIONS
+# ============================================================
+@app.get("/api/certifications")
+def list_certifications():
+    data = supabase.table("certifications").select("*").execute()
+    return data.data
+
+@app.get("/api/certifications/{slug}")
+def get_certification(slug: str):
+    data = supabase.table("certifications").select("*").eq("slug", slug).execute()
+    if not data.data:
+        return {"error": "Certification not found"}, 404
+    return data.data[0]
+# ============================================================
+# CERTIFICATION LESSONS
+# ============================================================
+@app.get("/api/certifications/{slug}/lessons")
+def get_certification_lessons(slug: str):
+    # Get certification ID from slug
+    cert = supabase.table("certifications").select("id").eq("slug", slug).execute()
+    if not cert.data:
+        return {"error": "Certification not found"}, 404
+    cert_id = cert.data[0]["id"]
+
+    # Get lessons for this certification via the mapping table
+    result = supabase.table("certification_lessons")\
+        .select("lessons(*)")\
+        .eq("certification_id", cert_id)\
+        .order("order_index")\
+        .execute()
+
+    # Extract lesson data from the result
+    lessons = [item["lessons"] for item in result.data if item.get("lessons")]
+    return lessons
+# ============================================================
+# CERTIFICATION LESSONS
+# ============================================================
+@app.get("/api/certifications/{slug}/lessons")
+def get_certification_lessons(slug: str):
+    # Get certification id
+    cert = supabase.table("certifications").select("id").eq("slug", slug).execute()
+    if not cert.data:
+        return {"error": "Certification not found"}, 404
+    cert_id = cert.data[0]["id"]
+    # Get lessons from mapping table, ordered
+    result = supabase.table("certification_lessons")\
+        .select("lesson_id, order_index, lessons(title, content)")\
+        .eq("certification_id", cert_id)\
+        .order("order_index")\
+        .execute()
+    # Extract lessons
+    lessons = [item["lessons"] for item in result.data]
+    return lessons
+# ============================================================
+# CERTIFICATION LESSONS
+# ============================================================
+@app.get("/api/certifications/{slug}/lessons")
+def get_certification_lessons(slug: str):
+    # Get certification id from slug
+    cert = supabase.table("certifications").select("id").eq("slug", slug).execute()
+    if not cert.data:
+        return {"error": "Certification not found"}, 404
+    cert_id = cert.data[0]["id"]
+
+    # Fetch lessons with their order
+    result = supabase.table("certification_lessons")\
+        .select("lesson_id, order_index, lessons(*)") \
+        .eq("certification_id", cert_id) \
+        .order("order_index") \
+        .execute()
+
+    lessons = []
+    for item in result.data:
+        lesson = item["lessons"]
+        lesson["order_index"] = item["order_index"]
+        lessons.append(lesson)
+    return lessons
+# ============================================================
+# TALENT DIRECTORY
+# ============================================================
+@app.get("/api/talent")
+def list_talent():
+    # Get all users who have completed all 30 lessons
+    # First, get all lesson IDs for the bootcamp course
+    lessons = supabase.table("lessons").select("id").eq("course_id", "a1b2c3d4-e5f6-7890-abcd-ef1234567890").execute()
+    lesson_ids = [l["id"] for l in lessons.data]
+    total_lessons = len(lesson_ids)
+
+    # Get all users who have completed all lessons
+    # We'll use a subquery to count completed lessons per user
+    # Supabase doesn't support complex joins easily; we'll fetch all progress and filter in Python.
+    progress = supabase.table("user_progress").select("user_id, lesson_id, status").execute()
+    # Group by user and count completed
+    user_completed = {}
+    for p in progress.data:
+        if p["status"] == "completed":
+            user_completed[p["user_id"]] = user_completed.get(p["user_id"], 0) + 1
+
+    certified_users = [uid for uid, count in user_completed.items() if count >= total_lessons]
+
+    # Fetch user details
+    if certified_users:
+        users = supabase.table("users").select("id, full_name, email").in_("id", certified_users).execute()
+        return users.data
+    else:
+        return []
+
+@app.post("/api/employer/request")
+def submit_employer_request(talent_id: str, employer_name: str, employer_email: str, company_name: str = "", job_title: str = "", message: str = ""):
+    data = {
+        "talent_id": talent_id,
+        "employer_name": employer_name,
+        "employer_email": employer_email,
+        "company_name": company_name,
+        "job_title": job_title,
+        "message": message,
+        "status": "pending"
+    }
+    result = supabase.table("employer_requests").insert(data).execute()
+    if result.data:
+        return {"message": "Request submitted successfully", "request_id": result.data[0]["id"]}
+    else:
+        return {"error": "Failed to submit request"}, 500
+# ============================================================
+# CREATOR SHOWCASE
+# ============================================================
+@app.get("/api/creators")
+def list_creators():
+    data = supabase.table("content_creators").select("*").eq("status", "approved").execute()
+    return data.data
+
+@app.post("/api/creators/request")
+def submit_creator_request(creator_id: str, client_name: str, client_email: str, company_name: str = "", message: str = ""):
+    data = {
+        "creator_id": creator_id,
+        "client_name": client_name,
+        "client_email": client_email,
+        "company_name": company_name,
+        "message": message,
+        "status": "pending"
+    }
+    result = supabase.table("creator_requests").insert(data).execute()
+    if result.data:
+        return {"message": "Request submitted successfully", "request_id": result.data[0]["id"]}
+    else:
+        return {"error": "Failed to submit request"}, 500
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)

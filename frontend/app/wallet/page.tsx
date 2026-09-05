@@ -1,12 +1,12 @@
 'use client';
 import Layout from '@/components/Layout';
 import { useEffect, useState } from 'react';
-import { getWalletBalance, getEarnings, getMicrotasks, submitMicrotask, getGigs, applyGig } from '@/lib/api';
 import { useSession } from 'next-auth/react';
+import { getWalletBalance, getEarnings, getMicrotasks, submitMicrotask, getGigs, applyGig } from '@/lib/api';
 
 export default function WalletPage() {
   const { data: session } = useSession();
-  const userId = session?.user?.id || 'test-user-id'; // replace with real
+  const userId = session?.user?.id || '97b74065-813b-4548-b0b7-f2f1d4512b23';
 
   const [balance, setBalance] = useState({ balance: 0, certification_savings: 0 });
   const [earnings, setEarnings] = useState([]);
@@ -14,6 +14,12 @@ export default function WalletPage() {
   const [gigs, setGigs] = useState([]);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState('');
+  const [baseUrl, setBaseUrl] = useState('');
+
+  useEffect(() => {
+    setBaseUrl(window.location.origin);
+    loadData();
+  }, []);
 
   const loadData = async () => {
     setLoading(true);
@@ -31,8 +37,6 @@ export default function WalletPage() {
     }
     setLoading(false);
   };
-
-  useEffect(() => { loadData(); }, []);
 
   const handleSubmitMicrotask = async (id: string) => {
     setLoading(true);
@@ -114,6 +118,30 @@ export default function WalletPage() {
               ))
             }
           </div>
+        </div>
+
+        {/* Refer & Earn Section */}
+        <div className="mt-10 bg-gray-800 p-6 rounded-lg">
+          <h2 className="text-2xl font-bold mb-2">🔗 Refer & Earn</h2>
+          <p className="text-gray-400 text-sm">Invite friends and earn rewards when they join!</p>
+          <div className="mt-3 flex flex-wrap items-center gap-3">
+            <input
+              type="text"
+              value={`${baseUrl}/register?ref=${userId}`}
+              readOnly
+              className="flex-1 bg-gray-700 p-2 rounded text-sm min-w-[200px]"
+            />
+            <button
+              onClick={() => {
+                navigator.clipboard.writeText(`${baseUrl}/register?ref=${userId}`);
+                alert('Referral link copied!');
+              }}
+              className="bg-blue-600 px-4 py-2 rounded text-sm hover:bg-blue-700"
+            >
+              📋 Copy Link
+            </button>
+          </div>
+          <p className="text-xs text-gray-500 mt-2">Share this link with your network. You'll earn rewards when they sign up.</p>
         </div>
       </div>
     </Layout>
