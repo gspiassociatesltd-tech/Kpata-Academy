@@ -192,18 +192,33 @@ export default function LessonPage() {
   };
 
   // Voice Output
-  const speakResponse = () => {
-    if (!tutorResponse) return;
-    if ('speechSynthesis' in window) {
-      const utterance = new SpeechSynthesisUtterance(tutorResponse);
-      utterance.lang = lang === 'ha' ? 'ha-NG' : lang === 'yo' ? 'yo-NG' : lang === 'ig' ? 'ig-NG' : 'en-US';
-      utterance.onstart = () => setIsSpeaking(true);
-      utterance.onend = () => setIsSpeaking(false);
-      window.speechSynthesis.speak(utterance);
-    } else {
-      alert('Text-to-speech is not supported in your browser.');
-    }
-  };
+  // Voice Output
+const speakResponse = () => {
+  if (!tutorResponse) return;
+  if ('speechSynthesis' in window) {
+    // Clean the text: remove markdown formatting (e.g., **, \n, etc.)
+    let cleanText = tutorResponse
+      .replace(/\*\*/g, '')           // Remove bold markers
+      .replace(/\\n/g, ' ')           // Replace newlines with spaces
+      .replace(/[#*_`]/g, '')         // Remove other markdown symbols
+      .replace(/\s+/g, ' ')           // Collapse multiple spaces
+      .trim();
+
+    const utterance = new SpeechSynthesisUtterance(cleanText);
+    utterance.lang = lang === 'ha' ? 'ha-NG' : lang === 'yo' ? 'yo-NG' : lang === 'ig' ? 'ig-NG' : 'en-US';
+    
+    // Try to find a native-sounding voice (if available)
+    const voices = window.speechSynthesis.getVoices();
+    const nativeVoice = voices.find(v => v.lang.startsWith(utterance.lang.slice(0, 2)) && v.localService);
+    if (nativeVoice) utterance.voice = nativeVoice;
+
+    utterance.onstart = () => setIsSpeaking(true);
+    utterance.onend = () => setIsSpeaking(false);
+    window.speechSynthesis.speak(utterance);
+  } else {
+    alert('Text-to-speech is not supported in your browser.');
+  }
+};
 
   // Translation Feedback
   const submitFeedback = async () => {
