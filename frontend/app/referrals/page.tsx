@@ -12,6 +12,7 @@ export default function ReferralsPage() {
   const [stats, setStats] = useState({ total_referrals: 0, total_earnings: 0 });
   const [loading, setLoading] = useState(true);
   const [copied, setCopied] = useState(false);
+  const [referralLink, setReferralLink] = useState('');
 
   useEffect(() => {
     if (!userId) return;
@@ -19,7 +20,13 @@ export default function ReferralsPage() {
     fetch(`${API_BASE}/api/referrals/generate?user_id=${userId}`, { method: 'POST' })
       .then(res => res.json())
       .then(data => {
-        if (data.referral_code) setReferralCode(data.referral_code);
+        if (data.referral_code) {
+          setReferralCode(data.referral_code);
+          // Set referral link after window is available
+          if (typeof window !== 'undefined') {
+            setReferralLink(`${window.location.origin}/register?ref=${data.referral_code}`);
+          }
+        }
       })
       .catch(err => console.error('Failed to generate referral code', err));
 
@@ -31,12 +38,12 @@ export default function ReferralsPage() {
       .finally(() => setLoading(false));
   }, [userId]);
 
-  const referralLink = `${window.location.origin}/register?ref=${referralCode}`;
-
   const copyToClipboard = () => {
-    navigator.clipboard.writeText(referralLink);
-    setCopied(true);
-    setTimeout(() => setCopied(false), 3000);
+    if (referralLink) {
+      navigator.clipboard.writeText(referralLink);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 3000);
+    }
   };
 
   if (loading) return <Layout><div>Loading referral dashboard...</div></Layout>;
