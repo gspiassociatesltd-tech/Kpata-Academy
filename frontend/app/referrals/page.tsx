@@ -15,18 +15,19 @@ export default function ReferralsPage() {
   const [referralLink, setReferralLink] = useState('');
 
   useEffect(() => {
+    // Only runs on client
+    if (typeof window !== 'undefined') {
+      setReferralLink(`${window.location.origin}/register?ref=${referralCode}`);
+    }
+  }, [referralCode]);
+
+  useEffect(() => {
     if (!userId) return;
     // Generate referral code
     fetch(`${API_BASE}/api/referrals/generate?user_id=${userId}`, { method: 'POST' })
       .then(res => res.json())
       .then(data => {
-        if (data.referral_code) {
-          setReferralCode(data.referral_code);
-          // Set referral link after window is available
-          if (typeof window !== 'undefined') {
-            setReferralLink(`${window.location.origin}/register?ref=${data.referral_code}`);
-          }
-        }
+        if (data.referral_code) setReferralCode(data.referral_code);
       })
       .catch(err => console.error('Failed to generate referral code', err));
 
@@ -39,11 +40,10 @@ export default function ReferralsPage() {
   }, [userId]);
 
   const copyToClipboard = () => {
-    if (referralLink) {
-      navigator.clipboard.writeText(referralLink);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 3000);
-    }
+    if (!referralLink) return;
+    navigator.clipboard.writeText(referralLink);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 3000);
   };
 
   if (loading) return <Layout><div>Loading referral dashboard...</div></Layout>;
