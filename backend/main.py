@@ -703,6 +703,265 @@ def submit_creator_request(creator_id: str, client_name: str, client_email: str,
         return {"message": "Request submitted successfully", "request_id": result.data[0]["id"]}
     else:
         return {"error": "Failed to submit request"}, 500
+@app.post("/api/referrals/register")
+def register_referral(referrer_id: str, referred_id: str):
+    # Check if referral already exists
+    existing = supabase.table("referrals").select("*").eq("referrer_id", referrer_id).eq("referred_id", referred_id).execute()
+    if existing.data:
+        return {"message": "Referral already recorded"}
+    data = {
+        "referrer_id": referrer_id,
+        "referred_id": referred_id,
+        "commission_earned": 0,
+        "status": "pending"
+    }
+    result = supabase.table("referrals").insert(data).execute()
+    if result.data:
+        return {"message": "Referral recorded"}
+    return {"error": "Failed to record referral"}, 500
+@app.get("/api/referrals/stats")
+def get_referral_stats(user_id: str):
+    # Total referrals
+    total = supabase.table("referrals").select("id", count="exact").eq("referrer_id", user_id).execute()
+    total_count = total.count if total.count else 0
+
+    # Earnings from referrals
+    earnings = supabase.table("referrals").select("commission_earned").eq("referrer_id", user_id).execute()
+    total_earnings = sum(r.get("commission_earned", 0) for r in earnings.data)
+
+    return {
+        "total_referrals": total_count,
+        "total_earnings": total_earnings
+    }
+# ============================================================
+# MARKETING DRAFTS
+# ============================================================
+@app.post("/api/marketing/generate")
+def generate_marketing_draft(user_id: str, certification_slug: str):
+    # Get user details
+    user = supabase.table("users").select("full_name").eq("id", user_id).execute()
+    if not user.data:
+        return {"error": "User not found"}, 404
+    user_name = user.data[0]["full_name"]
+
+    # Get certification details by slug
+    cert = supabase.table("certifications").select("id, name").eq("slug", certification_slug).execute()
+    if not cert.data:
+        return {"error": "Certification not found"}, 404
+    cert_id = cert.data[0]["id"]
+    cert_name = cert.data[0]["name"]
+
+    # Generate draft using AI (mock for MVP)
+    draft = f"""
+🎉 Congratulations to {user_name} for earning the **{cert_name}** certification on Kpata Academy!
+
+🚀 Learn AI for free, earn globally recognized certifications, and build your portfolio.
+
+👉 Join now: https://kpata-academy.vercel.app
+#AI #EdTech #KpataAcademy #Certification #FreeLearning
+    """
+
+    # Save draft to database
+    data = {
+        "user_id": user_id,
+        "certification_id": cert_id,
+        "draft_text": draft.strip(),
+        "platform": "all",
+        "status": "pending"
+    }
+    result = supabase.table("marketing_drafts").insert(data).execute()
+    if result.data:
+        return {
+            "message": "Draft generated",
+            "draft": draft.strip(),
+            "draft_id": result.data[0]["id"]
+        }
+    return {"error": "Failed to save draft"}, 500
+
+@app.get("/api/marketing/drafts")
+def list_marketing_drafts(status: str = "pending"):
+    data = supabase.table("marketing_drafts").select("*").eq("status", status).execute()
+    return data.data
+
+@app.put("/api/marketing/drafts/{draft_id}/approve")
+def approve_marketing_draft(draft_id: str):
+    result = supabase.table("marketing_drafts").update({"status": "approved"}).eq("id", draft_id).execute()
+    if result.data:
+        return {"message": "Draft approved", "draft": result.data[0]}
+    return {"error": "Draft not found"}, 404
+# ============================================================
+# TRANSLATION ENDPOINT
+# ============================================================
+@app.post("/api/translate")
+def translate_text(text: str, target_lang: str):
+    import httpx
+    import os
+    if not text:
+        return {"translation": ""}
+    prompt = f"Translate the following English text into {target_lang} (Hausa, Yoruba, Igbo, or Nigerian Pidgin). Return only the translation, nothing else:\n\n{text}"
+    api_key = os.getenv("GROQ_API_KEY")
+    if not api_key:
+        return {"error": "GROQ_API_KEY not set"}, 500
+    try:
+        with httpx.Client() as client:
+            response = client.post(
+                "https://api.groq.com/openai/v1/chat/completions",
+                headers={"Authorization": f"Bearer {api_key}"},
+                json={
+                    "model": "openai/gpt-oss-20b",
+                    "messages": [
+                        {"role": "system", "content": "You are an expert translator."},
+                        {"role": "user", "content": prompt}
+                    ],
+                    "temperature": 0.3,
+                    "max_tokens": 512
+                },
+                timeout=30
+            )
+            if response.status_code == 200:
+                result = response.json()
+                return {"translation": result["choices"][0]["message"]["content"].strip()}
+            else:
+                return {"error": f"Translation failed: {response.status_code}"}, response.status_code
+    except Exception as e:
+        return {"error": str(e)}, 500
+# ============================================================
+# PERSISTENT LESSON TRANSLATION
+# ============================================================
+@app.post("/api/lesson/translate")
+def translate_and_save_lesson(lesson_id: str, target_lang: str):
+    import httpx
+    import os
+    from supabase import create_client, Client
+
+    # Fetch lesson and exercises
+    lesson = supabase.table("lessons").select("*").eq("id", lesson_id).execute()
+    if not lesson.data:
+        return {"error": "Lesson not found"}, 404
+    lesson_data = lesson.data[0]
+
+    exercises = supabase.table("exercises").select("*").eq("lesson_id", lesson_id).execute()
+    exercises_data = exercises.data
+
+    # Translate function
+    def translate_text(text: str) -> str:
+        if not text or text.strip() == "":
+            return text
+        prompt = f"Translate the following English text into {target_lang} (Hausa, Yoruba, Igbo, or Nigerian Pidgin). Return only the translation, nothing else:\n\n{text}"
+        api_key = os.getenv("GROQ_API_KEY")
+        if not api_key:
+            return text
+        try:
+            with httpx.Client() as client:
+                response = client.post(
+                    "https://api.groq.com/openai/v1/chat/completions",
+                    headers={"Authorization": f"Bearer {api_key}"},
+                    json={
+                        "model": "openai/gpt-oss-20b",
+                        "messages": [
+                            {"role": "system", "content": "You are an expert translator."},
+                            {"role": "user", "content": prompt}
+                        ],
+                        "temperature": 0.3,
+                        "max_tokens": 512
+                    },
+                    timeout=30
+                )
+                if response.status_code == 200:
+                    result = response.json()
+                    return result["choices"][0]["message"]["content"].strip()
+                else:
+                    return text
+        except Exception:
+            return text
+
+    # Update lesson translations
+    lesson_translations = lesson_data.get("translations", {})
+    if target_lang not in lesson_translations:
+        translated_title = translate_text(lesson_data["title"])
+        translated_content = translate_text(lesson_data["content"])
+        lesson_translations[target_lang] = {
+            "title": translated_title,
+            "content": translated_content
+        }
+        supabase.table("lessons").update({"translations": lesson_translations}).eq("id", lesson_id).execute()
+
+    # Update exercise translations
+    for ex in exercises_data:
+        ex_translations = ex.get("translations", {})
+        if target_lang not in ex_translations:
+            translated_question = translate_text(ex["question"])
+            translated_options = []
+            if ex.get("options"):
+                for opt in ex["options"]:
+                    translated_options.append(translate_text(opt))
+            translated_correct = translate_text(ex["correct_answer"]) if ex.get("correct_answer") else ""
+            ex_translations[target_lang] = {
+                "question": translated_question,
+                "options": translated_options,
+                "correct_answer": translated_correct
+            }
+            supabase.table("exercises").update({"translations": ex_translations}).eq("id", ex["id"]).execute()
+
+    # Return the now-translated lesson (with exercises)
+    translated_lesson = lesson_data.copy()
+    translated_lesson["title"] = lesson_translations[target_lang]["title"]
+    translated_lesson["content"] = lesson_translations[target_lang]["content"]
+
+    translated_exercises = []
+    for ex in exercises_data:
+        new_ex = ex.copy()
+        ex_trans = ex.get("translations", {}).get(target_lang, {})
+        if ex_trans:
+            new_ex["question"] = ex_trans.get("question", ex["question"])
+            new_ex["options"] = ex_trans.get("options", ex["options"])
+            new_ex["correct_answer"] = ex_trans.get("correct_answer", ex["correct_answer"])
+        translated_exercises.append(new_ex)
+
+    return {"lesson": translated_lesson, "exercises": translated_exercises}
+# ============================================================
+# TUTOR CONVERSATION LOG
+# ============================================================
+@app.post("/api/tutor/log")
+def log_tutor_conversation(user_id: str, lesson_id: str, question: str, response: str, language: str = "en"):
+    data = {
+        "user_id": user_id,
+        "lesson_id": lesson_id,
+        "question": question,
+        "response": response,
+        "language": language,
+    }
+    result = supabase.table("tutor_conversations").insert(data).execute()
+    if result.data:
+        return {"message": "Conversation logged", "id": result.data[0]["id"]}
+    return {"error": "Failed to log conversation"}, 500
+# ============================================================
+# TRANSLATION FEEDBACK
+# ============================================================
+@app.post("/api/translation/feedback")
+def submit_translation_feedback(
+    lesson_id: str,
+    language: str,
+    original_text: str,
+    suggested_text: str,
+    user_id: str,
+    exercise_id: str = None
+):
+    data = {
+        "lesson_id": lesson_id,
+        "language": language,
+        "original_text": original_text,
+        "suggested_text": suggested_text,
+        "user_id": user_id,
+    }
+    if exercise_id:
+        data["exercise_id"] = exercise_id
+
+    result = supabase.table("translation_feedback").insert(data).execute()
+    if result.data:
+        return {"message": "Feedback saved", "id": result.data[0]["id"]}
+    else:
+        return {"error": "Failed to save feedback"}, 500
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8000)

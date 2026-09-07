@@ -1,11 +1,8 @@
-'use client'
 import Layout from '@/components/Layout';
-
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'https://kpata-academy-backend.onrender.com';
+import EmailWaitlist from '@/components/EmailWaitlist';
 
 export default async function Home() {
-  console.log('API_BASE in page:', API_BASE);
-  const res = await fetch(`${API_BASE}/`, { cache: 'no-store' });
+  const res = await fetch('http://localhost:8000/', { cache: 'no-store' });
   const data = await res.json();
 
   return (
@@ -19,6 +16,7 @@ export default async function Home() {
         <div className="mt-4 text-sm text-gray-400">
           Backend says: {data.message}
         </div>
+        <EmailWaitlist />
       </div>
     </Layout>
   );
