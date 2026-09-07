@@ -36,6 +36,10 @@ export const uiTranslations: Record<string, Record<string, string>> = {
     loading: 'Ana loda darasi...',
     lessonNotFound: 'Ba a sami darasi ba',
     failedToLoad: 'An kasa loda darasi',
+    speak: '🎤 Yi magana',
+    listen: '🔊 Saurara',
+    listening: '🔴 Saurara...',
+    speaking: '🔊 Magana...',
   },
   // Add yo (Yoruba), ig (Igbo), pcm (Pidgin) later
 };

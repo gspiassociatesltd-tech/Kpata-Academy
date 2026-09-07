@@ -427,16 +427,18 @@ const speakResponse = () => {
               disabled={isListening}
               className={`px-4 py-2 rounded ${isListening ? 'bg-red-600' : 'bg-blue-600'} hover:bg-blue-700 disabled:opacity-50`}
             >
-              {isListening ? '🔴 Listening...' : '🎤 Speak'}
+              {isListening ? t.listening : t.speak}
             </button>
-            {tutorResponse && (
+            </button>
+              {tutorResponse && (
               <button
-                onClick={speakResponse}
-                disabled={isSpeaking}
-                className="bg-green-600 px-4 py-2 rounded hover:bg-green-700 disabled:opacity-50"
-              >
-                {isSpeaking ? '🔊 Speaking...' : '🔊 Listen'}
-              </button>
+                
+              onClick={speakResponse}
+              disabled={isSpeaking}
+              className="bg-green-600 px-4 py-2 rounded hover:bg-green-700 disabled:opacity-50"
+            >
+              {isSpeaking ? t.speaking : t.listen}
+           </button>
             )}
           </div>
           {tutorResponse && (
