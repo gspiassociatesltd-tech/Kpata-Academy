@@ -9,6 +9,14 @@ import { uiTranslations } from '@/lib/uiTranslations';
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL || 'https://kpata-academy-backend.onrender.com';
 
+// Declare webkitSpeechRecognition for TypeScript
+declare global {
+  interface Window {
+    webkitSpeechRecognition: any;
+    SpeechRecognition: any;
+  }
+}
+
 export default function LessonPage() {
   const { id } = useParams();
   const searchParams = useSearchParams();
@@ -426,4 +434,3 @@ export default function LessonPage() {
     </Layout>
   );
 }
-
