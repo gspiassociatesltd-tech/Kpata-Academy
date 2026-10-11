@@ -1,0 +1,19 @@
+-- CLEANUP SCRIPT - Run this if you want to delete everything and start fresh
+DROP TABLE IF EXISTS earnings_log CASCADE;
+DROP TABLE IF EXISTS wallets CASCADE;
+DROP TABLE IF EXISTS improvement_proposals CASCADE;
+DROP TABLE IF EXISTS competition_sources CASCADE;
+DROP TABLE IF EXISTS submissions CASCADE;
+DROP TABLE IF EXISTS competitions CASCADE;
+DROP TABLE IF EXISTS feedback CASCADE;
+DROP TABLE IF EXISTS audit_log CASCADE;
+DROP TABLE IF EXISTS ai_interactions CASCADE;
+DROP TABLE IF EXISTS portfolio_items CASCADE;
+DROP TABLE IF EXISTS projects CASCADE;
+DROP TABLE IF EXISTS user_progress CASCADE;
+DROP TABLE IF EXISTS exercises CASCADE;
+DROP TABLE IF EXISTS lessons CASCADE;
+DROP TABLE IF EXISTS courses CASCADE;
+DROP TABLE IF EXISTS user_consents CASCADE;
+DROP TABLE IF EXISTS users CASCADE;
+-- Then run 001_initial_schema_FIXED.sql again
