@@ -1,7 +1,7 @@
 
 {
-  "name": "kpata-academy-fresh",
-  "version": "5.0.0",
+  "name": "kpata-academy-live",
+  "version": "6.0.0",
   "private": true,
   "scripts": {
     "dev": "next dev",
@@ -11,7 +11,8 @@
   "dependencies": {
     "next": "14.2.35",
     "react": "^18",
-    "react-dom": "^18"
+    "react-dom": "^18",
+    "@supabase/supabase-js": "^2.45.0"
   },
   "devDependencies": {
     "typescript": "^5",
