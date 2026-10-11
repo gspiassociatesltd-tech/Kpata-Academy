@@ -1,7 +1,7 @@
 
 'use client'
 import { useEffect, useState } from 'react'
-import { supabase, isSupabaseConfigured } from '@/lib/supabase'
+import { supabase, isSupabaseConfigured } from '../../lib/supabase'
 
 type Cert = {
   id: string
@@ -46,13 +46,12 @@ export default function AcademyPage() {
           .select('*')
           .eq('is_active', true)
           .order('relevance_score', { ascending: false })
-        
         if (!error && data && data.length > 0) {
           setCerts(data as Cert[])
           setLive(true)
         }
       } catch (e) {
-        console.log('Using fallback certs', e)
+        console.log('Using fallback', e)
       } finally {
         setLoading(false)
       }
@@ -67,9 +66,7 @@ export default function AcademyPage() {
   const CertCard = ({ c }: { c: Cert }) => (
     <div style={{ background: 'white', padding: '14px', borderRadius: '12px', marginBottom: '10px', fontSize: '14px', border: '1px solid #e5e7eb', textAlign: 'left' }}>
       <div style={{ fontWeight: 900 }}>{c.title}</div>
-      <div style={{ fontSize: '12px', color: '#6b7280', marginTop: '4px' }}>
-        {c.provider} {c.duration_hours ? `• ${c.duration_hours}h` : ''} {c.relevance_score ? `• ${c.relevance_score}/10` : ''} • {c.cost || 'FREE'}
-      </div>
+      <div style={{ fontSize: '12px', color: '#6b7280', marginTop: '4px' }}>{c.provider} {c.duration_hours ? `• ${c.duration_hours}h` : ''} {c.relevance_score ? `• ${c.relevance_score}/10` : ''} • {c.cost || 'FREE'}</div>
       <div style={{ fontSize: '12px', marginTop: '6px' }}><b>Tool:</b> {c.tool_mapping || 'AI Tools'} → {c.pidgin_why || c.voucher_info || 'Free cert'}</div>
     </div>
   )
@@ -84,44 +81,16 @@ export default function AcademyPage() {
           <span style={{ background: live ? '#22c55e' : 'white', color: live ? 'white' : 'black', padding: '6px 14px', borderRadius: '999px', fontSize: '12px', fontWeight: 'bold' }}>{live ? 'Supabase LIVE ✓' : 'Fresh Build ✓'}</span>
         </div>
       </header>
-
       <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '24px' }}>
         <div style={{ background: 'linear-gradient(135deg, #fde047 0%, #fb923c 100%)', padding: '40px', borderRadius: '24px', color: 'black', marginBottom: '24px', border: '3px solid black' }}>
           <h2 style={{ fontSize: '48px', fontWeight: 900, lineHeight: '0.95', margin: 0, letterSpacing: '-2px' }}>Learn AI.<br/>Choose Right Tool.<br/>Get Real Free Certs.</h2>
           <p style={{ marginTop: '16px', fontWeight: 600, fontSize: '18px', maxWidth: '700px' }}>We train you. We apply on your behalf. Google, Microsoft, IBM, AWS certify you. All self-paced in EN / HA / YO / IG / PIDGIN.</p>
-          {loading ? <div style={{ marginTop: '12px', fontSize: '13px', fontWeight: 'bold' }}>⏳ Checking Supabase LIVE...</div> : 
-            <div style={{ marginTop: '12px', background: live ? '#16a34a' : 'black', color: 'white', padding: '10px 16px', borderRadius: '999px', display: 'inline-block', fontSize: '13px', fontWeight: 'bold' }}>
-              {live ? `✅ LIVE from Supabase: ${certs.length} certs loaded!` : '⚠️ Using fallback - Add Supabase env to go LIVE'}
-            </div>
-          }
+          {loading ? <div style={{ marginTop: '12px', fontSize: '13px', fontWeight: 'bold' }}>⏳ Checking Supabase LIVE...</div> : <div style={{ marginTop: '12px', background: live ? '#16a34a' : 'black', color: 'white', padding: '10px 16px', borderRadius: '999px', display: 'inline-block', fontSize: '13px', fontWeight: 'bold' }}>{live ? `✅ LIVE from Supabase: ${certs.length} certs loaded!` : '⚠️ Using fallback - Add Supabase env to go LIVE'}</div>}
         </div>
-
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '20px' }}>
-          <div style={{ background: 'white', borderRadius: '20px', border: '3px solid #fde68a', padding: '24px' }}>
-            <h3 style={{ fontWeight: 900, fontSize: '20px', margin: '0 0 4px 0' }}>Phase 1: 0-30 Days</h3><p style={{ fontSize: '12px', color: '#6b7280', margin: '0 0 16px 0', fontWeight: 600 }}>{phase1.length} courses - Foundation</p>
-            {phase1.map(c => <CertCard key={c.id} c={c} />)}
-            <button style={{ marginTop: '16px', width: '100%', background: 'black', color: 'white', padding: '12px', borderRadius: '12px', fontWeight: 'bold', border: 'none' }}>Start Phase 1</button>
-          </div>
-          <div style={{ background: 'white', borderRadius: '20px', border: '3px solid #bfdbfe', padding: '24px' }}>
-            <h3 style={{ fontWeight: 900, fontSize: '20px', margin: '0 0 4px 0' }}>Phase 2: 30-90 Days</h3><p style={{ fontSize: '12px', color: '#6b7280', margin: '0 0 16px 0', fontWeight: 600 }}>{phase2.length} courses - Builder</p>
-            {phase2.map(c => <CertCard key={c.id} c={c} />)}
-            <button style={{ marginTop: '16px', width: '100%', background: '#2563eb', color: 'white', padding: '12px', borderRadius: '12px', fontWeight: 'bold', border: 'none' }}>Start Phase 2</button>
-          </div>
-          <div style={{ background: 'white', borderRadius: '20px', border: '3px solid #bbf7d0', padding: '24px' }}>
-            <h3 style={{ fontWeight: 900, fontSize: '20px', margin: '0 0 4px 0' }}>Phase 3: 90-180 Days</h3><p style={{ fontSize: '12px', color: '#6b7280', margin: '0 0 16px 0', fontWeight: 600 }}>{phase3.length} courses - Specialist</p>
-            {phase3.map(c => <CertCard key={c.id} c={c} />)}
-            <button style={{ marginTop: '16px', width: '100%', background: '#16a34a', color: 'white', padding: '12px', borderRadius: '12px', fontWeight: 'bold', border: 'none' }}>Start Phase 3</button>
-          </div>
-        </div>
-
-        <div style={{ marginTop: '24px', background: 'black', color: 'white', padding: '28px', borderRadius: '20px' }}>
-          <h3 style={{ fontWeight: 900, fontSize: '20px', margin: 0 }}>How LIVE works:</h3>
-          <div style={{ marginTop: '16px', background: 'white', color: 'black', padding: '20px', borderRadius: '16px', fontSize: '14px', lineHeight: '1.5', fontFamily: 'monospace' }}>
-            NEXT_PUBLIC_SUPABASE_URL=your_url<br/>
-            NEXT_PUBLIC_SUPABASE_ANON_KEY=your_key<br/>
-            Table: external_certifications (is_active=true)<br/><br/>
-            If env missing → fallback 9 certs, NO crash ever!
-          </div>
+          <div style={{ background: 'white', borderRadius: '20px', border: '3px solid #fde68a', padding: '24px' }}><h3 style={{ fontWeight: 900, fontSize: '20px', margin: '0 0 4px 0' }}>Phase 1: 0-30 Days</h3><p style={{ fontSize: '12px', color: '#6b7280', margin: '0 0 16px 0', fontWeight: 600 }}>{phase1.length} courses</p>{phase1.map(c => <CertCard key={c.id} c={c} />)}<button style={{ marginTop: '16px', width: '100%', background: 'black', color: 'white', padding: '12px', borderRadius: '12px', fontWeight: 'bold', border: 'none' }}>Start Phase 1</button></div>
+          <div style={{ background: 'white', borderRadius: '20px', border: '3px solid #bfdbfe', padding: '24px' }}><h3 style={{ fontWeight: 900, fontSize: '20px', margin: '0 0 4px 0' }}>Phase 2: 30-90 Days</h3><p style={{ fontSize: '12px', color: '#6b7280', margin: '0 0 16px 0', fontWeight: 600 }}>{phase2.length} courses</p>{phase2.map(c => <CertCard key={c.id} c={c} />)}<button style={{ marginTop: '16px', width: '100%', background: '#2563eb', color: 'white', padding: '12px', borderRadius: '12px', fontWeight: 'bold', border: 'none' }}>Start Phase 2</button></div>
+          <div style={{ background: 'white', borderRadius: '20px', border: '3px solid #bbf7d0', padding: '24px' }}><h3 style={{ fontWeight: 900, fontSize: '20px', margin: '0 0 4px 0' }}>Phase 3: 90-180 Days</h3><p style={{ fontSize: '12px', color: '#6b7280', margin: '0 0 16px 0', fontWeight: 600 }}>{phase3.length} courses</p>{phase3.map(c => <CertCard key={c.id} c={c} />)}<button style={{ marginTop: '16px', width: '100%', background: '#16a34a', color: 'white', padding: '12px', borderRadius: '12px', fontWeight: 'bold', border: 'none' }}>Start Phase 3</button></div>
         </div>
       </div>
     </div>
