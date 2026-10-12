@@ -1,7 +1,7 @@
 
 'use client'
 import { useParams } from 'next/navigation'
-import { getCourse } from '../../../lib/courses'
+import { getCourse } from '../../lib/courses'
 import Link from 'next/link'
 
 export default function CoursePage() {
@@ -46,7 +46,7 @@ export default function CoursePage() {
             <p style={{ fontSize: '14px', lineHeight: '1.5', color: '#374151', margin: '8px 0' }}>{lesson.content}</p>
             {lesson.toolTip && <div style={{ background: '#faf9f6', border: '1px dashed #d1d5db', padding: '10px 12px', borderRadius: '10px', fontSize: '12px', marginTop: '8px' }}>💡 <b>{lesson.toolTip}</b></div>}
             {lesson.pidgin && <div style={{ background: '#fffbeb', padding: '8px 12px', borderRadius: '10px', fontSize: '12px', marginTop: '8px', border: '1px solid #fde68a' }}>🇳🇬 PIDGIN: {lesson.pidgin}</div>}
-            <button style={{ marginTop: '12px', background: 'black', color: 'white', padding: '8px 16px', borderRadius: '10px', border: 'none', fontWeight: 'bold', fontSize: '13px', cursor: 'pointer' }}>{lesson.type === 'task' ? '✓ Mark Done' : '▶ Start Lesson'}</button>
+            <Link href={`/courses/${course.slug}/${lesson.id}`} style={{ marginTop: '12px', background: 'black', color: 'white', padding: '8px 16px', borderRadius: '10px', border: 'none', fontWeight: 'bold', fontSize: '13px', cursor: 'pointer', display: 'inline-block', textDecoration: 'none' }}>{lesson.type === 'task' ? '✓ Do Task' : '▶ Start Lesson'}</Link>
           </div>
         ))}
 
