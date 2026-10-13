@@ -1,0 +1,19 @@
+SAMPLE INVOICE - For AI Training
+Vendor: GSPI Associates Ltd
+Address: Minna, Niger State, Nigeria
+Invoice Number: INV-2026-001
+Date: 13 October 2026
+Customer: Kpata Academy
+Items:
+1. AI Training Course - Google AI Essentials - 1 participant - 50,000 Naira
+2. Microsoft AI-900 Training - 1 participant - 75,000 Naira
+3. Data Analytics Course - 1 participant - 100,000 Naira
+Subtotal: 225,000 Naira
+Tax (7.5%): 16,875 Naira
+Total: 241,875 Naira
+Payment Terms: Net 14 days
+Bank: First Bank - Account 1234567890
+This invoice is for AI training to practice Document Intelligence - Extract vendor, amount, date, line
+items.
+
+[PDF page 1 image attached. Read this image directly to extract content.]
