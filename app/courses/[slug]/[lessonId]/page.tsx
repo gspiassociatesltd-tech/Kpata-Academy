@@ -118,7 +118,6 @@ export default function LessonPage(){
             )}
           </div>
 
-          
           <div style={{ fontSize: '15px', lineHeight: '1.8', background: '#faf9f6', padding: '20px', borderRadius: '12px', border: '2px solid #e5e7eb' }}>
             <div style={{ whiteSpace: 'pre-wrap', fontFamily: 'system-ui' }}>{lesson.content}</div>
             
@@ -134,7 +133,6 @@ export default function LessonPage(){
               </div>
             </div>
           </div>
-
 
           <div style={{ marginTop: '12px', background: 'linear-gradient(135deg, #111 0%, #333 100%)', color: 'white', padding: '10px 14px', borderRadius: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', border: '2px solid #16a34a', flexWrap: 'wrap', gap: '8px' }}>
             <span style={{ fontSize: '11px', fontWeight: 'bold' }}>Written lesson is enough - 0 data - 5 mins reading - Video optional</span>
@@ -195,7 +193,6 @@ export default function LessonPage(){
           </div>
         </div>
 
-        
         <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between', gap: '12px', flexWrap: 'wrap' }}>
           {prev ? (
             <Link href={`/courses/${slug}/${prev.id}`} style={{ flex: 1, minWidth: '120px', background: 'white', border: '3px solid black', padding: '14px', borderRadius: '12px', textDecoration: 'none', color: 'black', fontWeight: 900, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
@@ -214,9 +211,6 @@ export default function LessonPage(){
           )}
         </div>
 
-        <div style={{ marginTop: '16px', background: '#111', color: '#fde047', padding: '14px', borderRadius: '12px', textAlign: 'center', fontWeight: 900, fontSize: '11px', border: '2px solid #16a34a' }}>
-          FIXED: Build error - Video optional collapsed - Real duration 2h18m shown - Not 5 mins - Written lesson enough - Saves 1GB data per lesson
-        </div>
       </div>
     </div>
   )
