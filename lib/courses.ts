@@ -151,7 +151,7 @@ export const COURSES: Course[] = [
 ];
 
 export const BUILD_STATUS = {
-  overall: 95,
+  overall: 96,
   phases: [
     { name: 'Platform Core', percent: 100, status: 'DONE', desc: 'Next.js 14, Vercel deploy, no crash, text-first' },
     { name: 'Real Training Content', percent: 95, status: 'DONE', desc: '15 lessons with 600+ words each, labs, quizzes, full curriculum' },
