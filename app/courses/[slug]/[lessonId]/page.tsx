@@ -5,6 +5,7 @@ import { getCourse, BUILD_STATUS } from '../../../../lib/courses'
 import { saveProgress, isLessonDone } from '../../../../lib/progress'
 import Link from 'next/link'
 import { useState, useEffect } from 'react'
+import { WhatsAppBanner } from '../../../../components/WhatsAppBanner'
 
 function getVideoInfo(slug: string, lid: string){
   if(slug==='google-ai-essentials'){
@@ -65,11 +66,13 @@ export default function LessonPage(){
 
   return (
     <div style={{ minHeight: '100vh', background: '#faf9f6', fontFamily: 'system-ui, sans-serif' }}>
+      <WhatsAppBanner variant="top" />
       <header style={{ background: 'black', color: 'white', padding: '12px 16px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', position: 'sticky', top: 0, zIndex: 10, flexWrap: 'wrap', gap: '8px' }}>
-        <Link href={`/courses/${slug}`} style={{ color: 'white', textDecoration: 'none', fontWeight: 900, fontSize: '13px' }}>Back</Link>
+        <Link href={`/courses/${slug}`} style={{ color: 'white', textDecoration: 'none', fontWeight: 900, fontSize: '13px' }}>← Back to Course</Link>
         <div style={{ display: 'flex', gap: '6px', alignItems: 'center' }}>
           <span style={{ background: '#16a34a', color: 'white', padding: '4px 10px', borderRadius: '999px', fontSize: '11px', fontWeight: 'bold' }}>Build {BUILD_STATUS.overall}%</span>
           <span style={{ background: '#fbbf24', color: 'black', padding: '4px 10px', borderRadius: '999px', fontSize: '11px', fontWeight: 'bold' }}>L{idx+1}/{course.lessons.length}</span>
+          <span style={{ background: '#25D366', color: 'white', padding: '4px 10px', borderRadius: '999px', fontSize: '11px', fontWeight: 'bold' }}>No Registration Needed</span>
         </div>
       </header>
 
@@ -77,12 +80,17 @@ export default function LessonPage(){
         <div style={{ background: 'white', borderRadius: '20px', border: '3px solid black', padding: '20px' }}>
           <h1 style={{ fontSize: '20px', fontWeight: 900, margin: '0 0 12px 0' }}>{idx+1}. {lesson.title}</h1>
           
+          <div style={{ background: '#f0fdf4', border: '2px solid #bbf7d0', padding: '8px 12px', borderRadius: '8px', marginBottom: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '6px' }}>
+            <div style={{ fontSize: '11px', fontWeight: 700 }}>✓ No Registration Needed to Learn - 100% FREE - Join WhatsApp Channel for Updates & Jobs (Optional)</div>
+            <div style={{ fontSize: '10px', color: '#16a34a', fontWeight: 900 }}>Loved for Simplicity</div>
+          </div>
+
           <div style={{ background: 'white', border: '2px dashed #f59e0b', padding: '12px', marginBottom: '16px', borderRadius: '12px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
               <div>
-                <div style={{ fontWeight: 900, fontSize: '13px' }}>Video: Optional - Uses Data</div>
-                <div style={{ fontSize: '11px', color: '#92400e', marginTop: '4px' }}>Data Warning: {v.duration} = ~1GB at 480p. Written lesson below is enough for certification. Video is extra, not required.</div>
-                <div style={{ fontSize: '11px', color: '#374151', marginTop: '4px' }}>You can get certified WITHOUT watching video - Do 3 steps + quiz + PDF is enough.</div>
+                <div style={{ fontWeight: 900, fontSize: '13px' }}>Video: Optional - Uses Data - Written Lesson is Enough</div>
+                <div style={{ fontSize: '11px', color: '#92400e', marginTop: '4px' }}>Data Warning: {v.duration} = ~1GB at 480p. Written lesson below is enough for certification. Video is extra, not required. Saves 1GB data.</div>
+                <div style={{ fontSize: '11px', color: '#374151', marginTop: '4px' }}>You can get certified WITHOUT watching video - Do 3 steps + quiz + PDF is enough - No registration needed.</div>
               </div>
               <button onClick={()=>setShowVideo(!showVideo)} style={{ background: showVideo ? '#ef4444' : '#f59e0b', color: showVideo ? 'white' : 'black', padding: '10px 16px', borderRadius: '8px', border: 'none', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer' }}>{showVideo ? 'Hide Video' : 'Show Video (Optional)'}</button>
             </div>
@@ -96,23 +104,8 @@ export default function LessonPage(){
                   <div style={{ padding: '10px 14px', background: '#111', color: 'white' }}>
                     <div style={{ fontSize: '11px', fontWeight: 'bold' }}>{v.title} - {v.duration}</div>
                     <div style={{ fontSize: '10px', marginTop: '4px', color: '#fde047' }}>{v.chapter} - {v.desc}</div>
-                    <div style={{ fontSize: '10px', marginTop: '4px', color: '#aaa' }}>Data saver: In YouTube tap Settings gear - Quality - 144p to use 0.2GB instead of 1GB. Or read transcript below (0 data).</div>
+                    <div style={{ fontSize: '10px', marginTop: '4px', color: '#aaa' }}>Data saver: In YouTube tap Settings gear - Quality - 144p to use 0.2GB instead of 1GB. Or read transcript below (0 data). Subtitles: CC - Auto-translate - Hausa/Yoruba/Igbo/Pidgin</div>
                   </div>
-                </div>
-
-                <div style={{ background: '#f0fdf4', border: '2px solid #bbf7d0', padding: '10px', marginTop: '10px', borderRadius: '10px' }}>
-                  <div style={{ fontWeight: 900, fontSize: '12px' }}>Local Languages + Low Data:</div>
-                  <div style={{ fontSize: '11px', marginTop: '6px', lineHeight: '1.5' }}>
-                    Tap CC for subtitles, Settings - Subtitles - Auto-translate - Hausa/Yoruba/Igbo/Pidgin. Or tap Open in YouTube - Quality - 144p saves data. Or use Read Aloud (0 data).
-                  </div>
-                  <div style={{ marginTop: '8px', display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
-                    <a href={`https://www.youtube.com/watch?v=${v.id}`} target="_blank" style={{ background: '#ff0000', color: 'white', padding: '8px 12px', borderRadius: '8px', textDecoration: 'none', fontSize: '11px', fontWeight: 'bold' }}>Open in YouTube (144p saves data)</a>
-                  </div>
-                </div>
-
-                <div style={{ background: 'white', border: '1px solid #e5e7eb', padding: '10px', marginTop: '10px', borderRadius: '8px' }}>
-                  <div style={{ fontWeight: 900, fontSize: '11px' }}>Transcript - 0 data - Read instead of video:</div>
-                  <div style={{ fontSize: '11px', marginTop: '6px', color: '#374151' }}>{v.title} covers: What is AI, generative AI creates content, helps with writing and brainstorming, limitations and responsible AI. For Module 1 focus on intro. Written lesson below covers same in 5 mins.</div>
                 </div>
               </div>
             )}
@@ -122,37 +115,38 @@ export default function LessonPage(){
             <div style={{ whiteSpace: 'pre-wrap', fontFamily: 'system-ui' }}>{lesson.content}</div>
             
             <div style={{ marginTop: '16px', background: 'white', border: '2px solid #16a34a', padding: '12px', borderRadius: '10px' }}>
-              <div style={{ fontWeight: 900, fontSize: '13px', color: '#16a34a' }}>📚 Simple Summary - For Love & Simplicity:</div>
+              <div style={{ fontWeight: 900, fontSize: '13px', color: '#16a34a' }}>📚 Simple Summary - For Love & Simplicity - First Attempt Success:</div>
               <div style={{ fontSize: '13px', marginTop: '6px', lineHeight: '1.6' }}>
                 <b>What You Must Know to Pass First Attempt:</b><br/>
-                • {(lesson as any).examTips || (lesson as any).toolTip || 'Read lesson carefully, memorize cheatsheet'}<br/>
+                • {(lesson as any).examTips || 'Read lesson carefully, memorize cheatsheet'}<br/>
                 • <b>Cheatsheet:</b> {(lesson as any).cheatsheet || 'See exam guide'}<br/>
-                • <b>Lab:</b> Do 3 steps below - We give you real files<br/>
+                • <b>Lab:</b> Do 3 steps below - We give you real files - No registration needed<br/>
                 • <b>Quiz:</b> Tap answer below - 0 data<br/>
-                • <b>Video:</b> Optional - Written lesson is enough - Saves 1GB data
+                • <b>Video:</b> Optional - Written lesson is enough - Saves 1GB data - No registration<br/>
+                • <b>Registration:</b> NOT required to learn - Learn 100% FREE - Optional registration only to save progress across devices - Join WhatsApp Channel for updates (Optional)
               </div>
             </div>
           </div>
 
           <div style={{ marginTop: '12px', background: 'linear-gradient(135deg, #111 0%, #333 100%)', color: 'white', padding: '10px 14px', borderRadius: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', border: '2px solid #16a34a', flexWrap: 'wrap', gap: '8px' }}>
-            <span style={{ fontSize: '11px', fontWeight: 'bold' }}>Written lesson is enough - 0 data - 5 mins reading - Video optional</span>
+            <span style={{ fontSize: '11px', fontWeight: 'bold' }}>Written lesson is enough - 0 data - 5 mins reading - Video optional - No registration needed - Loved for simplicity</span>
             <button onClick={handleRead} style={{ background: reading ? '#ef4444' : '#fde047', color: 'black', padding: '6px 12px', borderRadius: '999px', border: 'none', fontSize: '11px', fontWeight: 'bold', cursor: 'pointer' }}>{reading ? 'Stop' : 'Read Aloud'}</button>
           </div>
 
           <div style={{ marginTop: '16px', background: '#f0fdf4', border: '3px solid #16a34a', padding: '16px', borderRadius: '14px' }}>
-            <div style={{ fontWeight: 900, fontSize: '14px' }}>Quiz - Tap Answer - 0 data</div>
+            <div style={{ fontWeight: 900, fontSize: '14px' }}>Quiz - Tap Answer - 0 data - No registration needed</div>
             <div style={{ fontSize: '14px', fontWeight: 800, marginTop: '10px', background: 'white', padding: '12px', borderRadius: '10px' }}>What is main use of AI in this lesson?</div>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '10px' }}>
               {['A: Create new content faster (Correct)', 'B: Only search internet', 'C: Repair hardware'].map((opt,i)=>(
                 <button key={i} onClick={()=>{ setQuizAns(i); setQuizShow(true) }} style={{ background: quizAns===i ? (i===0 ? '#16a34a' : '#ef4444') : 'white', color: quizAns===i ? 'white' : 'black', border: `2px solid ${quizAns===i ? (i===0 ? '#16a34a' : '#ef4444') : '#e5e7eb'}`, padding: '12px', borderRadius: '10px', textAlign: 'left', fontSize: '13px', cursor: 'pointer', fontWeight: 'bold' }}>{opt} {quizAns===i && i===0 ? ' Correct' : quizAns===i ? ' Try again' : ''}</button>
               ))}
             </div>
-            {quizShow && <div style={{ marginTop: '10px', background: quizAns===0 ? '#f0fdf4' : '#fef2f2', padding: '12px', borderRadius: '10px', border: `2px solid ${quizAns===0 ? '#bbf7d0' : '#fecaca'}` }}><div style={{ fontWeight: 900, fontSize: '13px', color: quizAns===0 ? '#16a34a' : '#ef4444' }}>{quizAns===0 ? 'Correct!' : 'Try again - watch first 25 mins or read lesson'}</div></div>}
+            {quizShow && <div style={{ marginTop: '10px', background: quizAns===0 ? '#f0fdf4' : '#fef2f2', padding: '12px', borderRadius: '10px', border: `2px solid ${quizAns===0 ? '#bbf7d0' : '#fecaca'}` }}><div style={{ fontWeight: 900, fontSize: '13px', color: quizAns===0 ? '#16a34a' : '#ef4444' }}>{quizAns===0 ? 'Correct! - No registration needed to continue' : 'Try again - watch first 25 mins or read lesson'}</div></div>}
           </div>
 
           <div style={{ marginTop: '20px', background: '#eff6ff', border: '3px solid #3b82f6', padding: '16px', borderRadius: '16px' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px' }}>
-              <div style={{ fontWeight: 900, fontSize: '14px' }}>3 Easy Steps - We Give You Files - 0.05MB</div>
+              <div style={{ fontWeight: 900, fontSize: '14px' }}>3 Easy Steps - We Give You Files - 0.05MB - No Registration Needed</div>
               <div style={{ background: allDone ? '#16a34a' : '#3b82f6', color: 'white', padding: '4px 10px', borderRadius: '999px', fontSize: '11px', fontWeight: 'bold' }}>{prog}/3</div>
             </div>
 
@@ -160,7 +154,7 @@ export default function LessonPage(){
               <div style={{ display: 'flex', gap: '10px' }}>
                 <button onClick={()=>{ const n=[...labSteps]; n[0]=!n[0]; setLabSteps(n) }} style={{ width: '28px', height: '28px', borderRadius: '50%', border: `3px solid ${labSteps[0] ? '#16a34a' : '#3b82f6'}`, background: labSteps[0] ? '#16a34a' : 'white', color: labSteps[0] ? 'white' : '#3b82f6', fontWeight: 'bold', cursor: 'pointer', flexShrink: 0 }}>{labSteps[0] ? '✓' : '1'}</button>
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontWeight: 900, fontSize: '13px' }}>Step 1: Download 10-Page PDF - Real 10 Pages</div>
+                  <div style={{ fontWeight: 900, fontSize: '13px' }}>Step 1: Download 10-Page PDF - Real 10 Pages - No registration needed</div>
                   <div style={{ marginTop: '8px', display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
                     <a href="/samples/Company_Policy_Handbook_10pages.pdf" target="_blank" style={{ background: '#16a34a', color: 'white', padding: '10px 14px', borderRadius: '8px', textDecoration: 'none', fontSize: '12px', fontWeight: 'bold' }}>Download 10-Page PDF - 0.05MB</a>
                     <a href="https://notebooklm.google.com" target="_blank" style={{ background: 'black', color: 'white', padding: '10px 14px', borderRadius: '8px', textDecoration: 'none', fontSize: '12px', fontWeight: 'bold' }}>Open NotebookLM</a>
@@ -173,7 +167,7 @@ export default function LessonPage(){
               <div style={{ display: 'flex', gap: '10px' }}>
                 <button onClick={()=>{ const n=[...labSteps]; n[1]=!n[1]; setLabSteps(n) }} style={{ width: '28px', height: '28px', borderRadius: '50%', border: `3px solid ${labSteps[1] ? '#16a34a' : '#3b82f6'}`, background: labSteps[1] ? '#16a34a' : 'white', color: labSteps[1] ? 'white' : '#3b82f6', fontWeight: 'bold', cursor: 'pointer', flexShrink: 0 }}>{labSteps[1] ? '✓' : '2'}</button>
                 <div style={{ flex: 1 }}>
-                  <div style={{ fontWeight: 900, fontSize: '13px' }}>Step 2: Copy Questions - 0 data</div>
+                  <div style={{ fontWeight: 900, fontSize: '13px' }}>Step 2: Copy Questions - 0 data - No registration</div>
                   <div style={{ fontSize: '11px', background: '#111', color: '#fde68a', padding: '10px', borderRadius: '8px', marginTop: '6px', fontFamily: 'monospace' }}>Q1: Summarize in 5 points. Q2: How many sick leave days? Q3: Important dates?</div>
                 </div>
               </div>
@@ -182,35 +176,40 @@ export default function LessonPage(){
             <div style={{ background: 'white', padding: '14px', borderRadius: '12px', border: `3px solid ${labSteps[2] ? '#16a34a' : '#bfdbfe'}` }}>
               <div style={{ display: 'flex', gap: '10px' }}>
                 <button onClick={()=>{ const n=[...labSteps]; n[2]=!n[2]; setLabSteps(n) }} style={{ width: '28px', height: '28px', borderRadius: '50%', border: `3px solid ${labSteps[2] ? '#16a34a' : '#3b82f6'}`, background: labSteps[2] ? '#16a34a' : 'white', color: labSteps[2] ? 'white' : '#3b82f6', fontWeight: 'bold', cursor: 'pointer', flexShrink: 0 }}>{labSteps[2] ? '✓' : '3'}</button>
-                <div><div style={{ fontWeight: 900, fontSize: '13px' }}>Step 3: Screenshot - Proof for portfolio</div></div>
+                <div><div style={{ fontWeight: 900, fontSize: '13px' }}>Step 3: Screenshot - Proof for portfolio - No registration needed</div></div>
               </div>
             </div>
           </div>
 
+          <WhatsAppBanner variant="lesson" />
+
           <div style={{ marginTop: '16px', padding: '14px', background: done ? '#f0fdf4' : '#fff', border: `3px solid ${done ? '#16a34a' : '#e5e7eb'}`, borderRadius: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '10px' }}>
-            <div><div style={{ fontWeight: 900, fontSize: '14px' }}>{done ? 'Saved!' : 'Finish?'}</div><div style={{ fontSize: '10px', color: '#6b7280' }}>Written lesson enough - Video optional - Saves 1GB data</div></div>
+            <div><div style={{ fontWeight: 900, fontSize: '14px' }}>{done ? 'Saved! - No registration needed' : 'Finish? - No registration needed'}</div><div style={{ fontSize: '10px', color: '#6b7280' }}>Written lesson enough - Video optional - Saves 1GB data - No registration needed - Join WhatsApp optional</div></div>
             <button onClick={()=>{ const nd=!done; setDone(nd); saveProgress(slug, lessonId, nd) }} style={{ background: done ? '#16a34a' : allDone ? '#111' : '#9ca3af', color: 'white', padding: '12px 20px', borderRadius: '10px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}>{done ? 'Done' : allDone ? 'Mark Done' : 'Do 3 Steps First'}</button>
           </div>
-        </div>
 
-        <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between', gap: '12px', flexWrap: 'wrap' }}>
-          {prev ? (
-            <Link href={`/courses/${slug}/${prev.id}`} style={{ flex: 1, minWidth: '120px', background: 'white', border: '3px solid black', padding: '14px', borderRadius: '12px', textDecoration: 'none', color: 'black', fontWeight: 900, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
-              <span>← Previous</span><br/><span style={{ fontSize: '11px', fontWeight: 500 }}>{prev.title.substring(0, 25)}...</span>
-            </Link>
-          ) : <div style={{ flex: 1 }}></div>}
-          
-          {next ? (
-            <Link href={`/courses/${slug}/${next.id}`} style={{ flex: 1, minWidth: '120px', background: '#111', border: '3px solid black', padding: '14px', borderRadius: '12px', textDecoration: 'none', color: 'white', fontWeight: 900, textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
-              <span>Next →</span><span style={{ fontSize: '11px', fontWeight: 500, marginTop: '4px' }}>{next.title.substring(0, 25)}...</span>
-            </Link>
-          ) : (
-            <Link href={`/courses/${slug}`} style={{ flex: 1, minWidth: '120px', background: '#16a34a', border: '3px solid black', padding: '14px', borderRadius: '12px', textDecoration: 'none', color: 'white', fontWeight: 900, textAlign: 'center' }}>
-              <span>✓ Complete Course →</span><br/><span style={{ fontSize: '11px' }}>Back to Course</span>
-            </Link>
-          )}
-        </div>
+          <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between', gap: '12px', flexWrap: 'wrap' }}>
+            {prev ? (
+              <Link href={`/courses/${slug}/${prev.id}`} style={{ flex: 1, minWidth: '120px', background: 'white', border: '3px solid black', padding: '14px', borderRadius: '12px', textDecoration: 'none', color: 'black', fontWeight: 900, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+                <span>← Previous</span>
+              </Link>
+            ) : <div style={{ flex: 1 }}></div>}
+            
+            {next ? (
+              <Link href={`/courses/${slug}/${next.id}`} style={{ flex: 1, minWidth: '120px', background: '#111', border: '3px solid black', padding: '14px', borderRadius: '12px', textDecoration: 'none', color: 'white', fontWeight: 900, textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+                <span>Next →</span><span style={{ fontSize: '11px', fontWeight: 500, marginTop: '4px' }}>{next.title.substring(0, 25)}...</span>
+              </Link>
+            ) : (
+              <Link href={`/courses/${slug}`} style={{ flex: 1, minWidth: '120px', background: '#16a34a', border: '3px solid black', padding: '14px', borderRadius: '12px', textDecoration: 'none', color: 'white', fontWeight: 900, textAlign: 'center' }}>
+                <span>✓ Complete Course →</span><br/><span style={{ fontSize: '11px' }}>Back to Course</span>
+              </Link>
+            )}
+          </div>
 
+          <div style={{ marginTop: '16px', background: '#f0fdf4', border: '2px solid #bbf7d0', padding: '10px', borderRadius: '8px', textAlign: 'center', fontSize: '11px' }}>
+            ✓ No registration needed to learn - 100% FREE - All 15 lessons open - Optional: Join WhatsApp Channel for updates & jobs - Optional: Register to save progress across devices - Loved for simplicity
+          </div>
+        </div>
       </div>
     </div>
   )
