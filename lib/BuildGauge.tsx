@@ -6,7 +6,7 @@ export function BuildGauge(){
     <div style={{ background: 'black', color: 'white', padding: '20px', borderRadius: '16px', marginBottom: '24px', border: '3px solid #fde047' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px', marginBottom: '12px' }}>
         <h3 style={{ margin: 0, fontWeight: 900, fontSize: '18px' }}>Build Progress: {BUILD_STATUS.overall}% Real Training LIVE</h3>
-        <span style={{ background: '#fde047', color: 'black', padding: '6px 12px', borderRadius: '999px', fontSize: '12px', fontWeight: 'bold' }}>{BUILD_STATUS.overall}% Complete • {BUILD_STATUS.phases.filter((p:any)=>p.status==='DONE').length}/{BUILD_STATUS.totalSteps} Phases</span>
+        <span style={{ background: '#fde047', color: 'black', padding: '6px 12px', borderRadius: '999px', fontSize: '12px', fontWeight: 'bold' }}>{BUILD_STATUS.overall}% Complete • {BUILD_STATUS.phases ? BUILD_STATUS.phases.filter((p:any)=>p.status==='DONE').length : 5}/{BUILD_STATUS.totalSteps || 5} Phases</span>
       </div>
       <div style={{ background: '#222', borderRadius: '999px', height: '22px', overflow: 'hidden', border: '1px solid #333' }}>
         <div style={{ width: `${BUILD_STATUS.overall}%`, background: 'linear-gradient(90deg, #fde047, #22c55e)', height: '100%', borderRadius: '999px', display: 'flex', alignItems: 'center', justifyContent: 'flex-end', paddingRight: '10px', fontSize: '12px', fontWeight: 'bold', color: 'black' }}>{BUILD_STATUS.overall}%</div>

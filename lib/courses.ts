@@ -1,7 +1,20 @@
 
 export type Lesson = { id: string; title: string; duration: string; type: string; content: string; quiz?: string; }
 export type Course = { slug: string; phase: string; title: string; provider: string; level: string; hours: number; score: number; cost: string; tool: string; description: string; outcomes: string[]; lessons: Lesson[]; }
-export const BUILD_STATUS = { overall: 100, status: 'LIVE' }
+
+export const BUILD_STATUS = { 
+  overall: 100, 
+  status: 'LIVE',
+  totalSteps: 5,
+  phases: [
+    { name: 'Foundation', status: 'DONE' },
+    { name: 'AI Essentials', status: 'DONE' },
+    { name: 'AI-900', status: 'DONE' },
+    { name: 'Data Analytics', status: 'DONE' },
+    { name: 'First Attempt Kit', status: 'DONE' }
+  ]
+}
+
 export const COURSES: Course[] = [
   { slug: 'google-ai-essentials', phase: 'Phase 1', title: 'Google AI Essentials', provider: 'Google', level: 'Beginner', hours: 10, score: 9, cost: 'FREE', tool: 'Gemini NotebookLM', description: 'Google AI Essentials', outcomes: ['Pass first attempt'], lessons: [
     { id: '1', title: 'Module 1: Introduction to AI', duration: '2h 18m total Module 1 25 mins', type: 'video-optional', content: 'WHAT IS AI? AI systems perform tasks requiring human intelligence. AI Broad ML learns from data Generative creates content. AI can Draft Summarize Brainstorm Analyze. LIMITATIONS Can be wrong hallucinate Can be biased Needs human review. EXAM AI vs ML vs Generative difference. CHEATSHEET AI Broad ML learns Generative creates. Good at drafting summarizing. Bad at replacing judgment. Always check facts. PRACTICE What is ML? Subset of AI that learns from data. What is Generative AI? ChatGPT email draft. Limitation? Can be biased hallucinate.' },
