@@ -6,6 +6,7 @@ export const BUILD_STATUS = {
   overall: 100, 
   status: 'LIVE',
   totalSteps: 5,
+  nextSteps: ['Google AI Essentials Certified', 'Microsoft AI-900 Certified', 'Google Data Analytics Certified', 'Job Ready Portfolio'],
   phases: [
     { name: 'Foundation', status: 'DONE' },
     { name: 'AI Essentials', status: 'DONE' },
