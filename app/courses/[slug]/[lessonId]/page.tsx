@@ -236,7 +236,7 @@ export default function LessonPage(){
           
           <div style={{ background: 'black', borderRadius: '14px', overflow: 'hidden', marginBottom: '16px', border: '3px solid black' }}>
             <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0 }}>
-              <iframe src={slug==='google-ai-essentials' ? (lessonId==='1' ? 'https://www.youtube.com/embed/3o5m1d2rUpU' : lessonId==='2' ? 'https://www.youtube.com/embed/5NgNicANyqM' : 'https://www.youtube.com/embed/2ePf9rue1Ao') : slug==='microsoft-ai-900' ? 'https://www.youtube.com/embed/hHIJbyQ7o2E' : 'https://www.youtube.com/embed/2a8PgqWrc_Q'} title={lesson.title} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+              <iframe src={slug==='google-ai-essentials' ? (lessonId==='1' ? 'https://www.youtube.com/embed/JtIkF2XeIdk' : lessonId==='2' ? 'https://www.youtube.com/embed/Hz0GtSycbLE' : 'https://www.youtube.com/embed/bknUn7yMwNI') : slug==='microsoft-ai-900' ? 'https://www.youtube.com/embed/hT2MMa-l1RM' : 'https://www.youtube.com/embed/aMBm3O78Sfg'} title={lesson.title} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
             </div>
             <div style={{ padding: '10px 14px', background: '#111', color: 'white', display: 'flex', justifyContent: 'space-between' }}>
               <span style={{ fontSize: '11px', fontWeight: 'bold' }}>🎥 Video - 5 mins - Official - Free</span>
