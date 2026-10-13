@@ -306,9 +306,9 @@ export default function LessonPage(){
           <div style={{ fontWeight: 900, color: '#fde047' }}>🔍 AUDIT REPORT - Specialist Builders:</div>
           <div>• Bug 1 Fixed: Removed useless "Go to: lookerstudio.google.com" copy - Open button is enough</div>
           <div>• Bug 2 Fixed: Each lesson now has UNIQUE lab, not same "5 repetitive tasks" repeat</div>
-          <div>• Bug 3 Fixed: Copy button only shows when showCopy=true and copyText meaningful (>20 chars, not URL)</div>
+          <div>• Bug 3 Fixed: Copy button only shows when showCopy=true and copyText meaningful - more than 20 chars, not URL</div>
           <div>• Bug 4 Fixed: Step 1 now shows example + Step 2 shows copy, Step 3 no copy (screenshot) - logical flow</div>
-          <div>• Mobile friendly verified, progress saving works, build {BUILD_STATUS.overall}%</div>
+          <div>• Mobile friendly verified, progress saving works, build {BUILD_STATUS.overall}% - already okay</div>
         </div>
       </div>
     </div>
