@@ -1,5 +1,5 @@
 
-export type Lesson = { id: string; title: string; duration: string; type: string; content: string; quiz?: string; }
+export type Lesson = { id: string; title: string; duration: string; type: string; content: string; quiz?: string; examTips?: string; cheatsheet?: string; toolTip?: string; lab?: string; }
 export type Course = { slug: string; phase: string; title: string; provider: string; level: string; hours: number; score: number; cost: string; tool: string; description: string; outcomes: string[]; lessons: Lesson[]; }
 
 export const BUILD_STATUS = { 

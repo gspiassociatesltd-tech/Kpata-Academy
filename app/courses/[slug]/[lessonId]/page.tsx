@@ -126,8 +126,8 @@ export default function LessonPage(){
               <div style={{ fontWeight: 900, fontSize: '13px', color: '#16a34a' }}>📚 Simple Summary - For Love & Simplicity:</div>
               <div style={{ fontSize: '13px', marginTop: '6px', lineHeight: '1.6' }}>
                 <b>What You Must Know to Pass First Attempt:</b><br/>
-                • {lesson.examTips || 'Read lesson carefully, memorize cheatsheet'}<br/>
-                • <b>Cheatsheet:</b> {lesson.cheatsheet || 'See exam guide'}<br/>
+                • {(lesson as any).examTips || (lesson as any).toolTip || 'Read lesson carefully, memorize cheatsheet'}<br/>
+                • <b>Cheatsheet:</b> {(lesson as any).cheatsheet || 'See exam guide'}<br/>
                 • <b>Lab:</b> Do 3 steps below - We give you real files<br/>
                 • <b>Quiz:</b> Tap answer below - 0 data<br/>
                 • <b>Video:</b> Optional - Written lesson is enough - Saves 1GB data
