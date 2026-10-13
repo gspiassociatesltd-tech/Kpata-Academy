@@ -15,7 +15,7 @@ function getLabs(slug: string, lessonId: string): LabStep[] {
         { title: 'Step 1: See Example - 5 Tasks', desc: 'Example of 5 repetitive tasks', simpleDesc: 'Look at example below. This is what you will create.', example: '1. Weekly report Monday (1h)\n2. Same emails "Price?" (30m daily)\n3. Meeting notes (45m)\n4. Social posts (1h weekly)\n5. Emails to Excel (30m daily)', copyText: `MY 5 TASKS (Change to your own):
 1. Weekly sales report Monday (1 hour)
 2. Same emails: "Price? Delivery?" (30 mins daily)
-3. Meeting notes summary (45 mins)
+3. Meeting notes summary (42h 18m - Module 1: 25 mins)
 4. Social posts (1 hour weekly)
 5. Emails to Excel (30 mins daily)
 Total ~7h/week wasted`, showCopy: true, links: [{ label: '📄 Open Google Doc - Click here', url: 'https://docs.new', color: '#4285f4' }] },
@@ -239,7 +239,7 @@ export default function LessonPage(){
               <iframe src={slug==='google-ai-essentials' ? (lessonId==='1' ? 'https://www.youtube.com/embed/JtIkF2XeIdk' : lessonId==='2' ? 'https://www.youtube.com/embed/Hz0GtSycbLE' : 'https://www.youtube.com/embed/bknUn7yMwNI') : slug==='microsoft-ai-900' ? 'https://www.youtube.com/embed/hT2MMa-l1RM' : 'https://www.youtube.com/embed/aMBm3O78Sfg'} title={lesson.title} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
             </div>
             <div style={{ padding: '10px 14px', background: '#111', color: 'white', display: 'flex', justifyContent: 'space-between' }}>
-              <span style={{ fontSize: '11px', fontWeight: 'bold' }}>🎥 Video - 5 mins - Official - Free</span>
+              <span style={{ fontSize: '11px', fontWeight: 'bold' }}>🎥 Video - 2h 18m Full Course - Module 1 is 22h 18m - Module 1: 25 mins (0:00-25:00)</span>
               <span style={{ fontSize: '10px', background: '#222', padding: '4px 8px', borderRadius: '6px' }}>YouTube</span>
             </div>
           </div>
