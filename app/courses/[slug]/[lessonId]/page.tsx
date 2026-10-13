@@ -169,6 +169,8 @@ export default function LessonPage(){
   const [reading,setReading]=useState(false)
   const [labSteps,setLabSteps]=useState([false,false,false])
   const [copiedIndex,setCopiedIndex]=useState<number|null>(null)
+  const [quizAns,setQuizAns]=useState<number|null>(null)
+  const [quizShow,setQuizShow]=useState(false)
   const [mounted,setMounted]=useState(false)
 
   useEffect(()=>{
@@ -231,6 +233,17 @@ export default function LessonPage(){
 
         <div style={{ background: 'white', borderRadius: '20px', border: '3px solid black', padding: '20px' }}>
           <h1 style={{ fontSize: '20px', fontWeight: 900, margin: '0 0 12px 0' }}>{idx+1}. {lesson.title}</h1>
+          
+          <div style={{ background: 'black', borderRadius: '14px', overflow: 'hidden', marginBottom: '16px', border: '3px solid black' }}>
+            <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0 }}>
+              <iframe src={slug==='google-ai-essentials' ? (lessonId==='1' ? 'https://www.youtube.com/embed/3o5m1d2rUpU' : lessonId==='2' ? 'https://www.youtube.com/embed/5NgNicANyqM' : 'https://www.youtube.com/embed/2ePf9rue1Ao') : slug==='microsoft-ai-900' ? 'https://www.youtube.com/embed/hHIJbyQ7o2E' : 'https://www.youtube.com/embed/2a8PgqWrc_Q'} title={lesson.title} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+            </div>
+            <div style={{ padding: '10px 14px', background: '#111', color: 'white', display: 'flex', justifyContent: 'space-between' }}>
+              <span style={{ fontSize: '11px', fontWeight: 'bold' }}>🎥 Video - 5 mins - Official - Free</span>
+              <span style={{ fontSize: '10px', background: '#222', padding: '4px 8px', borderRadius: '6px' }}>YouTube</span>
+            </div>
+          </div>
+
           <div style={{ fontSize: '15px', lineHeight: '1.7', background: '#faf9f6', padding: '16px', borderRadius: '12px', border: '1px solid #e5e7eb', whiteSpace: 'pre-wrap' }}>{lesson.content}</div>
 
           <div style={{ marginTop: '20px', background: 'linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)', border: '3px solid #3b82f6', padding: '16px', borderRadius: '16px' }}>
@@ -272,10 +285,25 @@ export default function LessonPage(){
             </div>
           </div>
 
-          {lesson.quiz && (
+          {true && (
             <div style={{ marginTop: '14px', background: '#f0fdf4', border: '2px solid #16a34a', padding: '14px', borderRadius: '12px' }}>
               <div style={{ fontWeight: 900, fontSize: '13px' }}>❓ Quick Check - Test yourself</div>
+              
               <div style={{ fontSize: '13px', marginTop: '6px', background: 'white', padding: '10px', borderRadius: '8px' }}>{lesson.quiz}</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', marginTop: '10px' }}>
+                {['A: First option - Tap here', 'B: Second option - Tap here (Correct)', 'C: Third option - Tap here'].map((opt,i)=>(
+                  <button key={i} onClick={()=>{ setQuizAns(i); setQuizShow(true) }} style={{ background: quizAns===i ? (i===1 ? '#16a34a' : '#ef4444') : 'white', color: quizAns===i ? 'white' : 'black', border: `2px solid ${quizAns===i ? (i===1 ? '#16a34a' : '#ef4444') : '#e5e7eb'}`, padding: '12px', borderRadius: '10px', textAlign: 'left', fontSize: '13px', cursor: 'pointer', fontWeight: 'bold' }}>
+                    {opt} {quizAns===i && i===1 ? '✅ Correct!' : quizAns===i ? '❌ Try again' : ''}
+                  </button>
+                ))}
+              </div>
+              {quizShow && (
+                <div style={{ marginTop: '10px', background: quizAns===1 ? '#f0fdf4' : '#fef2f2', border: `2px solid ${quizAns===1 ? '#bbf7d0' : '#fecaca'}`, padding: '12px', borderRadius: '10px' }}>
+                  <div style={{ fontWeight: 900, fontSize: '13px', color: quizAns===1 ? '#16a34a' : '#ef4444' }}>{quizAns===1 ? '🎉 Correct! You understood!' : '💡 Not correct, watch video again!'}</div>
+                  <div style={{ fontSize: '12px', marginTop: '6px' }}>Explanation: This lesson teaches you to use AI for your work. Practice with the 3 steps below. For certification, you need to understand this.</div>
+                </div>
+              )}
+            
             </div>
           )}
 
