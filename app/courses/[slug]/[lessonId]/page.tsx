@@ -15,7 +15,7 @@ function getLabs(slug: string, lessonId: string): LabStep[] {
         { title: 'Step 1: See Example - 5 Tasks', desc: 'Example of 5 repetitive tasks', simpleDesc: 'Look at example below. This is what you will create.', example: '1. Weekly report Monday (1h)\n2. Same emails "Price?" (30m daily)\n3. Meeting notes (45m)\n4. Social posts (1h weekly)\n5. Emails to Excel (30m daily)', copyText: `MY 5 TASKS (Change to your own):
 1. Weekly sales report Monday (1 hour)
 2. Same emails: "Price? Delivery?" (30 mins daily)
-3. Meeting notes summary (42h 18m - Module 1: 25 mins)
+3. Meeting notes summary (45 mins)
 4. Social posts (1 hour weekly)
 5. Emails to Excel (30 mins daily)
 Total ~7h/week wasted`, showCopy: true, links: [{ label: '📄 Open Google Doc - Click here', url: 'https://docs.new', color: '#4285f4' }] },
@@ -234,50 +234,52 @@ export default function LessonPage(){
         <div style={{ background: 'white', borderRadius: '20px', border: '3px solid black', padding: '20px' }}>
           <h1 style={{ fontSize: '20px', fontWeight: 900, margin: '0 0 12px 0' }}>{idx+1}. {lesson.title}</h1>
           
-          <div style={{ background: 'black', borderRadius: '14px', overflow: 'hidden', marginBottom: '16px', border: '3px solid black' }}>
-            <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0 }}>
-              <iframe src={slug==='google-ai-essentials' ? (lessonId==='1' ? 'https://www.youtube.com/embed/JtIkF2XeIdk' : lessonId==='2' ? 'https://www.youtube.com/embed/Hz0GtSycbLE' : 'https://www.youtube.com/embed/bknUn7yMwNI') : slug==='microsoft-ai-900' ? 'https://www.youtube.com/embed/hT2MMa-l1RM' : 'https://www.youtube.com/embed/aMBm3O78Sfg'} title={lesson.title} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen></iframe>
+          
+          {/* VIDEO - OPTIONAL - DATA SAVER MODE */}
+          <div style={{ background: 'white', border: '2px dashed #f59e0b', padding: '12px', marginBottom: '16px', borderRadius: '12px' }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '8px' }}>
+              <div>
+                <div style={{ fontWeight: 900, fontSize: '13px' }}>🎥 Video: Optional - Uses Data (1-2GB for 2h 18m)</div>
+                <div style={{ fontSize: '11px', color: '#92400e', marginTop: '4px' }}>⚠️ Data Warning: Full course video is 2h 18m = ~1GB data at 480p. Written lesson below is enough for certification. Video is extra, not required.</div>
+                <div style={{ fontSize: '11px', color: '#374151', marginTop: '4px' }}>✅ You can get AI certified WITHOUT watching video - Do 3 steps labs + quiz + 10-page PDF is enough. Video is for those with WiFi/data.</div>
+              </div>
+              <button onClick={()=>{ const el=document.getElementById('video-container'); if(el) el.style.display = el.style.display==='none' ? 'block' : 'none' }} style={{ background: '#f59e0b', color: 'black', padding: '10px 16px', borderRadius: '8px', border: 'none', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer' }}>▶️ Show/Hide Video (Optional)</button>
             </div>
-            <div style={{ padding: '10px 14px', background: '#111', color: 'white', display: 'flex', justifyContent: 'space-between' }}>
-              <span style={{ fontSize: '11px', fontWeight: 'bold' }}>🎥 Video - 2h 18m Full Course - Module 1 is 22h 18m - Module 1: 25 mins (0:00-25:00)</span>
-              <span style={{ fontSize: '10px', background: '#222', padding: '4px 8px', borderRadius: '6px' }}>YouTube</span>
+            
+            <div id="video-container" style={{ display: 'none', marginTop: '12px' }}>
+              <div style={{ background: 'black', borderRadius: '14px', overflow: 'hidden', border: '3px solid black' }}>
+                <div style={{ position: 'relative', paddingBottom: '56.25%', height: 0 }}>
+                  <iframe src={`https://www.youtube.com/embed/${videoId}?cc_load_policy=1&modestbranding=1&rel=0`} title={lesson.title} style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', border: 'none' }} allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen loading="lazy"></iframe>
+                </div>
+                <div style={{ padding: '10px 14px', background: '#111', color: 'white' }}>
+                  <div style={{ fontSize: '11px', fontWeight: 'bold' }}>⏱️ {videoInfo.duration} - {videoInfo.chapter}</div>
+                  <div style={{ fontSize: '10px', marginTop: '4px', color: '#fde047' }}>💡 Data saver: In YouTube, tap ⚙️ → Quality → 144p or 240p to use less data (0.2GB instead of 1GB)</div>
+                </div>
+              </div>
+
+              <div style={{ background: '#f0fdf4', border: '2px solid #bbf7d0', padding: '10px', marginTop: '10px', borderRadius: '10px' }}>
+                <div style={{ fontWeight: 900, fontSize: '12px' }}>🌍 Local Language Subtitles + Low Data Options:</div>
+                <div style={{ fontSize: '11px', marginTop: '6px', lineHeight: '1.5' }}>
+                  • Tap CC → Settings → Auto-translate → Hausa/Yoruba/Igbo<br/>
+                  • To save data: Open in YouTube → Settings → Quality → 144p (uses 0.2GB vs 1GB)<br/>
+                  • Or tap Read Aloud below (uses 0 data, just text-to-speech)<br/>
+                  • Or read transcript below (0 data)
+                </div>
+                <div style={{ marginTop: '8px', display: 'flex', gap: '6px', flexWrap: 'wrap' }}>
+                  <a href={`https://www.youtube.com/watch?v=${videoId}`} target="_blank" style={{ background: '#ff0000', color: 'white', padding: '8px 12px', borderRadius: '8px', textDecoration: 'none', fontSize: '11px', fontWeight: 'bold' }}>▶️ Open in YouTube (Choose 144p to save data)</a>
+                </div>
+              </div>
+
+              <div style={{ background: 'white', border: '1px solid #e5e7eb', padding: '10px', marginTop: '10px', borderRadius: '8px' }}>
+                <div style={{ fontWeight: 900, fontSize: '11px' }}>📄 Transcript (0 data - read instead of watching video):</div>
+                <div style={{ fontSize: '11px', marginTop: '6px', color: '#374151', maxHeight: '120px', overflow: 'auto', whiteSpace: 'pre-wrap' }}>
+                  This video is AI Essentials Full Course by Google (2h 18m). Module 1 covers: What is AI? Generative AI creates new content. AI helps with writing, summarizing, brainstorming. Limitations: AI can be biased, needs human review. Responsible AI: Check facts, protect privacy. You will learn 5 ways to use AI at work to save time. For Module 1, focus on introduction to AI and what it can do. No need to watch full 2h - written lesson below covers same content in 5 mins reading.
+                </div>
+                <div style={{ fontSize: '10px', marginTop: '6px', color: '#6b7280' }}>Transcript saves data - 0MB vs 1000MB for video. For certification, reading written lesson + doing labs is enough.</div>
+              </div>
             </div>
           </div>
 
-          <div style={{ fontSize: '15px', lineHeight: '1.7', background: '#faf9f6', padding: '16px', borderRadius: '12px', border: '1px solid #e5e7eb', whiteSpace: 'pre-wrap' }}>{lesson.content}</div>
-
-          <div style={{ marginTop: '20px', background: 'linear-gradient(135deg, #eff6ff 0%, #dbeafe 100%)', border: '3px solid #3b82f6', padding: '16px', borderRadius: '16px' }}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '12px', flexWrap: 'wrap', gap: '8px' }}>
-              <div><div style={{ fontWeight: 900, fontSize: '14px' }}>🧪 Do It Yourself - 3 Easy Steps</div><div style={{ fontSize: '10px', color: '#1e40af' }}>We give you files, no need to search. Simple words, for everyone.</div></div>
-              <div style={{ background: allDone ? '#16a34a' : '#3b82f6', color: 'white', padding: '4px 10px', borderRadius: '999px', fontSize: '11px', fontWeight: 'bold' }}>{progress}/3 {allDone ? '✅' : ''}</div>
-            </div>
-
-            {labs.map((lab, i) => (
-              <div key={i} style={{ background: 'white', padding: '14px', borderRadius: '12px', border: `3px solid ${labSteps[i] ? '#16a34a' : '#bfdbfe'}`, marginBottom: '10px' }}>
-                <div style={{ display: 'flex', gap: '10px' }}>
-                  <button onClick={()=>toggle(i)} style={{ width: '28px', height: '28px', borderRadius: '50%', border: `3px solid ${labSteps[i] ? '#16a34a' : '#3b82f6'}`, background: labSteps[i] ? '#16a34a' : 'white', color: labSteps[i] ? 'white' : '#3b82f6', fontWeight: 'bold', cursor: 'pointer', flexShrink: 0 }}>{labSteps[i] ? '✓' : i+1}</button>
-                  <div style={{ flex: 1 }}>
-                    <div style={{ fontWeight: 900, fontSize: '13px' }}>{lab.title}</div>
-                    <div style={{ fontSize: '11px', color: '#111', fontWeight: 'bold', marginTop: '2px' }}>{lab.simpleDesc}</div>
-                    <div style={{ fontSize: '11px', color: '#374151', marginTop: '4px' }}>{lab.desc}</div>
-                    <div style={{ fontSize: '11px', background: '#faf9f6', border: '1px solid #e5e7eb', padding: '8px', borderRadius: '8px', marginTop: '8px', whiteSpace: 'pre-wrap', lineHeight: '1.4' }}>{lab.example}</div>
-                    <div style={{ marginTop: '8px', display: 'flex', gap: '6px', flexWrap: 'wrap', alignItems: 'center' }}>
-                      {lab.links.map((link, li) => (
-                        <a key={li} href={link.url} target="_blank" download={link.url.startsWith('/samples/') ? '' : undefined} style={{ background: link.color, color: link.color==='#fde047' ? 'black' : 'white', padding: '10px 14px', borderRadius: '8px', textDecoration: 'none', fontSize: '12px', fontWeight: 'bold', display: 'inline-block' }}>{link.label}</a>
-                      ))}
-                      {lab.showCopy && lab.copyText && (
-                        <button onClick={()=>handleCopy(lab.copyText, i)} style={{ background: copiedIndex===i ? '#16a34a' : '#fde047', color: copiedIndex===i ? 'white' : 'black', padding: '10px 14px', borderRadius: '8px', border: 'none', fontSize: '12px', fontWeight: 'bold', cursor: 'pointer' }}>{copiedIndex===i ? '✅ Copied!' : '📋 Copy This'}</button>
-                      )}
-                    </div>
-                    {lab.showCopy && lab.copyText && (
-                      <div style={{ marginTop: '8px', background: '#111', color: '#fde68a', padding: '10px', borderRadius: '8px', fontSize: '11px', fontFamily: 'monospace', whiteSpace: 'pre-wrap', maxHeight: '120px', overflow: 'auto' }}>{lab.copyText.substring(0,300)}{lab.copyText.length>300 ? '...' : ''}</div>
-                    )}
-                    {lab.sampleFile && (
-                      <div style={{ marginTop: '8px', fontSize: '10px', color: '#16a34a', background: '#f0fdf4', padding: '6px 8px', borderRadius: '6px', border: '1px solid #bbf7d0' }}>✅ We give you this file - Tap green download button above. No need to search.</div>
-                    )}
-                  </div>
-                </div>
-              </div>
             ))}
 
             <div style={{ marginTop: '12px', background: allDone ? '#f0fdf4' : '#fff', border: `2px dashed ${allDone ? '#16a34a' : '#3b82f6'}`, padding: '10px', borderRadius: '10px', textAlign: 'center', fontSize: '12px' }}>
