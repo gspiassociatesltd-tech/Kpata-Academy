@@ -1,0 +1,9 @@
+OrderID,Product,Quantity,Price,Date,Customer,State
+1,Laptop,2,250000,2026-01-05,John,Lagos
+2,Mouse,10,5000,2026-01-06,Mary,Abuja
+3,Keyboard,5,15000,2026-01-07,Ali,Kano
+4,Monitor,3,80000,2026-01-08,Sarah,Minna
+5,Laptop,1,250000,2026-01-09,David,Uyo
+6,Mouse,20,5000,2026-01-10,Esther,Port Harcourt
+7,Keyboard,2,15000,2026-01-11,John,Lagos
+8,Monitor,1,80000,2026-01-12,Mary,Abuja
