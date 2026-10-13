@@ -118,7 +118,23 @@ export default function LessonPage(){
             )}
           </div>
 
-          <div style={{ fontSize: '15px', lineHeight: '1.7', background: '#faf9f6', padding: '16px', borderRadius: '12px', border: '1px solid #e5e7eb', whiteSpace: 'pre-wrap' }}>{lesson.content}</div>
+          
+          <div style={{ fontSize: '15px', lineHeight: '1.8', background: '#faf9f6', padding: '20px', borderRadius: '12px', border: '2px solid #e5e7eb' }}>
+            <div style={{ whiteSpace: 'pre-wrap', fontFamily: 'system-ui' }}>{lesson.content}</div>
+            
+            <div style={{ marginTop: '16px', background: 'white', border: '2px solid #16a34a', padding: '12px', borderRadius: '10px' }}>
+              <div style={{ fontWeight: 900, fontSize: '13px', color: '#16a34a' }}>📚 Simple Summary - For Love & Simplicity:</div>
+              <div style={{ fontSize: '13px', marginTop: '6px', lineHeight: '1.6' }}>
+                <b>What You Must Know to Pass First Attempt:</b><br/>
+                • {lesson.examTips || 'Read lesson carefully, memorize cheatsheet'}<br/>
+                • <b>Cheatsheet:</b> {lesson.cheatsheet || 'See exam guide'}<br/>
+                • <b>Lab:</b> Do 3 steps below - We give you real files<br/>
+                • <b>Quiz:</b> Tap answer below - 0 data<br/>
+                • <b>Video:</b> Optional - Written lesson is enough - Saves 1GB data
+              </div>
+            </div>
+          </div>
+
 
           <div style={{ marginTop: '12px', background: 'linear-gradient(135deg, #111 0%, #333 100%)', color: 'white', padding: '10px 14px', borderRadius: '12px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', border: '2px solid #16a34a', flexWrap: 'wrap', gap: '8px' }}>
             <span style={{ fontSize: '11px', fontWeight: 'bold' }}>Written lesson is enough - 0 data - 5 mins reading - Video optional</span>
@@ -177,6 +193,25 @@ export default function LessonPage(){
             <div><div style={{ fontWeight: 900, fontSize: '14px' }}>{done ? 'Saved!' : 'Finish?'}</div><div style={{ fontSize: '10px', color: '#6b7280' }}>Written lesson enough - Video optional - Saves 1GB data</div></div>
             <button onClick={()=>{ const nd=!done; setDone(nd); saveProgress(slug, lessonId, nd) }} style={{ background: done ? '#16a34a' : allDone ? '#111' : '#9ca3af', color: 'white', padding: '12px 20px', borderRadius: '10px', border: 'none', fontWeight: 'bold', cursor: 'pointer' }}>{done ? 'Done' : allDone ? 'Mark Done' : 'Do 3 Steps First'}</button>
           </div>
+        </div>
+
+        
+        <div style={{ marginTop: '20px', display: 'flex', justifyContent: 'space-between', gap: '12px', flexWrap: 'wrap' }}>
+          {prev ? (
+            <Link href={`/courses/${slug}/${prev.id}`} style={{ flex: 1, minWidth: '120px', background: 'white', border: '3px solid black', padding: '14px', borderRadius: '12px', textDecoration: 'none', color: 'black', fontWeight: 900, textAlign: 'center', display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+              <span>← Previous</span><br/><span style={{ fontSize: '11px', fontWeight: 500 }}>{prev.title.substring(0, 25)}...</span>
+            </Link>
+          ) : <div style={{ flex: 1 }}></div>}
+          
+          {next ? (
+            <Link href={`/courses/${slug}/${next.id}`} style={{ flex: 1, minWidth: '120px', background: '#111', border: '3px solid black', padding: '14px', borderRadius: '12px', textDecoration: 'none', color: 'white', fontWeight: 900, textAlign: 'center', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center' }}>
+              <span>Next →</span><span style={{ fontSize: '11px', fontWeight: 500, marginTop: '4px' }}>{next.title.substring(0, 25)}...</span>
+            </Link>
+          ) : (
+            <Link href={`/courses/${slug}`} style={{ flex: 1, minWidth: '120px', background: '#16a34a', border: '3px solid black', padding: '14px', borderRadius: '12px', textDecoration: 'none', color: 'white', fontWeight: 900, textAlign: 'center' }}>
+              <span>✓ Complete Course →</span><br/><span style={{ fontSize: '11px' }}>Back to Course</span>
+            </Link>
+          )}
         </div>
 
         <div style={{ marginTop: '16px', background: '#111', color: '#fde047', padding: '14px', borderRadius: '12px', textAlign: 'center', fontWeight: 900, fontSize: '11px', border: '2px solid #16a34a' }}>

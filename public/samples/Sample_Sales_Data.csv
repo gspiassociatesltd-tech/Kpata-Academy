@@ -1,4 +1,11 @@
-order_id,product,state,sale_price,order_date
-1,T-Shirt,California,25,2026-01-01
-2,Jeans,Texas,50,2026-01-02
-3,T-Shirt,California,25,2026-01-03
+order_id,product,category,state,sale_price,quantity,order_date,customer_feedback
+1,T-Shirt,Apparel,California,25,2,2026-01-01,I love this product
+2,Jeans,Apparel,Texas,50,1,2026-01-02,Good quality
+3,T-Shirt,Apparel,California,25,3,2026-01-03,Fast delivery
+4,Shoes,Footwear,New York,80,1,2026-01-04,Amazing
+5,Jeans,Apparel,California,50,2,2026-01-05,Will buy again
+6,Hoodie,Apparel,Texas,60,1,2026-01-06,Great
+7,Shoes,Footwear,Florida,80,1,2026-01-07,Comfortable
+8,T-Shirt,Apparel,New York,25,5,2026-01-08,Best
+9,Jeans,Apparel,California,50,1,2026-01-09,Good
+10,Hoodie,Apparel,California,60,2,2026-01-10,Love it
