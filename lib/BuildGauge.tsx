@@ -1,7 +1,6 @@
-
 'use client'
-import { BUILD_STATUS } from './courses'
 export function BuildGauge(){
+  const BUILD_STATUS = { overall: 75, totalSteps: 5, phases: [{status:'DONE'},{status:'DONE'},{status:'DONE'},{status:'IN_PROGRESS'}] }
   return (
     <div style={{ background: 'black', color: 'white', padding: '20px', borderRadius: '16px', marginBottom: '24px', border: '3px solid #fde047' }}>
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap', gap: '12px', marginBottom: '12px' }}>
