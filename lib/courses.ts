@@ -1,4 +1,4 @@
-// FULL ROBUST COURSES - All lessons with real content
+// FULL ROBUST COURSES - All lessons with real content - FIXED EXPORTS
 export type Lesson = {
   id: string | number
   title: string
@@ -534,7 +534,14 @@ Submit as Google Doc link. This is your portfolio piece for job!`,
         cheatsheet: `Capstone Template: Ask (business task), Prepare (source + ROCCC), Process (cleaning), Analyze (2 insights), Share (charts), Act (recommendation).`,
         quiz: `Quiz: Capstone must have how many phases? 6. Must include visualizations? Yes minimum 2-3.`,
         finalProject: `FINAL PROJECT: Submit full capstone Google Slides (6 slides) + 1 dashboard link (Looker Studio). Must score 80% from Kpata Bot evaluation to complete certification. Congratulations! You are now job-ready Junior Data Analyst!`
-      }
+      },
+      { id: 9, title: 'Data Analytics Lesson 9 - Spreadsheets Advanced', type: 'Practical', duration: '30 mins', content: 'Advanced spreadsheets: Pivot tables deep dive, Advanced formulas: INDEX-MATCH better than VLOOKUP, ARRAYFORMULA, QUERY function, Data validation, Conditional formatting. Create interactive dashboard in Sheets using slicers.', workedExample: 'Pivot: Rows=Product, Values=SUM(Sales). Instantly see total per product.', workedExample2: 'INDEX-MATCH: =INDEX(return_col, MATCH(lookup_val, lookup_col,0)) - no column count issue like VLOOKUP.', sampleLab: 'Build pivot table from 100 rows sales data, group by month.', tryYourself: 'Use QUERY: =QUERY(A1:D100, "select B, sum(C) where D>100 group by B")', examTips: 'Pivot tables are exam heavy.', cheatsheet: 'Pivot: Drag fields. INDEX-MATCH > VLOOKUP.', quiz: 'Function to sum with condition? SUMIF', finalProject: 'Interactive dashboard in Sheets with pivot + slicer.' },
+      { id: 10, title: 'Data Analytics Lesson 10 - SQL Advanced', type: 'Practical', duration: '30 mins', content: 'Advanced SQL: Subqueries (query inside query), CTEs (WITH clause), Window functions ROW_NUMBER(), RANK(), CASE statements, Data types, Temporary tables, Cleaning with SQL: TRIM, CAST, COALESCE for nulls, Handling duplicates with ROW_NUMBER() partition.', workedExample: 'Subquery: SELECT * FROM (SELECT City, SUM(Sales) as total FROM Sales GROUP BY City) WHERE total>10000', workedExample2: 'Window: SELECT Name, Sales, RANK() OVER (ORDER BY Sales DESC) as rank FROM Sales', sampleLab: 'Practice window functions on W3Schools.', tryYourself: 'Use CASE: SELECT Name, CASE WHEN Sales>10000 THEN "High" ELSE "Low" END', examTips: 'Window functions are advanced but tested.', cheatsheet: 'Subquery, CTE WITH, Window RANK(), CASE WHEN', quiz: 'What is CTE?', finalProject: 'Write 5 advanced queries: subquery, CTE, window, CASE, cleaning.' },
+      { id: 11, title: 'Data Analytics Lesson 11 - R Advanced & Visualization', type: 'Practical', duration: '35 mins', content: 'R advanced: dplyr package for data manipulation: filter(), select(), mutate(), arrange(), group_by() + summarise(). ggplot2 advanced: aes, geom_point, geom_line, facets, themes. Tidyverse. Import CSV: read.csv(). Export. Handling factors. Real project: Analyze COVID data.', workedExample: 'dplyr: library(dplyr); data %>% filter(city=="Minna") %>% group_by(product) %>% summarise(total=sum(sales))', workedExample2: 'ggplot2 advanced: ggplot(data, aes(x=sales, y=profit, color=city)) + geom_point() + facet_wrap(~year)', sampleLab: 'Use dplyr to clean and summarize FitBit data.', tryYourself: 'Install tidyverse and practice pipe %>%', examTips: 'dplyr verbs: filter, select, mutate, arrange, group_by, summarise.', cheatsheet: 'dplyr + ggplot2 = 90% of R work.', quiz: 'Pipe operator? %>% or |>', finalProject: 'Full R analysis: Import CSV, clean with dplyr, visualize with ggplot2, 3 charts.' },
+      { id: 12, title: 'Data Analytics Lesson 12 - Tableau Deep Dive', type: 'Practical', duration: '30 mins', content: 'Tableau: Connect to data, Dimensions vs Measures, Marks card, Filters, Parameters, Calculated fields, Joins and Blends, Dashboards and Stories, Publishing to Tableau Public. Best practices: Keep dashboard under 3 views, use filters, tell story.', workedExample: 'Calculated field: Profit Margin = SUM([Profit])/SUM([Sales]). Add to view.', workedExample2: 'Dashboard: Combine bar + map + KPI in one dashboard with filter by year.', sampleLab: 'Tableau Public: Create dashboard with Superstore dataset.', tryYourself: 'Create parameter to switch between Sales and Profit.', examTips: 'Tableau: Dimensions=qualitative, Measures=quantitative.', cheatsheet: 'Dimensions vs Measures, Calculated field, Dashboard.', quiz: 'Difference dimension vs measure?', finalProject: 'Publish Tableau dashboard to public profile - link for portfolio.' },
+      { id: 13, title: 'Data Analytics Lesson 13 - Data Ethics & Privacy', type: 'Theory', duration: '20 mins', content: 'Ethics: Informed consent, Anonymization (remove PII), Data bias (historical bias, sampling bias), Fairness, Privacy laws: GDPR (EU), NDPR (Nigeria Data Protection Regulation). De-identification, k-anonymity. Responsible AI. Case studies: Bias in hiring algorithms. As analyst, you must protect privacy.', workedExample: 'Anonymization: Replace names with ID 1,2,3. Remove phone numbers before sharing analysis.', workedExample2: 'Bias: If train hiring model only on male resumes, it will discriminate. Need diverse data.', sampleLab: 'Review a dataset for PII. List fields to anonymize before sharing.', tryYourself: 'What is NDPR? Nigeria Data Protection Regulation.', examTips: 'Ethics questions appear in Google cert.', cheatsheet: 'Consent, Anonymize, Bias check, GDPR/NDPR.', quiz: 'What is PII?', finalProject: 'Write data ethics checklist for your capstone project.' },
+      { id: 14, title: 'Data Analytics Lesson 14 - Job Preparation', type: 'Career', duration: '30 mins', content: 'Resume: Highlight tools: SQL, Sheets, Tableau, R. Projects: Capstone + 2 more. Portfolio: GitHub or website with dashboards links. LinkedIn optimization. Interview: STAR method (Situation Task Action Result) for behavioral questions. Technical interview: SQL query whiteboard, case study. Salary negotiation. Apply: LinkedIn, Indeed, local companies.', workedExample: 'Resume bullet: "Analyzed sales data of 10k rows using SQL and Tableau, identified 15% growth opportunity, presented to management, led to N500k increased sales"', workedExample2: 'STAR: Q: Tell time you handled difficult data. S: Data was messy sales. T: Need clean in 2 days. A: Used SQL to clean duplicates. R: Delivered on time, analysis accurate.', sampleLab: 'Create 1-page resume for Junior Data Analyst using your capstone.', tryYourself: 'Practice STAR stories for 3 common questions.', examTips: 'Portfolio > Certificate alone. Show projects.', cheatsheet: 'Resume = Tools + Projects + Impact with numbers. STAR for interviews.', quiz: 'What is STAR?', finalProject: 'Complete portfolio: Resume + LinkedIn + 2 dashboards links.' },
+      { id: 15, title: 'Data Analytics Lesson 15 - Final Exam & Certification', type: 'Exam', duration: '60 mins', content: 'Final preparation: Review all 6 phases, SQL (SELECT WHERE GROUP BY), Spreadsheets (VLOOKUP, Pivot), R (mean, data.frame), Visualization (chart choice), Ethics, Capstone structure. Google Data Analytics Certificate exam: 8 courses, each course has quizzes + final. Must pass all to get certificate on Coursera. After certificate, add to LinkedIn, share. Next steps: Learn Python, Advanced SQL, Power BI. Keep practicing on Kaggle datasets. Congratulations!', workedExample: 'Practice Exam: 1. What is first phase? ASK. 2. SQL to find sum? SELECT SUM(). 3. Best chart for trend? Line. 4. How to remove duplicates in Sheets? Data > Remove duplicates.', workedExample2: 'Next learning path: Google Advanced Data Analytics or IBM Data Science.', sampleLab: 'Take Google practice quiz: https://www.coursera.org/professional-certificates/google-data-analytics', tryYourself: 'Mock interview: Explain your capstone in 3 minutes.', examTips: 'Final exam: Focus on 6 phases, SQL basics, chart choice, cleaning.', cheatsheet: '6 Phases + SQL + Sheets + R + Visualization + Ethics = Certificate', quiz: 'Full mock quiz of 10 questions covering all topics.', finalProject: 'FINAL: Submit all: Capstone slides + 2 dashboards + Resume. Score 80% to earn Kpata Academy Certificate for Google Data Analytics. Share on LinkedIn and tag Kpata Academy!' }
     ]
   },
   {
@@ -563,8 +570,26 @@ Submit as Google Doc link. This is your portfolio piece for job!`,
   }
 ]
 
+// --- EXPORTS REQUIRED BY DASHBOARD AND OTHER PAGES ---
 export function getCourse(slug: string){
   if(!slug) return null
   const s = slug.toString().toLowerCase().trim()
   return COURSES.find(c => c.slug.toLowerCase() === s) || COURSES.find(c => c.slug.toLowerCase().includes(s)) || null
+}
+
+export function getAllCourses(){
+  return COURSES
+}
+
+export function getAllCourseSlugs(){
+  return COURSES.map(c => c.slug)
+}
+
+export function getCourseBySlug(slug: string){
+  return getCourse(slug)
+}
+
+export function getLessons(slug: string){
+  const course = getCourse(slug)
+  return course?.lessons || []
 }
