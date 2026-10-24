@@ -1,788 +1,570 @@
-export const COURSES = [
-  {
-    slug: 'google-ai-essentials',
-    title: 'Google AI Essentials',
-    lessons: [
-    {
-      id: '1',
-      title: 'What is AI - How Computer Learns',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `What is Artificial Intelligence? Computer learns like child. You show child many pictures of mango, child learns to recognize mango. AI same - show 100 mango pictures, AI learns.`,
-      workedExample: `Q: How does computer learn to recognize mango? Step 1: Collect 100 pictures labeled mango. Step 2: Show AI pictures. Step 3: AI finds pattern. Step 4: Show new picture, AI says mango 95%. Solution: AI learns from examples. Link: No link needed for this lesson.`,
-      workedExample2: `Q: What is Generative AI? Step 1: Generative creates new content. Step 2: Type prompt "Write 100-word driver application letter". Step 3: AI creates new letter, not copy. Solution: Generative = Creates new.`,
-      sampleLab: `LAB QUESTION: You learned mango recognition. Now using same method, explain how AI would learn to recognize orange. Submit your steps. Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `20% exam - AI vs ML umbrella`,
-      cheatsheet: `AI learns from examples like child learns mango`,
-      quiz: `Quiz 1: What is AI? A) Computer learns from examples B) Only internet C) Only typing D) Game. Correct A. Past Q: AI vs ML? ML is part of AI.`,
-      homework: `Homework: Define AI and Generative AI with example. 1) What is AI? 2) What is Generative? 3) Give example of mango learning. Must score 80% to unlock Complete.`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework: Define AI and Generative AI with example. 1) What is AI? 2) What is Generative? 3) Give example of mango learning. Must score 80% to unlock Complete. Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '2',
-      title: 'Keep Work Private - NotebookLM',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `How to keep company work private with AI. Use private tool that does not share data.`,
-      workedExample: `Q: How to summarize private company policy safely? Step 1: Open https://notebooklm.google.com Step 2: Click New Notebook Step 3: Upload PDF from /Sample_Company_Policy.pdf Step 4: Wait 1 min Step 5: Type "Summarize leave policy in 5 points with page numbers". Solution: Answer shows page citations  safe private. Link inside: https://notebooklm.google.com and /Sample_Company_Policy.pdf`,
-      workedExample2: `Q: How many vacation days? Step 1: Type "How many vacation days per policy?" Step 2: Answer "10 days per page 1". Solution: Citation shows source.`,
-      sampleLab: `LAB QUESTION: Upload /Sample_Company_Policy.pdf to https://notebooklm.google.com and ask "What is sick leave?" Submit screenshot of answer with citation. Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `30% exam - NotebookLM private`,
-      cheatsheet: `Private = NotebookLM + PDF + citation`,
-      quiz: `Quiz: Which tool keeps work private? A) NotebookLM B) Public chatbot C) Social media D) No tool. Correct A. Past Q: Why private? Protect NIN and data.`,
-      homework: `Homework: Summarize policy in 5 points with citations. Must score 80%.`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework: Summarize policy in 5 points with citations. Must score 80%. Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '3',
-      title: 'Lesson 3 - Google AI Essentials',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson for Lesson 3 simple English. Learn concept step by step.`,
-      workedExample: `Q: Question for Lesson 3? Step 1: Open link https://notebooklm.google.com or https://docs.google.com Step 2: Do action Step 3: See output. Solution step by step with link.`,
-      workedExample2: `Q: Second scenario Lesson 3? Step 1: Different example Step 2: Output. Solution.`,
-      sampleLab: `LAB QUESTION: Lab Question for Lesson 3 using Worked Example experience. Submit to Kpata Bot. Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `Exam Tips Lesson 3`,
-      cheatsheet: `Cheatsheet Lesson 3`,
-      quiz: `Quiz Lesson 3 MCQ A B C D Correct A. Past certification question.`,
-      homework: `Homework Lesson 3 80% to unlock Complete.`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework Lesson 3 80% to unlock Complete. Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '4',
-      title: 'Lesson 4 - Google AI Essentials',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson for Lesson 4 simple English. Learn concept step by step.`,
-      workedExample: `Q: Question for Lesson 4? Step 1: Open link https://notebooklm.google.com or https://docs.google.com Step 2: Do action Step 3: See output. Solution step by step with link.`,
-      workedExample2: `Q: Second scenario Lesson 4? Step 1: Different example Step 2: Output. Solution.`,
-      sampleLab: `LAB QUESTION: Lab Question for Lesson 4 using Worked Example experience. Submit to Kpata Bot. Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `Exam Tips Lesson 4`,
-      cheatsheet: `Cheatsheet Lesson 4`,
-      quiz: `Quiz Lesson 4 MCQ A B C D Correct A. Past certification question.`,
-      homework: `Homework Lesson 4 80% to unlock Complete.`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework Lesson 4 80% to unlock Complete. Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '5',
-      title: 'Lesson 5 - Google AI Essentials',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson for Lesson 5 simple English. Learn concept step by step.`,
-      workedExample: `Q: Question for Lesson 5? Step 1: Open link https://notebooklm.google.com or https://docs.google.com Step 2: Do action Step 3: See output. Solution step by step with link.`,
-      workedExample2: `Q: Second scenario Lesson 5? Step 1: Different example Step 2: Output. Solution.`,
-      sampleLab: `LAB QUESTION: Lab Question for Lesson 5 using Worked Example experience. Submit to Kpata Bot. Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `Exam Tips Lesson 5`,
-      cheatsheet: `Cheatsheet Lesson 5`,
-      quiz: `Quiz Lesson 5 MCQ A B C D Correct A. Past certification question.`,
-      homework: `Homework Lesson 5 80% to unlock Complete.`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework Lesson 5 80% to unlock Complete. Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '6',
-      title: 'Lesson 6 - Google AI Essentials',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson for Lesson 6 simple English. Learn concept step by step.`,
-      workedExample: `Q: Question for Lesson 6? Step 1: Open link https://notebooklm.google.com or https://docs.google.com Step 2: Do action Step 3: See output. Solution step by step with link.`,
-      workedExample2: `Q: Second scenario Lesson 6? Step 1: Different example Step 2: Output. Solution.`,
-      sampleLab: `LAB QUESTION: Lab Question for Lesson 6 using Worked Example experience. Submit to Kpata Bot. Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `Exam Tips Lesson 6`,
-      cheatsheet: `Cheatsheet Lesson 6`,
-      quiz: `Quiz Lesson 6 MCQ A B C D Correct A. Past certification question.`,
-      homework: `Homework Lesson 6 80% to unlock Complete.`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework Lesson 6 80% to unlock Complete. Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '7',
-      title: 'Lesson 7 - Google AI Essentials',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson for Lesson 7 simple English. Learn concept step by step.`,
-      workedExample: `Q: Question for Lesson 7? Step 1: Open link https://notebooklm.google.com or https://docs.google.com Step 2: Do action Step 3: See output. Solution step by step with link.`,
-      workedExample2: `Q: Second scenario Lesson 7? Step 1: Different example Step 2: Output. Solution.`,
-      sampleLab: `LAB QUESTION: Lab Question for Lesson 7 using Worked Example experience. Submit to Kpata Bot. Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `Exam Tips Lesson 7`,
-      cheatsheet: `Cheatsheet Lesson 7`,
-      quiz: `Quiz Lesson 7 MCQ A B C D Correct A. Past certification question.`,
-      homework: `Homework Lesson 7 80% to unlock Complete.`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework Lesson 7 80% to unlock Complete. Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '8',
-      title: 'Lesson 8 - Google AI Essentials',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson for Lesson 8 simple English. Learn concept step by step.`,
-      workedExample: `Q: Question for Lesson 8? Step 1: Open link https://notebooklm.google.com or https://docs.google.com Step 2: Do action Step 3: See output. Solution step by step with link.`,
-      workedExample2: `Q: Second scenario Lesson 8? Step 1: Different example Step 2: Output. Solution.`,
-      sampleLab: `LAB QUESTION: Lab Question for Lesson 8 using Worked Example experience. Submit to Kpata Bot. Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `Exam Tips Lesson 8`,
-      cheatsheet: `Cheatsheet Lesson 8`,
-      quiz: `Quiz Lesson 8 MCQ A B C D Correct A. Past certification question.`,
-      homework: `Homework Lesson 8 80% to unlock Complete.`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework Lesson 8 80% to unlock Complete. Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '9',
-      title: 'Lesson 9 - Google AI Essentials',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson for Lesson 9 simple English. Learn concept step by step.`,
-      workedExample: `Q: Question for Lesson 9? Step 1: Open link https://notebooklm.google.com or https://docs.google.com Step 2: Do action Step 3: See output. Solution step by step with link.`,
-      workedExample2: `Q: Second scenario Lesson 9? Step 1: Different example Step 2: Output. Solution.`,
-      sampleLab: `LAB QUESTION: Lab Question for Lesson 9 using Worked Example experience. Submit to Kpata Bot. Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `Exam Tips Lesson 9`,
-      cheatsheet: `Cheatsheet Lesson 9`,
-      quiz: `Quiz Lesson 9 MCQ A B C D Correct A. Past certification question.`,
-      homework: `Homework Lesson 9 80% to unlock Complete.`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework Lesson 9 80% to unlock Complete. Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '10',
-      title: 'Lesson 10 - Google AI Essentials',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson for Lesson 10 simple English. Learn concept step by step.`,
-      workedExample: `Q: Question for Lesson 10? Step 1: Open link https://notebooklm.google.com or https://docs.google.com Step 2: Do action Step 3: See output. Solution step by step with link.`,
-      workedExample2: `Q: Second scenario Lesson 10? Step 1: Different example Step 2: Output. Solution.`,
-      sampleLab: `LAB QUESTION: Lab Question for Lesson 10 using Worked Example experience. Submit to Kpata Bot. Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `Exam Tips Lesson 10`,
-      cheatsheet: `Cheatsheet Lesson 10`,
-      quiz: `Quiz Lesson 10 MCQ A B C D Correct A. Past certification question.`,
-      homework: `Homework Lesson 10 80% to unlock Complete.`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework Lesson 10 80% to unlock Complete. Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '11',
-      title: 'Lesson 11 - Google AI Essentials',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson for Lesson 11 simple English. Learn concept step by step.`,
-      workedExample: `Q: Question for Lesson 11? Step 1: Open link https://notebooklm.google.com or https://docs.google.com Step 2: Do action Step 3: See output. Solution step by step with link.`,
-      workedExample2: `Q: Second scenario Lesson 11? Step 1: Different example Step 2: Output. Solution.`,
-      sampleLab: `LAB QUESTION: Lab Question for Lesson 11 using Worked Example experience. Submit to Kpata Bot. Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `Exam Tips Lesson 11`,
-      cheatsheet: `Cheatsheet Lesson 11`,
-      quiz: `Quiz Lesson 11 MCQ A B C D Correct A. Past certification question.`,
-      homework: `Homework Lesson 11 80% to unlock Complete.`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework Lesson 11 80% to unlock Complete. Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '12',
-      title: 'Lesson 12 - Google AI Essentials',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson for Lesson 12 simple English. Learn concept step by step.`,
-      workedExample: `Q: Question for Lesson 12? Step 1: Open link https://notebooklm.google.com or https://docs.google.com Step 2: Do action Step 3: See output. Solution step by step with link.`,
-      workedExample2: `Q: Second scenario Lesson 12? Step 1: Different example Step 2: Output. Solution.`,
-      sampleLab: `LAB QUESTION: Lab Question for Lesson 12 using Worked Example experience. Submit to Kpata Bot. Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `Exam Tips Lesson 12`,
-      cheatsheet: `Cheatsheet Lesson 12`,
-      quiz: `Quiz Lesson 12 MCQ A B C D Correct A. Past certification question.`,
-      homework: `Homework Lesson 12 80% to unlock Complete.`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework Lesson 12 80% to unlock Complete. Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '13',
-      title: 'Lesson 13 - Google AI Essentials',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson for Lesson 13 simple English. Learn concept step by step.`,
-      workedExample: `Q: Question for Lesson 13? Step 1: Open link https://notebooklm.google.com or https://docs.google.com Step 2: Do action Step 3: See output. Solution step by step with link.`,
-      workedExample2: `Q: Second scenario Lesson 13? Step 1: Different example Step 2: Output. Solution.`,
-      sampleLab: `LAB QUESTION: Lab Question for Lesson 13 using Worked Example experience. Submit to Kpata Bot. Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `Exam Tips Lesson 13`,
-      cheatsheet: `Cheatsheet Lesson 13`,
-      quiz: `Quiz Lesson 13 MCQ A B C D Correct A. Past certification question.`,
-      homework: `Homework Lesson 13 80% to unlock Complete.`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework Lesson 13 80% to unlock Complete. Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '14',
-      title: 'Lesson 14 - Google AI Essentials',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson for Lesson 14 simple English. Learn concept step by step.`,
-      workedExample: `Q: Question for Lesson 14? Step 1: Open link https://notebooklm.google.com or https://docs.google.com Step 2: Do action Step 3: See output. Solution step by step with link.`,
-      workedExample2: `Q: Second scenario Lesson 14? Step 1: Different example Step 2: Output. Solution.`,
-      sampleLab: `LAB QUESTION: Lab Question for Lesson 14 using Worked Example experience. Submit to Kpata Bot. Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `Exam Tips Lesson 14`,
-      cheatsheet: `Cheatsheet Lesson 14`,
-      quiz: `Quiz Lesson 14 MCQ A B C D Correct A. Past certification question.`,
-      homework: `Homework Lesson 14 80% to unlock Complete.`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework Lesson 14 80% to unlock Complete. Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '15',
-      title: 'Lesson 15 - Google AI Essentials',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson for Lesson 15 simple English. Learn concept step by step.`,
-      workedExample: `Q: Question for Lesson 15? Step 1: Open link https://notebooklm.google.com or https://docs.google.com Step 2: Do action Step 3: See output. Solution step by step with link.`,
-      workedExample2: `Q: Second scenario Lesson 15? Step 1: Different example Step 2: Output. Solution.`,
-      sampleLab: `LAB QUESTION: Lab Question for Lesson 15 using Worked Example experience. Submit to Kpata Bot. Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `Exam Tips Lesson 15`,
-      cheatsheet: `Cheatsheet Lesson 15`,
-      quiz: `Quiz Lesson 15 MCQ A B C D Correct A. Past certification question.`,
-      homework: `Homework Lesson 15 80% to unlock Complete.`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework Lesson 15 80% to unlock Complete. Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    }
-    ]
-  },
-  {
-    slug: '【entity-microsoft¦canonical_name=Microsoft】-ai-900',
-    title: '【entity-Microsoft¦canonical_name=Microsoft】 AI-900',
-    lessons: [
-    {
-      id: '1',
-      title: 'AI-900 Lesson 1',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson AI-900 1 simple English no city name.`,
-      workedExample: `Q: AI-900 Lesson 1 question? Step with link https://learn.microsoft.com Azure. Solution.`,
-      workedExample2: `Second scenario AI-900 1`,
-      sampleLab: `LAB QUESTION: Lab AI-900 1 submit to Bot Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `21% exam`,
-      cheatsheet: `Cheatsheet 1`,
-      quiz: `Quiz AI-900 1 MCQ`,
-      homework: `Homework AI-900 1 80%`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework AI-900 1 80% Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '2',
-      title: 'AI-900 Lesson 2',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson AI-900 2 simple English no city name.`,
-      workedExample: `Q: AI-900 Lesson 2 question? Step with link https://learn.microsoft.com Azure. Solution.`,
-      workedExample2: `Second scenario AI-900 2`,
-      sampleLab: `LAB QUESTION: Lab AI-900 2 submit to Bot Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `22% exam`,
-      cheatsheet: `Cheatsheet 2`,
-      quiz: `Quiz AI-900 2 MCQ`,
-      homework: `Homework AI-900 2 80%`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework AI-900 2 80% Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '3',
-      title: 'AI-900 Lesson 3',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson AI-900 3 simple English no city name.`,
-      workedExample: `Q: AI-900 Lesson 3 question? Step with link https://learn.microsoft.com Azure. Solution.`,
-      workedExample2: `Second scenario AI-900 3`,
-      sampleLab: `LAB QUESTION: Lab AI-900 3 submit to Bot Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `23% exam`,
-      cheatsheet: `Cheatsheet 3`,
-      quiz: `Quiz AI-900 3 MCQ`,
-      homework: `Homework AI-900 3 80%`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework AI-900 3 80% Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '4',
-      title: 'AI-900 Lesson 4',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson AI-900 4 simple English no city name.`,
-      workedExample: `Q: AI-900 Lesson 4 question? Step with link https://learn.microsoft.com Azure. Solution.`,
-      workedExample2: `Second scenario AI-900 4`,
-      sampleLab: `LAB QUESTION: Lab AI-900 4 submit to Bot Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `24% exam`,
-      cheatsheet: `Cheatsheet 4`,
-      quiz: `Quiz AI-900 4 MCQ`,
-      homework: `Homework AI-900 4 80%`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework AI-900 4 80% Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '5',
-      title: 'AI-900 Lesson 5',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson AI-900 5 simple English no city name.`,
-      workedExample: `Q: AI-900 Lesson 5 question? Step with link https://learn.microsoft.com Azure. Solution.`,
-      workedExample2: `Second scenario AI-900 5`,
-      sampleLab: `LAB QUESTION: Lab AI-900 5 submit to Bot Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `25% exam`,
-      cheatsheet: `Cheatsheet 5`,
-      quiz: `Quiz AI-900 5 MCQ`,
-      homework: `Homework AI-900 5 80%`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework AI-900 5 80% Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '6',
-      title: 'AI-900 Lesson 6',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson AI-900 6 simple English no city name.`,
-      workedExample: `Q: AI-900 Lesson 6 question? Step with link https://learn.microsoft.com Azure. Solution.`,
-      workedExample2: `Second scenario AI-900 6`,
-      sampleLab: `LAB QUESTION: Lab AI-900 6 submit to Bot Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `26% exam`,
-      cheatsheet: `Cheatsheet 6`,
-      quiz: `Quiz AI-900 6 MCQ`,
-      homework: `Homework AI-900 6 80%`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework AI-900 6 80% Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '7',
-      title: 'AI-900 Lesson 7',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson AI-900 7 simple English no city name.`,
-      workedExample: `Q: AI-900 Lesson 7 question? Step with link https://learn.microsoft.com Azure. Solution.`,
-      workedExample2: `Second scenario AI-900 7`,
-      sampleLab: `LAB QUESTION: Lab AI-900 7 submit to Bot Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `27% exam`,
-      cheatsheet: `Cheatsheet 7`,
-      quiz: `Quiz AI-900 7 MCQ`,
-      homework: `Homework AI-900 7 80%`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework AI-900 7 80% Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '8',
-      title: 'AI-900 Lesson 8',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson AI-900 8 simple English no city name.`,
-      workedExample: `Q: AI-900 Lesson 8 question? Step with link https://learn.microsoft.com Azure. Solution.`,
-      workedExample2: `Second scenario AI-900 8`,
-      sampleLab: `LAB QUESTION: Lab AI-900 8 submit to Bot Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `28% exam`,
-      cheatsheet: `Cheatsheet 8`,
-      quiz: `Quiz AI-900 8 MCQ`,
-      homework: `Homework AI-900 8 80%`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework AI-900 8 80% Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '9',
-      title: 'AI-900 Lesson 9',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson AI-900 9 simple English no city name.`,
-      workedExample: `Q: AI-900 Lesson 9 question? Step with link https://learn.microsoft.com Azure. Solution.`,
-      workedExample2: `Second scenario AI-900 9`,
-      sampleLab: `LAB QUESTION: Lab AI-900 9 submit to Bot Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `29% exam`,
-      cheatsheet: `Cheatsheet 9`,
-      quiz: `Quiz AI-900 9 MCQ`,
-      homework: `Homework AI-900 9 80%`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework AI-900 9 80% Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '10',
-      title: 'AI-900 Lesson 10',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson AI-900 10 simple English no city name.`,
-      workedExample: `Q: AI-900 Lesson 10 question? Step with link https://learn.microsoft.com Azure. Solution.`,
-      workedExample2: `Second scenario AI-900 10`,
-      sampleLab: `LAB QUESTION: Lab AI-900 10 submit to Bot Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `30% exam`,
-      cheatsheet: `Cheatsheet 10`,
-      quiz: `Quiz AI-900 10 MCQ`,
-      homework: `Homework AI-900 10 80%`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework AI-900 10 80% Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '11',
-      title: 'AI-900 Lesson 11',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson AI-900 11 simple English no city name.`,
-      workedExample: `Q: AI-900 Lesson 11 question? Step with link https://learn.microsoft.com Azure. Solution.`,
-      workedExample2: `Second scenario AI-900 11`,
-      sampleLab: `LAB QUESTION: Lab AI-900 11 submit to Bot Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `31% exam`,
-      cheatsheet: `Cheatsheet 11`,
-      quiz: `Quiz AI-900 11 MCQ`,
-      homework: `Homework AI-900 11 80%`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework AI-900 11 80% Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '12',
-      title: 'AI-900 Lesson 12',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson AI-900 12 simple English no city name.`,
-      workedExample: `Q: AI-900 Lesson 12 question? Step with link https://learn.microsoft.com Azure. Solution.`,
-      workedExample2: `Second scenario AI-900 12`,
-      sampleLab: `LAB QUESTION: Lab AI-900 12 submit to Bot Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `32% exam`,
-      cheatsheet: `Cheatsheet 12`,
-      quiz: `Quiz AI-900 12 MCQ`,
-      homework: `Homework AI-900 12 80%`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework AI-900 12 80% Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '13',
-      title: 'AI-900 Lesson 13',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson AI-900 13 simple English no city name.`,
-      workedExample: `Q: AI-900 Lesson 13 question? Step with link https://learn.microsoft.com Azure. Solution.`,
-      workedExample2: `Second scenario AI-900 13`,
-      sampleLab: `LAB QUESTION: Lab AI-900 13 submit to Bot Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `33% exam`,
-      cheatsheet: `Cheatsheet 13`,
-      quiz: `Quiz AI-900 13 MCQ`,
-      homework: `Homework AI-900 13 80%`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework AI-900 13 80% Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '14',
-      title: 'AI-900 Lesson 14',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson AI-900 14 simple English no city name.`,
-      workedExample: `Q: AI-900 Lesson 14 question? Step with link https://learn.microsoft.com Azure. Solution.`,
-      workedExample2: `Second scenario AI-900 14`,
-      sampleLab: `LAB QUESTION: Lab AI-900 14 submit to Bot Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `34% exam`,
-      cheatsheet: `Cheatsheet 14`,
-      quiz: `Quiz AI-900 14 MCQ`,
-      homework: `Homework AI-900 14 80%`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework AI-900 14 80% Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '15',
-      title: 'AI-900 Lesson 15',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson AI-900 15 simple English no city name.`,
-      workedExample: `Q: AI-900 Lesson 15 question? Step with link https://learn.microsoft.com Azure. Solution.`,
-      workedExample2: `Second scenario AI-900 15`,
-      sampleLab: `LAB QUESTION: Lab AI-900 15 submit to Bot Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `35% exam`,
-      cheatsheet: `Cheatsheet 15`,
-      quiz: `Quiz AI-900 15 MCQ`,
-      homework: `Homework AI-900 15 80%`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework AI-900 15 80% Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    }
-    ]
-  },
+// FULL ROBUST COURSES - All lessons with real content
+export type Lesson = {
+  id: string | number
+  title: string
+  type?: string
+  duration?: string
+  content: string
+  workedExample?: string
+  workedExample2?: string
+  sampleLab?: string
+  lab?: string
+  tryYourself?: string
+  examTips?: string
+  cheatsheet?: string
+  quiz?: string
+  finalProject?: string
+  homework?: string
+  description?: string
+}
+
+export type Course = {
+  slug: string
+  title: string
+  description: string
+  lessons: Lesson[]
+}
+
+export const COURSES: Course[] = [
   {
     slug: 'google-data-analytics',
     title: 'Google Data Analytics',
+    description: 'Complete Google Data Analytics Certification - From beginner to job-ready analyst',
     lessons: [
-    {
-      id: '1',
-      title: 'Data Analytics Lesson 1',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson Data 1 simple English.`,
-      workedExample: `Q: Data Lesson 1 with link https://lookerstudio.google.com or /Sample_Sales_Data.csv Solution.`,
-      workedExample2: `Second scenario Data 1`,
-      sampleLab: `LAB QUESTION: Lab Data 1 submit Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `25% exam`,
-      cheatsheet: `Cheatsheet 1`,
-      quiz: `Quiz Data 1 MCQ`,
-      homework: `Homework Data 1 80% unlock`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework Data 1 80% unlock Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '2',
-      title: 'Data Analytics Lesson 2',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson Data 2 simple English.`,
-      workedExample: `Q: Data Lesson 2 with link https://lookerstudio.google.com or /Sample_Sales_Data.csv Solution.`,
-      workedExample2: `Second scenario Data 2`,
-      sampleLab: `LAB QUESTION: Lab Data 2 submit Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `25% exam`,
-      cheatsheet: `Cheatsheet 2`,
-      quiz: `Quiz Data 2 MCQ`,
-      homework: `Homework Data 2 80% unlock`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework Data 2 80% unlock Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '3',
-      title: 'Data Analytics Lesson 3',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson Data 3 simple English.`,
-      workedExample: `Q: Data Lesson 3 with link https://lookerstudio.google.com or /Sample_Sales_Data.csv Solution.`,
-      workedExample2: `Second scenario Data 3`,
-      sampleLab: `LAB QUESTION: Lab Data 3 submit Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `25% exam`,
-      cheatsheet: `Cheatsheet 3`,
-      quiz: `Quiz Data 3 MCQ`,
-      homework: `Homework Data 3 80% unlock`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework Data 3 80% unlock Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '4',
-      title: 'Data Analytics Lesson 4',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson Data 4 simple English.`,
-      workedExample: `Q: Data Lesson 4 with link https://lookerstudio.google.com or /Sample_Sales_Data.csv Solution.`,
-      workedExample2: `Second scenario Data 4`,
-      sampleLab: `LAB QUESTION: Lab Data 4 submit Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `25% exam`,
-      cheatsheet: `Cheatsheet 4`,
-      quiz: `Quiz Data 4 MCQ`,
-      homework: `Homework Data 4 80% unlock`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework Data 4 80% unlock Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '5',
-      title: 'Data Analytics Lesson 5',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson Data 5 simple English.`,
-      workedExample: `Q: Data Lesson 5 with link https://lookerstudio.google.com or /Sample_Sales_Data.csv Solution.`,
-      workedExample2: `Second scenario Data 5`,
-      sampleLab: `LAB QUESTION: Lab Data 5 submit Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `25% exam`,
-      cheatsheet: `Cheatsheet 5`,
-      quiz: `Quiz Data 5 MCQ`,
-      homework: `Homework Data 5 80% unlock`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework Data 5 80% unlock Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '6',
-      title: 'Data Analytics Lesson 6',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson Data 6 simple English.`,
-      workedExample: `Q: Data Lesson 6 with link https://lookerstudio.google.com or /Sample_Sales_Data.csv Solution.`,
-      workedExample2: `Second scenario Data 6`,
-      sampleLab: `LAB QUESTION: Lab Data 6 submit Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `25% exam`,
-      cheatsheet: `Cheatsheet 6`,
-      quiz: `Quiz Data 6 MCQ`,
-      homework: `Homework Data 6 80% unlock`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework Data 6 80% unlock Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '7',
-      title: 'Data Analytics Lesson 7',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson Data 7 simple English.`,
-      workedExample: `Q: Data Lesson 7 with link https://lookerstudio.google.com or /Sample_Sales_Data.csv Solution.`,
-      workedExample2: `Second scenario Data 7`,
-      sampleLab: `LAB QUESTION: Lab Data 7 submit Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `25% exam`,
-      cheatsheet: `Cheatsheet 7`,
-      quiz: `Quiz Data 7 MCQ`,
-      homework: `Homework Data 7 80% unlock`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework Data 7 80% unlock Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '8',
-      title: 'Data Analytics Lesson 8',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson Data 8 simple English.`,
-      workedExample: `Q: Data Lesson 8 with link https://lookerstudio.google.com or /Sample_Sales_Data.csv Solution.`,
-      workedExample2: `Second scenario Data 8`,
-      sampleLab: `LAB QUESTION: Lab Data 8 submit Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `25% exam`,
-      cheatsheet: `Cheatsheet 8`,
-      quiz: `Quiz Data 8 MCQ`,
-      homework: `Homework Data 8 80% unlock`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework Data 8 80% unlock Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '9',
-      title: 'Data Analytics Lesson 9',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson Data 9 simple English.`,
-      workedExample: `Q: Data Lesson 9 with link https://lookerstudio.google.com or /Sample_Sales_Data.csv Solution.`,
-      workedExample2: `Second scenario Data 9`,
-      sampleLab: `LAB QUESTION: Lab Data 9 submit Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `25% exam`,
-      cheatsheet: `Cheatsheet 9`,
-      quiz: `Quiz Data 9 MCQ`,
-      homework: `Homework Data 9 80% unlock`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework Data 9 80% unlock Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '10',
-      title: 'Data Analytics Lesson 10',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson Data 10 simple English.`,
-      workedExample: `Q: Data Lesson 10 with link https://lookerstudio.google.com or /Sample_Sales_Data.csv Solution.`,
-      workedExample2: `Second scenario Data 10`,
-      sampleLab: `LAB QUESTION: Lab Data 10 submit Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `25% exam`,
-      cheatsheet: `Cheatsheet 10`,
-      quiz: `Quiz Data 10 MCQ`,
-      homework: `Homework Data 10 80% unlock`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework Data 10 80% unlock Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '11',
-      title: 'Data Analytics Lesson 11',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson Data 11 simple English.`,
-      workedExample: `Q: Data Lesson 11 with link https://lookerstudio.google.com or /Sample_Sales_Data.csv Solution.`,
-      workedExample2: `Second scenario Data 11`,
-      sampleLab: `LAB QUESTION: Lab Data 11 submit Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `25% exam`,
-      cheatsheet: `Cheatsheet 11`,
-      quiz: `Quiz Data 11 MCQ`,
-      homework: `Homework Data 11 80% unlock`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework Data 11 80% unlock Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '12',
-      title: 'Data Analytics Lesson 12',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson Data 12 simple English.`,
-      workedExample: `Q: Data Lesson 12 with link https://lookerstudio.google.com or /Sample_Sales_Data.csv Solution.`,
-      workedExample2: `Second scenario Data 12`,
-      sampleLab: `LAB QUESTION: Lab Data 12 submit Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `25% exam`,
-      cheatsheet: `Cheatsheet 12`,
-      quiz: `Quiz Data 12 MCQ`,
-      homework: `Homework Data 12 80% unlock`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework Data 12 80% unlock Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '13',
-      title: 'Data Analytics Lesson 13',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson Data 13 simple English.`,
-      workedExample: `Q: Data Lesson 13 with link https://lookerstudio.google.com or /Sample_Sales_Data.csv Solution.`,
-      workedExample2: `Second scenario Data 13`,
-      sampleLab: `LAB QUESTION: Lab Data 13 submit Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `25% exam`,
-      cheatsheet: `Cheatsheet 13`,
-      quiz: `Quiz Data 13 MCQ`,
-      homework: `Homework Data 13 80% unlock`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework Data 13 80% unlock Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '14',
-      title: 'Data Analytics Lesson 14',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson Data 14 simple English.`,
-      workedExample: `Q: Data Lesson 14 with link https://lookerstudio.google.com or /Sample_Sales_Data.csv Solution.`,
-      workedExample2: `Second scenario Data 14`,
-      sampleLab: `LAB QUESTION: Lab Data 14 submit Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `25% exam`,
-      cheatsheet: `Cheatsheet 14`,
-      quiz: `Quiz Data 14 MCQ`,
-      homework: `Homework Data 14 80% unlock`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework Data 14 80% unlock Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: ``
-    },
-    {
-      id: '15',
-      title: 'Data Analytics Lesson 15',
-      duration: '15 mins',
-      type: 'Practical',
-      content: `Main lesson Data 15 simple English.`,
-      workedExample: `Q: Data Lesson 15 with link https://lookerstudio.google.com or /Sample_Sales_Data.csv Solution.`,
-      workedExample2: `Second scenario Data 15`,
-      sampleLab: `LAB QUESTION: Lab Data 15 submit Submit your solution. Kpata Bot will evaluate. You must get it right before Complete button activates. [Connect to AI appraisal]`,
-      tryYourself: `Try Yourself: Practice using Worked Example steps. Type your answer and submit to Kpata Bot for evaluation.`,
-      examTips: `25% exam`,
-      cheatsheet: `Cheatsheet 15`,
-      quiz: `Quiz Data 15 MCQ`,
-      homework: `Homework Data 15 80% unlock`,
-      finalProject: `HOMEWORK - Must score 80% to unlock Complete: Homework Data 15 80% unlock Past certification question included. Submit to Kpata Bot. 80% minimum required.`,
-      builtBy: `Built by Meta AI - Kpata Academy`
-    }
+      {
+        id: 1,
+        title: 'Data Analytics Lesson 1 - Introduction to Data Analytics',
+        type: 'Theory',
+        duration: '20 mins',
+        content: `MAIN LESSON: Introduction to Data Analytics - Simple English
+
+What is Data Analytics?
+Data Analytics is the process of collecting, cleaning, analyzing data to find useful information to make better business decisions.
+
+Example: A shop owner in Minna wants to know which product sells most. He looks at his sales book - that is data analytics!
+
+6 Steps of Data Analysis Process:
+1. ASK - Define the problem and question
+2. PREPARE - Collect data from sources
+3. PROCESS - Clean the data (remove errors)
+4. ANALYZE - Find patterns
+5. SHARE - Present with charts
+6. ACT - Make decision
+
+Types of Data:
+- Quantitative: Numbers (Age 25, Sales N5000)
+- Qualitative: Words (Customer happy, Color red)
+
+Career Path: Junior Data Analyst -> Data Analyst -> Senior Analyst -> Data Scientist
+
+Tools: Spreadsheets (Excel/Google Sheets), SQL, R, Tableau`,
+        workedExample: `WORKED EXAMPLE 1 - Step by Step
+
+Scenario: Kpata Shop wants to know best selling day.
+
+Data: Monday: 5 sales, Tuesday: 20 sales, Wednesday: 7 sales
+
+Q: What is best day?
+A: Step 1 ASK: Which day has highest sales?
+Step 2 PREPARE: Sales data Mon-Wed
+Step 3 PROCESS: Check data is correct
+Step 4 ANALYZE: Tuesday 20 > Monday 5, Wednesday 7
+Step 5 SHARE: Create bar chart - Tuesday bar tallest
+Step 6 ACT: Open shop longer on Tuesday, do promo
+
+Result: Data-driven decision, not guess!`,
+        workedExample2: `WORKED EXAMPLE 2 - Second Scenario
+
+Scenario: Restaurant wants to reduce food waste.
+
+Data: Collected food waste per day: Rice 5kg waste, Beans 1kg waste
+
+Analysis: Rice wasted more.
+
+Action: Cook less rice, more beans. Save money.
+
+This is analytics in real life!`,
+        sampleLab: `LAB QUESTION: Think of a business in your area (e.g., barbing salon). List 3 questions you can ASK about their business that data can answer. Example: What time do most customers come? Write your 3 questions and why they matter.`,
+        tryYourself: `Try Yourself: List 5 examples of quantitative and 5 qualitative data from your daily life.`,
+        examTips: `Exam Tips: Google asks definition of 6 phases. Memorize ASK, PREPARE, PROCESS, ANALYZE, SHARE, ACT in order.`,
+        cheatsheet: `Cheatsheet: Data Analytics = Collect + Clean + Analyze + Decide. 6 Steps: Ask Prepare Process Analyze Share Act.`,
+        quiz: `Quiz: 1. What is first step of data analysis? 2. Difference between quantitative and qualitative?`,
+        finalProject: `Homework: Interview one small business owner. Ask them one business question. Write how data can help answer it. Must explain 6 steps for that business.`
+      },
+      {
+        id: 2,
+        title: 'Data Analytics Lesson 2 - Spreadsheets & Data Cleaning',
+        type: 'Practical',
+        duration: '15 mins',
+        content: `MAIN LESSON: Data 2 - Spreadsheets & Data Cleaning
+
+What is a Spreadsheet?
+Grid of rows and columns like Excel. Each box is a cell.
+
+Important Terms:
+- Formula: =SUM(A1:A10) adds numbers
+- Function: Pre-built formula e.g., AVERAGE
+- VLOOKUP: Find value in table
+- Pivot Table: Summarize large data quickly
+
+Data Cleaning - Why?
+Real data is dirty! Examples: Missing name, Wrong date format 12/13/2023, Duplicate customer twice, Spelling "Lagos" vs "lagos"
+
+How to Clean:
+1. Remove duplicates: Data > Remove Duplicates
+2. Fix spelling: Find & Replace
+3. Handle blanks: Fill with N/A or 0 or delete
+4. Change format: Text to Date, Number to Currency
+5. Trim spaces: =TRIM(A1)
+
+Link for Practice: https://docs.google.com/spreadsheets or Sample_Sales_Data.csv
+
+Rule: Clean data = Accurate analysis. Dirty data = Wrong decisions!`,
+        workedExample: `WORKED EXAMPLE: Cleaning Sales Data
+
+Raw Data:
+Name | Sales | Date
+John |  500 | 2024-13-01 (invalid month 13)
+john |  500 | 2024-01-10 (duplicate + lowercase)
+Mary |  (blank)
+
+Cleaning Steps:
+1. Date 2024-13-01 -> Error, change to 2024-01-13 after checking receipt
+2. john duplicate -> Remove duplicate, keep John capitalized
+3. Mary blank sales -> Check if she made sale, if not put 0
+4. Use =TRIM to remove spaces
+
+Result: Clean table ready for analysis.
+
+Link: https://lookerstudio.google.com or /Sample_Sales_Data.csv`,
+        workedExample2: `SCENARIO 2: Student scores
+
+Data: Names with scores: Musa 90, Musa 90 (duplicate), Musa  (blank), musa 70
+
+Cleaning:
+- Remove duplicate 90
+- Capitalize musa to Musa
+- Blank -> Ask teacher for correct score
+
+Clean data helps fair ranking!`,
+        sampleLab: `LAB: Open Google Sheets. Create table: Product, Qty, Price. Add 10 rows with 2 intentional duplicates and 1 blank. Use Remove Duplicates and fill blank. Screenshot your cleaned sheet. Link practice: https://docs.google.com/spreadsheets`,
+        tryYourself: `Try: Use functions =SUM, =AVERAGE, =MAX, =MIN on your sales data.`,
+        examTips: `Exam: Know how to use VLOOKUP, Remove Duplicates, Text to Columns.`,
+        cheatsheet: `Formulas: SUM, AVERAGE, COUNT, IF, VLOOKUP. Cleaning: Duplicates, Blanks, Trim, Format.`,
+        quiz: `Quiz: What function removes extra spaces? Answer: TRIM. What tool summarizes data fast? Pivot Table.`,
+        finalProject: `Homework: Download sample sales CSV from Kaggle. Clean it fully: duplicates, blanks, formats. Submit before/after screenshot.`
+      },
+      {
+        id: 3,
+        title: 'Data Analytics Lesson 3 - SQL Basics',
+        type: 'Practical',
+        duration: '25 mins',
+        content: `MAIN LESSON: SQL - Language for Databases
+
+What is SQL? Structured Query Language. Used to talk to databases where large data lives (not Excel).
+
+Why SQL? Excel can handle 1 million rows max. SQL handles billions! Companies store data in SQL databases.
+
+Basic SQL Commands:
+SELECT - Choose columns: SELECT name, age FROM customers
+FROM - Which table: FROM customers
+WHERE - Filter rows: WHERE age > 25
+ORDER BY - Sort: ORDER BY sales DESC
+GROUP BY - Group same values: GROUP BY city
+JOIN - Combine two tables
+
+Example Database: Customers Table
+ID | Name | City | Sales
+1 | Musa | Minna | 5000
+2 | Aisha | Abuja | 7000
+
+Query: SELECT Name FROM Customers WHERE City='Minna' -> Returns Musa`,
+        workedExample: `STEP-BY-STEP SQL Query
+
+Task: Find total sales per city from Sales Table.
+
+Table: Sales
+City | Amount
+Minna | 5000
+Abuja | 7000
+Minna | 3000
+
+Query:
+SELECT City, SUM(Amount) AS TotalSales
+FROM Sales
+GROUP BY City
+
+Result:
+Minna | 8000
+Abuja | 7000
+
+Explanation: GROUP BY groups Minna together, SUM adds 5000+3000=8000`,
+        workedExample2: `SCENARIO 2: Join
+
+Customers Table + Orders Table
+
+Customers: ID, Name
+Orders: OrderID, CustomerID, Amount
+
+Want Name + Amount:
+
+SELECT Customers.Name, Orders.Amount
+FROM Customers
+JOIN Orders ON Customers.ID = Orders.CustomerID
+
+This combines data from two tables using common ID.`,
+        sampleLab: `LAB: Go to https://www.w3schools.com/sql/trysql.asp?filename=trysql_select_all
+Practice:
+1. SELECT * FROM Customers
+2. SELECT City FROM Customers WHERE Country='Nigeria'
+3. SELECT COUNT(*) FROM Customers
+Submit your 3 queries and results.`,
+        tryYourself: `Try: Write query to find all customers from Minna with sales > 5000.`,
+        examTips: `Memorize SELECT, FROM, WHERE, GROUP BY, ORDER BY, JOIN order. Google loves GROUP BY vs ORDER BY difference.`,
+        cheatsheet: `SQL Order: SELECT -> FROM -> WHERE -> GROUP BY -> ORDER BY. JOIN combines tables.`,
+        quiz: `Quiz: Which clause filters after grouping? Answer: HAVING (not WHERE).`,
+        finalProject: `Homework: Create 2 tables (Students, Grades) with 5 rows each. Write 3 queries: 1 SELECT WHERE, 1 GROUP BY SUM, 1 JOIN.`
+      },
+      {
+        id: 4,
+        title: 'Data Analytics Lesson 4 - Data Visualization with Tableau/Looker Studio',
+        type: 'Practical',
+        duration: '20 mins',
+        content: `MAIN LESSON: Visualization - Making Data Beautiful & Understandable
+
+Why Visualize? Human brain understands pictures faster than tables. A chart can show trend in 2 seconds that table needs 2 minutes.
+
+Types of Charts & When to Use:
+- Bar Chart: Compare categories (Sales by City)
+- Line Chart: Show trend over time (Sales Jan-Dec)
+- Pie Chart: Show parts of whole (Market share %)
+- Scatter Plot: Show relationship (Age vs Spending)
+- Map: Location data (Sales by State)
+
+Principles:
+- Keep simple, no 3D effects
+- Label axes clearly
+- Use color meaningfully (red = loss, green = profit)
+- One chart = One message
+
+Tools: Tableau Public (free), Looker Studio (Google, free, link: https://lookerstudio.google.com), Power BI
+
+Steps: Connect data -> Drag fields -> Choose chart type -> Customize -> Share link`,
+        workedExample: `WORKED EXAMPLE: Sales Dashboard
+
+Data: Monthly sales Jan: 10k, Feb: 15k, Mar: 8k
+
+Goal: Show sales trend
+
+Steps in Looker Studio:
+1. Go to lookerstudio.google.com -> Blank Report
+2. Add Data: Google Sheets with monthly sales
+3. Add Chart -> Line Chart
+4. Dimension: Month, Metric: Sales
+5. Result: Line going up then down - shows Feb best month
+
+Insight: Promote more in February next year!
+
+Link: https://lookerstudio.google.com`,
+        workedExample2: `SCENARIO 2: Which product sells most?
+
+Data: Product A 50 sales, Product B 30, Product C 100
+
+Best Chart: Bar Chart - Product C bar tallest instantly visible.
+
+If use Pie: C takes 55% of pie.
+
+Choose bar for comparison, pie for percentage.`,
+        sampleLab: `LAB: Use Looker Studio https://lookerstudio.google.com
+Import sample data: https://docs.google.com/spreadsheets/d/1sample (or your sales data). Create 2 charts: 1 Bar chart Sales by Product, 1 Line chart Sales over Time. Share view link.`,
+        tryYourself: `Try: Create dashboard with 3 charts for same dataset. Which tells best story?`,
+        examTips: `Know which chart for which data: Trend=Line, Comparison=Bar, Composition=Pie, Relationship=Scatter.`,
+        cheatsheet: `Bar=Compare, Line=Trend over time, Pie=% of whole, Scatter=relationship, Map=location.`,
+        quiz: `Quiz: Sales by region - best chart? Bar or Map. Sales over 12 months - best? Line.`,
+        finalProject: `Homework: Build full dashboard: Title, 3 charts (bar, line, pie), 1 filter. Topic: Your shop sales or student scores. Submit screenshot + insights (2 sentences).`
+      },
+      {
+        id: 5,
+        title: 'Data Analytics Lesson 5 - R Programming Basics',
+        type: 'Practical',
+        duration: '25 mins',
+        content: `MAIN LESSON: R Programming for Analysts
+
+What is R? Programming language for statistics and data analysis. Free. Used for complex analysis Excel cannot do.
+
+Why R? Powerful for statistics, many free packages, great charts, used by Google analysts.
+
+Basics:
+- Install: https://cran.r-project.org + RStudio
+- Variable: x <- 5 (assign 5 to x)
+- Vector (list): scores <- c(90, 80, 70)
+- Data Frame (table): data.frame(name=c("Musa","Aisha"), age=c(25,30))
+- Function: mean(scores) gives average 80
+- Install package: install.packages("ggplot2")
+- Load package: library(ggplot2)
+
+Common functions:
+mean() average, sum() total, sd() standard deviation, head() first rows, summary() stats`,
+        workedExample: `STEP-BY-STEP R Example
+
+Task: Analyze student scores
+
+Code in RStudio:
+scores <- c(85, 90, 78, 92, 88)
+mean(scores) # Result 86.6 average
+max(scores) # 92 highest
+min(scores) # 78 lowest
+sort(scores) # 78 85 88 90 92
+
+Create data frame:
+students <- data.frame(
+  name = c("Musa","Aisha","John"),
+  score = c(85,90,78)
+)
+print(students)
+
+Chart:
+library(ggplot2)
+ggplot(students, aes(x=name, y=score)) + geom_bar(stat="identity")
+
+Result: Bar chart of scores`,
+        workedExample2: `SCENARIO 2: Clean with R
+
+Data with NA (blank):
+scores <- c(90, NA, 85)
+
+mean(scores, na.rm=TRUE) # Removes NA, calculates 87.5
+
+Filter:
+subset(students, score > 80) # Only students above 80`,
+        sampleLab: `LAB: Install R & RStudio. Run:
+x <- c(10,20,30,40,50)
+mean(x)
+sum(x)
+Create data.frame with your 5 friends names and ages. Use summary().
+Submit code + output screenshot.`,
+        tryYourself: `Try: Create vector of 10 sales numbers. Find mean, median, sd.`,
+        examTips: `R basics: <- for assignment, c() for vector, data.frame() for table, mean(), library().`,
+        cheatsheet: `x <- 5, c(1,2,3), data.frame(), mean(), sum(), library(package), install.packages()`,
+        quiz: `Quiz: How to assign in R? Answer: <- . Function for average? mean().`,
+        finalProject: `Homework: Dataset of 20 sales values. In R, calculate mean, max, min, sd, and create bar chart with ggplot2.`
+      },
+      {
+        id: 6,
+        title: 'Data Analytics Lesson 6 - Ask, Prepare, Process',
+        type: 'Theory',
+        duration: '20 mins',
+        content: `DEEP DIVE: First 3 Phases
+
+1. ASK Phase:
+Define problem, stakeholders (who cares), questions. SMART questions: Specific, Measurable, Action-oriented, Relevant, Time-bound.
+Bad: "How are sales?" Good: "What was sales increase for Product A in Minna last 30 days?"
+Identify data needed, not assumptions.
+
+2. PREPARE Phase:
+Where is data? Internal (company database) vs External (government, Kaggle). Check data credibility: ROCCC - Reliable, Original, Comprehensive, Current, Cited.
+Data types: First-party (you collected), Second-party (partner), Third-party (bought).
+Bias check: Selection bias (only surveying happy customers), Observer bias.
+
+3. PROCESS Phase:
+Cleaning in detail: Manual vs automated. Tools: Spreadsheets, SQL, R, Python.
+Checklist: Duplicates, blanks, outliers (e.g., age 200), inconsistent formatting, misspellings.
+Documentation: Keep log of cleaning steps (Data lineage).
+
+Real example: Hospital data - ASK: Why patients wait long? PREPARE: Collect check-in/out times, staff numbers. PROCESS: Remove test entries, fix time formats.`,
+        workedExample: `EXAMPLE: Ask Phase Done Well
+
+Business: Kpata Academy
+
+Stakeholder: CEO Godwin
+
+Bad Question: "Is academy doing well?"
+SMART Question: "What is completion rate for Google Data Analytics course among students in Minna in last 90 days, and what lessons have lowest completion?"
+
+Why better? Specific (completion rate), Measurable (%), Action-oriented (find low lessons), Relevant (CEO cares), Time-bound (90 days).
+
+Then PREPARE: Data from platform database, student progress table. Check if data current, reliable.`,
+        workedExample2: `PROCESS Example
+
+Data: Student ages: 22, 25, 999, 23
+
+999 is outlier (error). How to handle? Check source, if typo 99? Or remove? Document decision: "Removed 999 as data entry error per ROCCC check - not reliable".
+
+This shows professional cleaning.`,
+        sampleLab: `LAB: Choose a topic (e.g., food delivery). Write 1 Bad question and 1 SMART question. List 2 data sources you would PREPARE and how to check ROCCC. Then list 3 PROCESS cleaning steps you anticipate.`,
+        tryYourself: `Try: Find a dataset on Kaggle. Evaluate ROCCC for it.`,
+        examTips: `Exam loves SMART and ROCCC. Memorize letters!`,
+        cheatsheet: `ASK=SMART, PREPARE=ROCCC + Data types, PROCESS=Cleaning checklist`,
+        quiz: `What does ROCCC stand for? Reliable Original Comprehensive Current Cited.`,
+        finalProject: `Homework: Full Ask-Prepare-Process report for "Why Kpata Academy students drop off". 300 words.`
+      },
+      {
+        id: 7,
+        title: 'Data Analytics Lesson 7 - Analyze & Share',
+        type: 'Theory + Practical',
+        duration: '25 mins',
+        content: `DEEP DIVE: Last 3 Phases
+
+4. ANALYZE Phase:
+Tools: Spreadsheets (pivot), SQL (group by), R (statistics), Tableau (visual).
+Methods: Correlation (does A go with B?), Sorting, Filtering, Calculating mean/median/mode.
+Data storytelling: Find insight, not just numbers. Insight = "Sales drop 20% on Mondays because shop closes early"
+
+5. SHARE Phase:
+Who is audience? CEO wants high-level, team wants detail.
+Visualization: Use right chart, tell story.
+Presentation: Start with question, show analysis, end with recommendation.
+McCandless Method: Introduction, Insight, Impact.
+
+6. ACT Phase:
+Put insight into action. Implement recommendation, measure result. Data-driven decision.
+
+Also: Data Ethics, Privacy, Consent, Anonymization.
+
+Google Data Analytics Certificate Exam covers all 6 phases heavily.`,
+        workedExample: `ANALYZE Example
+
+Data: Sales vs Advertising spend
+Month | Ad Spend | Sales
+Jan | 1000 | 10000
+Feb | 2000 | 20000
+Mar | 3000 | 28000
+
+Analysis: As Ad Spend increases, Sales increases -> Positive correlation. Calculate: For every 1000 ad, sales increase ~9000.
+
+Share: Line chart showing both lines going up together.
+
+Act: Recommendation: Increase ad spend to 4000 next month, expect sales ~37000.
+
+This is full Analyze-Share-Act.`,
+        workedExample2: `SHARE Example
+
+Bad Share: "Sales is 10000, 20000, 28000" (just numbers)
+
+Good Share: "Sales grew 180% from Jan to Mar, strongly correlated with ad spend. Recommendation: Increase ad budget by 33% to maximize profit. See chart."
+
+CEO understands impact quickly.`,
+        sampleLab: `LAB: Take previous sales data. Calculate correlation manually or in Sheets =CORREL(). Create 1 chart. Write 3-bullet Share story: Insight, Evidence, Recommendation.`,
+        tryYourself: `Try: Analyze your own phone usage data (screen time per day). Find pattern, share insight.`,
+        examTips: `Analyze tools: Pivot, SQL, R. Share: Audience matters, chart choice matters.`,
+        cheatsheet: `Analyze=Correlation, calc, pivot. Share=Audience+Chart+Story. Act=Decision.`,
+        quiz: `Quiz: What phase presents findings? Share. What phase implements decision? Act.`,
+        finalProject: `Homework: Full case study: Analyze Kpata Academy lesson completion data (make sample 20 rows). Show Analyze (calculations), Share (chart description), Act (recommendation).`
+      },
+      {
+        id: 8,
+        title: 'Data Analytics Lesson 8 - Capstone Project - Case Study',
+        type: 'Project',
+        duration: '60 mins',
+        content: `CAPSTONE: Put Everything Together - Real Job Interview Project
+
+Scenario: You are Junior Data Analyst at Bellabeat (Google case study example) or Kpata Shop.
+
+Task: Complete full 6 phases for one business question.
+
+Bellabeat Case Study (Google's actual case study):
+Bellabeat makes wellness products. Question: How can Bellabeat smart devices trends inform marketing?
+
+Your Job:
+1. ASK: Define business task - Analyze FitBit fitness data to find usage trends
+2. PREPARE: Dataset - FitBit Daily Activity (30 days, 33 users) from Kaggle
+3. PROCESS: Clean - Remove 0 steps (device not worn), fix dates, remove duplicates
+4. ANALYZE: Calculate avg steps, active minutes, find correlation between steps and calories, find which day most active
+5. SHARE: Create 3 visualizations: Avg steps per weekday (bar), Steps vs Calories (scatter), Daily active minutes trend (line). Write insights.
+6. ACT: Recommend marketing campaign targeting most active day, feature for low-activity users.
+
+Deliverables for Certificate: Presentation (slides) + Documentation.
+
+This is what employers will ask in interview!`,
+        workedExample: `WORKED CAPSTONE SNIPPET
+
+Ask: "What are trends in smart device usage?"
+
+Prepare: Source - FitBit Fitness Tracker Data from Kaggle, 30 users, reliable? Yes, original from FitBit, current (2023).
+
+Process: Found 100 rows with 0 steps - removed as device not worn (documented).
+
+Analyze:
+- Average steps: 7500
+- Most active: Tuesday & Saturday
+- Correlation steps-calories: 0.7 strong positive
+- 30% users use device <10 days (low engagement)
+
+Share:
+Chart 1: Bar - Steps by weekday - Tue/Sat highest
+Insight: People more active mid-week and weekend
+Recommendation: Push notifications on Tue/Sat
+
+Act: Recommend Bellabeat app send motivational message on low-activity days.
+
+This gets you certificate!`,
+        workedExample2: `KPATA SHOP VERSION
+
+Same 6 phases for Kpata Academy:
+
+Question: Which lessons have lowest completion?
+
+Data: Student progress table
+
+Finding: Lesson 2 and 5 have 40% drop.
+
+Recommendation: Add more examples to lesson 2, add video to lesson 5.
+
+Action: Update lessons, re-measure completion after 30 days.
+
+This shows you can apply to your own business.`,
+        sampleLab: `FINAL LAB - YOUR CAPSTONE:
+
+Choose ONE dataset:
+- FitBit (Kaggle)
+- Your own Kpata Academy progress (make 30 rows)
+- Sample Superstore Sales
+
+Do full 6 phases report:
+- 1 page Ask
+- 1 page Prepare (ROCCC)
+- 1 page Process (cleaning log)
+- 2 pages Analyze (2 calculations + insights)
+- 2 pages Share (describe 2 charts you would make + story)
+- 1 page Act (recommendation)
+
+Submit as Google Doc link. This is your portfolio piece for job!`,
+        tryYourself: `Try: Present your capstone to friend in 5 minutes. Can they understand your recommendation?`,
+        examTips: `Google Certificate Final: Case Study is mandatory. Follow 6 phases structure exactly. Use Bellabeat example as template.`,
+        cheatsheet: `Capstone Template: Ask (business task), Prepare (source + ROCCC), Process (cleaning), Analyze (2 insights), Share (charts), Act (recommendation).`,
+        quiz: `Quiz: Capstone must have how many phases? 6. Must include visualizations? Yes minimum 2-3.`,
+        finalProject: `FINAL PROJECT: Submit full capstone Google Slides (6 slides) + 1 dashboard link (Looker Studio). Must score 80% from Kpata Bot evaluation to complete certification. Congratulations! You are now job-ready Junior Data Analyst!`
+      }
+    ]
+  },
+  {
+    slug: 'google-project-management',
+    title: 'Google Project Management',
+    description: 'Google Project Management Certificate - Lead projects',
+    lessons: [
+      { id: 1, title: 'Lesson 1 - Foundations of Project Management', type: 'Theory', duration: '20 mins', content: 'MAIN LESSON: What is a Project? Temporary effort to create unique product. Project vs Operations: Project temporary, operations ongoing. Triple Constraint: Scope, Time, Cost - change one affects others. Role of Project Manager: Plan, organize, lead. Methodologies: Waterfall (sequential) vs Agile (iterative). Example: Building Kpata Academy is project.', workedExample: 'Example: Building a house - Scope: 3 bedrooms, Time: 6 months, Cost: N10m. If add 1 bedroom, time/cost increase.', workedExample2: 'Example: Wedding planning is project - has deadline, budget, unique.', sampleLab: 'LAB: Define a project in your life (e.g., birthday party) with Scope, Time, Cost.', tryYourself: 'List 3 projects vs 3 operations.', examTips: 'Triple constraint is key exam topic.', cheatsheet: 'Project = Temporary + Unique. Triple: Scope Time Cost.', quiz: 'What is triple constraint?', finalProject: 'Write project charter for small project.' },
+      { id: 2, title: 'Lesson 2 - Project Initiation & Charter', type: 'Theory', duration: '20 mins', content: 'Initiation: First phase. Identify stakeholders, define goals, create Project Charter document. Charter includes: Project purpose, objectives, stakeholders, scope, risks, budget high-level. Stakeholder analysis: Power/Interest grid. Example charter for Kpata Academy.', workedExample: 'Charter Example: Project: Kpata Academy Platform. Purpose: Provide free tech education. Objectives: 1000 students in 6 months. Stakeholders: CEO, Students, Developers.', workedExample2: 'Stakeholder grid: CEO High Power High Interest -> Manage closely. Students Low Power High Interest -> Keep informed.', sampleLab: 'Create Project Charter for your own project (1 page).', tryYourself: 'Identify stakeholders for building school.', examTips: 'Charter is first document, signed by sponsor.', cheatsheet: 'Charter = Purpose + Objectives + Stakeholders + Scope + Risks.', quiz: 'When is charter created? Initiation.', finalProject: 'Full charter for app development project.' },
+      { id: 3, title: 'Lesson 3 - Planning - Scope, Schedule, Budget', type: 'Practical', duration: '25 mins', content: 'Planning: WBS (Work Breakdown Structure) - Break project into small tasks. Example: Build website = Design, Frontend, Backend, Test. Schedule: Gantt chart shows tasks over time, dependencies (Task B cannot start before A). Budget: Estimate costs bottom-up (each task cost sum). Tools: Asana, Jira, Sheets, Gantt.', workedExample: 'WBS for Data Analytics Course: 1. Create lessons 2. Create labs 3. Record videos 4. Build platform. Each broken further: 1.1 Write content 1.2 Review.', workedExample2: 'Gantt: Lesson creation Week 1-2, Platform Week 2-3, Test Week 4. Dependency: Test after Platform.', sampleLab: 'Create WBS for event planning (at least 12 tasks) and Gantt in Sheets.', tryYourself: 'Estimate budget for your project.', examTips: 'WBS 100% rule - sum of children = 100% of parent.', cheatsheet: 'WBS = Decompose. Gantt = Timeline + Dependencies. Budget = Bottom-up.', quiz: 'What is WBS?', finalProject: 'Full project plan: WBS + Gantt + Budget.' },
+      { id: 4, title: 'Lesson 4 - Agile & Scrum', type: 'Theory', duration: '20 mins', content: 'Agile: Iterative, flexible, customer feedback. Values: Individuals over processes, Working software over docs, Customer collaboration, Responding to change. Scrum: Framework. Roles: Product Owner (what), Scrum Master (process), Dev Team (build). Events: Sprint (2 weeks), Daily Standup (15 min), Sprint Review, Retrospective. Artifacts: Product Backlog, Sprint Backlog, Increment.', workedExample: 'Scrum for Kpata: Product Backlog: All lessons. Sprint 1: Build Lesson 1-2. Daily standup: What did yesterday? Today? Blockers?', workedExample2: 'Kanban board: To Do, In Progress, Done. Move tasks across.', sampleLab: 'Run 1-week sprint for your personal project using Trello board.', tryYourself: 'Write 5 user stories: As a student, I want ... so that ...', examTips: 'Scrum roles and events heavily tested.', cheatsheet: 'Agile = Iterative. Scrum = PO, SM, Dev Team. Sprint 2 weeks.', quiz: 'What is sprint?', finalProject: 'Create Product Backlog with 10 user stories + 1 Sprint plan.' },
+      { id: 5, title: 'Lesson 5 - Execution & Team Management', type: 'Theory', duration: '20 mins', content: 'Execution: Doing the work. Leadership styles: Authoritarian vs Democratic. Team development: Forming, Storming, Norming, Performing, Adjourning. Communication: 80% of PM job! Manage conflicts, motivate. RACI chart: Responsible, Accountable, Consulted, Informed for each task.', workedExample: 'RACI for Lesson creation: Writer Responsible, CEO Accountable, Students Consulted, Marketing Informed.', workedExample2: 'Conflict: Developer vs Designer disagreement on UI. Resolve: Focus on project goal, not personal.', sampleLab: 'Create RACI for your project team (3 people).', tryYourself: 'Which leadership style when team is new? Authoritarian more directive.', examTips: 'Tuckman 5 stages of team development.', cheatsheet: 'Forming Storming Norming Performing Adjourning. RACI.', quiz: 'What is RACI?', finalProject: 'Team management plan with communication plan.' },
+      { id: 6, title: 'Lesson 6 - Monitoring, Risk & Closing', type: 'Theory', duration: '25 mins', content: 'Monitoring: Track progress vs plan. Earned Value Management (EVM): PV Planned Value, EV Earned Value, AC Actual Cost. SPI Schedule Performance, CPI Cost Performance. If SPI <1 behind schedule, CPI <1 over budget. Risk: Identify, Assess (Probability x Impact), Mitigate, Monitor. Risk register. Closing: Lessons learned, Retrospective, Handover, Celebrate! Procurement closure.', workedExample: 'EVM: Planned to complete 50% work costing N100k (PV). Actually completed 40% (EV N80k) spent N90k (AC). SPI=EV/PV=0.8 behind, CPI=EV/AC=0.89 over budget.', workedExample2: 'Risk: Risk - Internet outage. Probability Medium, Impact High. Mitigation: Have offline backup, mobile hotspot.', sampleLab: 'Create risk register with 5 risks: Risk, Probability, Impact, Mitigation.', tryYourself: 'Calculate SPI/CPI for your project.', examTips: 'EVM formulas: SPI=EV/PV, CPI=EV/AC. Risk mitigation types.', cheatsheet: 'EVM: PV, EV, AC, SPI, CPI. Risk: Identify Assess Mitigate.', quiz: 'SPI <1 means?', finalProject: 'Capstone: Full project from Initiation to Closing with all docs. This completes certificate.' }
+    ]
+  },
+  {
+    slug: 'google-cybersecurity',
+    title: 'Google Cybersecurity',
+    description: 'Google Cybersecurity Certificate - Protect systems',
+    lessons: [
+      { id: 1, title: 'Lesson 1 - Cybersecurity Foundations', type: 'Theory', duration: '20 mins', content: 'CIA Triad: Confidentiality (only authorized see), Integrity (data not tampered), Availability (systems up). Threats: Malware (virus, ransomware), Phishing, Social Engineering. Defense in depth: Multiple layers. Security frameworks: NIST, ISO 27001. Ethics.', workedExample: 'Phishing email: From admin@googIe.com (I instead of l) asking password. Check sender, dont click.', workedExample2: 'Ransomware: Encrypts files asks Bitcoin. Prevent: Backup, dont open unknown attachments.', sampleLab: 'Identify 3 phishing signs in sample email.', tryYourself: 'List CIA for bank account.', examTips: 'CIA Triad is foundation.', cheatsheet: 'CIA: Confidentiality Integrity Availability.', quiz: 'What is phishing?', finalProject: 'Security awareness poster.' },
+      { id: 2, title: 'Lesson 2 - Networks & Threats', type: 'Theory', duration: '25 mins', content: 'Networks: OSI 7 layers, TCP/IP. Ports: 80 HTTP, 443 HTTPS, 22 SSH. Firewalls filter traffic. IDS/IPS detect/prevent intrusions. Common attacks: DDoS (flood), Man-in-the-Middle, Brute Force (try passwords), SQL Injection. Logs: Syslog, NetFlow.', workedExample: 'Brute force: Hacker tries 1000 passwords per second. Prevent: Lock account after 5 fails, 2FA.', workedExample2: 'SQL Injection: Input " OR 1=1 -- bypasses login. Prevent: Input sanitization.', sampleLab: 'Use Wireshark to capture packets (lab). Identify TCP handshake.', tryYourself: 'What port for HTTPS?', examTips: 'Know common ports and attack types.', cheatsheet: 'Ports 80,443,22. Attacks: DDoS, MITM, Brute Force, SQLi.', quiz: 'What is DDoS?', finalProject: 'Network diagram with firewall placement.' },
+      { id: 3, title: 'Lesson 3 - Linux, SQL, Python for Security', type: 'Practical', duration: '30 mins', content: 'Linux commands: ls, cd, pwd, cat, grep, chmod, sudo. Important for security analysts. SQL for logs: SELECT * FROM log WHERE event="failed_login". Python for automation: Parse logs, check hashes. Example: Python script to find failed logins >5. SIEM: Splunk, Chronicle collect logs.', workedExample: 'Linux: grep "Failed password" /var/log/auth.log finds failed SSH. Count: grep -c.', workedExample2: 'Python: for line in logfile: if "FAILED" in line: count+=1 print count', sampleLab: 'Linux lab: Create file, chmod 600, grep for error in log sample.', tryYourself: 'Write SQL to find logins from Nigeria.', examTips: 'Basic Linux and SQL queries.', cheatsheet: 'Linux: ls cd grep chmod. SQL: SELECT WHERE.', quiz: 'Command to list files? ls', finalProject: 'Python script to analyze auth log and report IPs with >5 fails.' },
+      { id: 4, title: 'Lesson 4 - Detection & Response', type: 'Practical', duration: '30 mins', content: 'Incident Response Lifecycle: 1. Preparation 2. Detection & Analysis 3. Containment 4. Eradication 5. Recovery 6. Lessons Learned. Playbooks: Step-by-step for phishing, malware. Triage: Priority based on severity. Containment: Isolate infected machine from network. Eradication: Remove malware, patch. Recovery: Restore from backup. Tools: SIEM alerts, SOAR automation.', workedExample: 'Incident: Malware detected on PC. Steps: Detect via antivirus alert -> Contain disconnect network -> Eradicate reinstall OS -> Recover restore files -> Lessons learned training.', workedExample2: 'Phishing playbook: User reports phishing -> Analyze header -> If malicious, delete email from all mailboxes -> Block sender domain.', sampleLab: 'Simulate incident: Write incident report with timeline, actions.', tryYourself: 'What is first step after detection? Containment.', examTips: '6 steps of IR lifecycle in order.', cheatsheet: 'IR: Prep, Detect, Contain, Eradicate, Recover, Lessons.', quiz: 'After containment?', finalProject: 'Full incident response report for ransomware scenario - capstone.' }
     ]
   }
-];
+]
 
-export function getCourse(slug: string){ return COURSES.find((c: any)=>c.slug===slug); }
-export function getAllCourses(){ return COURSES; }
+export function getCourse(slug: string){
+  if(!slug) return null
+  const s = slug.toString().toLowerCase().trim()
+  return COURSES.find(c => c.slug.toLowerCase() === s) || COURSES.find(c => c.slug.toLowerCase().includes(s)) || null
+}
