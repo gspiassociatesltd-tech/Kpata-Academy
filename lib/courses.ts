@@ -1,7 +1,8 @@
+// types inline to avoid missing module
+type Lesson = any;
+type Course = any;
 
-import { Course } from './types';
-
-export const courses: Course[] = [
+export const courses: any[] = [
   {
     slug: 'google-data-analytics',
     title: 'Google Data Analytics',
