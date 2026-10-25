@@ -5,7 +5,7 @@ import { notFound } from 'next/navigation'
 export function generateStaticParams() {
   const params: any[] = []
   for (const c of getAllCourses()) {
-    for (const l of c.lessons) params.push({ slug: c.slug, lessonId: l.id })
+    for (const l of c.lessons) params.push({ slug: c.slug, lessonId: String(l.id) })
   }
   return params
 }
