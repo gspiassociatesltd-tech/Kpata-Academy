@@ -1,183 +1,175 @@
-'use client'
-import { useState, useEffect } from 'react'
-import Link from 'next/link'
-import { courses, COURSES } from '@/lib/courses'
+import Link from "next/link"
+import { getCourse, getLesson } from "@/lib/courses"
 
-export default function LessonPage({ params }: { params: { slug: string, lessonId: string } }) {
-  const [progress, setProgress] = useState(56)
-  const [timeSpent, setTimeSpent] = useState(12)
-  const [showLab, setShowLab] = useState(false)
+export default function LessonPage({ params }: { params: { slug: string, lessonId: string }}) {
+  const course = getCourse(params.slug)
+  const lesson = getLesson(params.slug, parseInt(params.lessonId))
+  if (!course || !lesson) return <div>Lesson not found</div>
 
-  useEffect(() => {
-    const timer = setInterval(() => setTimeSpent(t => t + 1), 60000)
-    return () => clearInterval(timer)
-  }, [])
+  const dirtyData = [
+    { id: 1, name: " Musa  ", date: "2024-13-05", amount: "500" },
+    { id: 2, name: "Musa", date: "2024-05-10", amount: "" },
+    { id: 1, name: " Musa  ", date: "2024-13-05", amount: "500" },
+    { id: 3, name: "Nkechi", date: "05/15/2024", amount: "300" },
+    { id: 4, name: "", date: "2024-05-20", amount: "400" },
+  ]
 
-  const allCourses = (courses as any) || (COURSES as any) || []
-  const course = allCourses.find((c:any) => c.slug === params.slug)
-  if (!course) return <div style={{padding:24}}>Course not found - {params.slug}</div>
-  
-  const lesson = course.lessons?.find((l:any) => String(l.id) === String(params.lessonId))
-  if (!lesson) return <div style={{padding:24}}>Lesson {params.lessonId} not found in {course.title}</div>
-
-  const lessonIdNum = parseInt(params.lessonId)
-  const paragraphs = lesson.content ? lesson.content.split(/[\n]+/).filter((p:string)=>p.trim().length>10) : ['Content coming soon']
-  // Split long paragraphs further by sentences for readability
-  const chunks: string[] = []
-  paragraphs.forEach((p:string) => {
-    if (p.length > 400) {
-      const sentences = p.split(/\.\s+/)
-      let current = ''
-      sentences.forEach((s:string) => {
-        if ((current + s).length > 350) { chunks.push(current); current = s }
-        else current += (current ? '. ' : '') + s
-      })
-      if (current) chunks.push(current)
-    } else chunks.push(p)
-  })
+  const homeworkData = [
+    { customer: "Aisha  ", orderDate: "2024-02-30", total: "" },
+    { customer: "Aisha  ", orderDate: "2024-02-30", total: "" },
+    { customer: "John", orderDate: "30-02-2024", total: "200" },
+    { customer: "", orderDate: "2024-03-01", total: "150" },
+    { customer: "John", orderDate: "2024-03-01", total: "150" },
+  ]
 
   return (
-    <div style={{minHeight:'100vh', background:'#fcfcf9', paddingBottom:40}}>
-      {/* Header */}
-      <div style={{background:'white', borderBottom:'1px solid #e5e7eb', position:'sticky', top:0, zIndex:10}}>
-        <div style={{maxWidth:900, margin:'0 auto', padding:'12px 20px'}}>
-          <Link href={`/courses/${course.slug}`} style={{color:'#2563eb', fontSize:14}}>← {course.title}</Link>
-          <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginTop:8, flexWrap:'wrap', gap:8}}>
-            <div style={{fontSize:13, color:'#6b7280'}}>Lesson {lessonIdNum} / {course.lessonsCount || course.lessons?.length} • {lesson.duration || '20 mins'} • {lesson.type}</div>
-            <div style={{display:'flex', gap:12, alignItems:'center'}}>
-              <div style={{fontSize:12, background:'#fef3c7', padding:'4px 8px', borderRadius:12}}>⏱ {timeSpent} mins spent</div>
-              <div style={{fontSize:12, background:'#dcfce7', padding:'4px 8px', borderRadius:12}}>📊 {progress}% complete</div>
-            </div>
+    <div style={{minHeight:"100vh", background:"#fcfcf9", fontFamily:"system-ui", padding:"0"}}>
+      <div style={{maxWidth:800, margin:"0 auto", padding:"16px"}}>
+        <Link href={`/courses/${course.slug}`} style={{color:"#2563eb", fontSize:14, textDecoration:"none"}}>← {course.title}</Link>
+        
+        <div style={{background:"white", padding:16, borderRadius:12, marginTop:12, border:"1px solid #e5e7eb"}}>
+          <div style={{display:"flex", justifyContent:"space-between", fontSize:12, color:"#6b7280"}}>
+            <span>Lesson {lesson.id} / {course.lessonsCount} • {lesson.duration || "25 mins"} • hands-on</span>
+            <span id="progress" style={{fontSize:12}}>0% complete • 0 mins spent (tracking live as you scroll)</span>
           </div>
-          <div style={{marginTop:10, height:8, background:'#f3f4f6', borderRadius:8, overflow:'hidden'}}>
-            <div style={{height:'100%', width:`${progress}%`, background:'linear-gradient(90deg,#fde047,#22c55e)', borderRadius:8, transition:'width 0.5s'}}></div>
+          <div style={{height:8, background:"#f3f4f6", borderRadius:8, marginTop:8}}>
+            <div id="bar" style={{height:"100%", width:"0%", background:"#22c55e", borderRadius:8, transition:"width 0.3s"}}></div>
           </div>
-          <div style={{fontSize:11, color:'#6b7280', marginTop:4}}>Lesson {lessonIdNum} - {progress}% complete - You're doing great! Take a break if needed</div>
         </div>
+
+        <div style={{background:"white", padding:20, borderRadius:12, marginTop:12}}>
+          <h1 style={{fontSize:28, fontWeight:800, margin:0}}>{lesson.title}</h1>
+          <p style={{color:"#6b7280", fontSize:14, marginTop:6}}>Simple English • 2 Solved Examples • Hands-on Lab • Homework with data</p>
+        </div>
+
+        {/* WHAT IS DIRTY DATA */}
+        <div style={{background:"white", padding:20, borderRadius:12, marginTop:12}}>
+          <h2 style={{fontSize:18, fontWeight:800}}>1. What is dirty data?</h2>
+          <p style={{fontSize:16, lineHeight:1.7, color:"#1f2937"}}>
+            Imagine your room: Clothes on floor in 2 places (duplicate), calendar shows month 13 (invalid date), empty cup with no water (missing data), name written with extra spaces " Musa  " (extra spaces).
+            <br/>Dirty spreadsheet is same.
+          </p>
+          <div style={{background:"#fef9c3", padding:12, borderRadius:8, marginTop:12}}>
+            <strong>Simple definition:</strong> Dirty data = data with errors that will give wrong results if you don't clean it.
+          </div>
+        </div>
+
+        {/* HOW TO CLEAN - DETAILED WITH EXAMPLES */}
+        <div style={{background:"white", padding:20, borderRadius:12, marginTop:12}}>
+          <h2 style={{fontSize:18, fontWeight:800}}>2. How to clean data — 4 steps (with examples)</h2>
+          
+          <div style={{marginTop:16}}>
+            <div style={{fontWeight:700}}>Step 1: Remove duplicates</div>
+            <p style={{fontSize:15, lineHeight:1.6}}>Same row appears twice. Example: Row id=1 appears 2 times in table below. Keep one, delete other.<br/>
+            <em>How:</em> In Sheets: Data → Remove duplicates. In Excel: Data → Remove Duplicates.</p>
+            <div style={{background:"#f3f4f6", padding:8, borderRadius:6, fontSize:13, marginTop:6}}>Before: 2 identical rows for Musa → After: 1 row</div>
+          </div>
+
+          <div style={{marginTop:16}}>
+            <div style={{fontWeight:700}}>Step 2: Fix invalid dates</div>
+            <p style={{fontSize:15, lineHeight:1.6}}>Date that cannot exist. Example: 2024-13-05 (month 13 no exist), 05/15/2024 vs 2024-05-15 mixed formats.<br/>
+            <em>How:</em> Make all dates same format YYYY-MM-DD. Fix month 13 → ask correct month or delete row.</p>
+            <div style={{background:"#f3f4f6", padding:8, borderRadius:6, fontSize:13, marginTop:6}}>2024-13-05 → Invalid → Correct to 2024-05-05 or remove</div>
+          </div>
+
+          <div style={{marginTop:16}}>
+            <div style={{fontWeight:700}}>Step 3: Handle missing data (empty cells)</div>
+            <p style={{fontSize:15, lineHeight:1.6}}>Cell empty. Example: amount = "" (blank), name = "" (no name).<br/>
+            <em>How:</em> Option A: Fill with 0 or "Unknown". Option B: Delete row if important data missing. For amount blank, put 0 or average.</p>
+            <div style={{background:"#f3f4f6", padding:8, borderRadius:6, fontSize:13, marginTop:6}}>amount "" → fill with 0 or average 400</div>
+          </div>
+
+          <div style={{marginTop:16}}>
+            <div style={{fontWeight:700}}>Step 4: Trim extra spaces</div>
+            <p style={{fontSize:15, lineHeight:1.6}}>Name " Musa  " has spaces. Computer sees " Musa  " different from "Musa".<br/>
+            <em>How:</em> Use =TRIM() function. =TRIM(" Musa  ") → "Musa"</p>
+            <div style={{background:"#f3f4f6", padding:8, borderRadius:6, fontSize:13, marginTop:6}}>" Musa  " → TRIM → "Musa"</div>
+          </div>
+        </div>
+
+        {/* DIRTY DATA TABLE FOR REFERENCE */}
+        <div style={{background:"white", padding:20, borderRadius:12, marginTop:12}}>
+          <h2 style={{fontSize:18, fontWeight:800}}>3. Example dirty data (what you will clean)</h2>
+          <p style={{fontSize:14, color:"#6b7280"}}>Look at this table — it has all 4 errors:</p>
+          <div style={{overflowX:"auto", marginTop:10}}>
+            <table style={{width:"100%", borderCollapse:"collapse", fontSize:13}}>
+              <thead><tr style={{background:"#f3f4f6"}}><th style={{border:"1px solid #e5e7eb", padding:6}}>id</th><th style={{border:"1px solid #e5e7eb", padding:6}}>name (spaces)</th><th style={{border:"1px solid #e5e7eb", padding:6}}>date (invalid)</th><th style={{border:"1px solid #e5e7eb", padding:6}}>amount (missing)</th><th style={{border:"1px solid #e5e7eb", padding:6}}>Error?</th></tr></thead>
+              <tbody>
+                {dirtyData.map((r,i)=>(
+                  <tr key={i}><td style={{border:"1px solid #e5e7eb", padding:6}}>{r.id}</td><td style={{border:"1px solid #e5e7eb", padding:6}}>{r.name || "(empty)"}</td><td style={{border:"1px solid #e5e7eb", padding:6}}>{r.date}</td><td style={{border:"1px solid #e5e7eb", padding:6}}>{r.amount || "(empty)"}</td><td style={{border:"1px solid #e5e7eb", padding:6, color:"#dc2626"}}>{i==0?"duplicate+spaces+invalid":""}{i==1?"missing amount":""}{i==2?"duplicate":""}{i==3?"mixed date format":""}{i==4?"missing name":""}</td></tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        {/* LAB WITH DATA */}
+        <div style={{background:"#eff6ff", padding:20, borderRadius:12, marginTop:12, border:"1px solid #bfdbfe"}}>
+          <h2 style={{fontSize:18, fontWeight:800}}>4. LAB — Clean this dirty data (hands-on)</h2>
+          <p style={{fontSize:14}}>Use the table above. Your task: produce clean table with 3 rows only.</p>
+          <ol style={{fontSize:15, lineHeight:1.7}}>
+            <li>Remove duplicate id=1 (keep one Musa)</li>
+            <li>Fix date 2024-13-05 → 2024-05-05, make all YYYY-MM-DD</li>
+            <li>Fill missing amount with 0, missing name with "Unknown" or delete</li>
+            <li>Trim " Musa  " → "Musa" using =TRIM()</li>
+          </ol>
+          <div style={{background:"white", padding:12, borderRadius:8, marginTop:10}}>
+            <strong>Dirty data to copy for Sheets/Excel:</strong>
+            <pre style={{fontSize:12, background:"#f3f4f6", padding:8, borderRadius:6, overflowX:"auto"}}>{`id,name,date,amount
+1," Musa  ",2024-13-05,500
+2,Musa,2024-05-10,
+1," Musa  ",2024-13-05,500
+3,Nkechi,05/15/2024,300
+4,,2024-05-20,400`}</pre>
+            <p style={{fontSize:12, color:"#6b7280", marginTop:6}}>Paste into Google Sheets, clean it. Kpata Bot will check: Should have 3-4 clean rows, no duplicates, no month 13, no "  " spaces.</p>
+          </div>
+          <button style={{background:"#111827", color:"white", padding:"10px 16px", borderRadius:8, border:"none", marginTop:10, fontSize:14}}>Submit Lab to Kpata Bot (80% to pass)</button>
+        </div>
+
+        {/* HOMEWORK WITH DATA */}
+        <div style={{background:"#fef9c3", padding:20, borderRadius:12, marginTop:12, border:"1px solid #fde047"}}>
+          <h2 style={{fontSize:18, fontWeight:800}}>5. HOMEWORK — Your own shop data to clean</h2>
+          <p style={{fontSize:14}}>Clean this customer orders table. Submit clean version.</p>
+          <div style={{overflowX:"auto", marginTop:10}}>
+            <table style={{width:"100%", borderCollapse:"collapse", fontSize:13, background:"white"}}>
+              <thead><tr style={{background:"#f3f4f6"}}><th style={{border:"1px solid #e5e7eb", padding:6}}>customer</th><th style={{border:"1px solid #e5e7eb", padding:6}}>orderDate</th><th style={{border:"1px solid #e5e7eb", padding:6}}>total</th></tr></thead>
+              <tbody>
+                {homeworkData.map((r,i)=>(<tr key={i}><td style={{border:"1px solid #e5e7eb", padding:6}}>{r.customer || "(empty)"}</td><td style={{border:"1px solid #e5e7eb", padding:6}}>{r.orderDate}</td><td style={{border:"1px solid #e5e7eb", padding:6}}>{r.total || "(empty)"}</td></tr>))}
+              </tbody>
+            </table>
+          </div>
+          <div style={{background:"white", padding:12, borderRadius:8, marginTop:10}}>
+            <strong>Data to copy:</strong>
+            <pre style={{fontSize:12, background:"#f3f4f6", padding:8, borderRadius:6}}>{`customer,orderDate,total
+"Aisha  ",2024-02-30,
+"Aisha  ",2024-02-30,
+John,30-02-2024,200
+,2024-03-01,150
+John,2024-03-01,150`}</pre>
+          </div>
+          <p style={{fontSize:13, marginTop:8}}><strong>Questions:</strong> 1) How many duplicates? 2) Which dates invalid? 3) What will you do with empty customer?</p>
+        </div>
+
+        {/* CHECK UNDERSTANDING */}
+        <div style={{background:"white", padding:16, borderRadius:12, marginTop:12, border:"1px solid #e5e7eb"}}>
+          <h3 style={{fontSize:15, fontWeight:700}}>Fellow Student Check: Did you understand?</h3>
+          <p style={{fontSize:14}}>Can you explain in simple English: What is duplicate and how to fix?</p>
+          <textarea placeholder="Type your explanation here..." style={{width:"100%", height:60, border:"1px solid #e5e7eb", borderRadius:8, padding:8, marginTop:8}}></textarea>
+        </div>
+
+        <div style={{textAlign:"center", padding:20, fontSize:12, color:"#9ca3af"}}>Progress updates live as you scroll • No fake stats • Simple English only</div>
       </div>
-
-      {/* Lesson Navigation - Clean Cards not jammed */}
-      <div style={{maxWidth:900, margin:'0 auto', padding:'16px 20px'}}>
-        <div style={{fontSize:12, color:'#6b7280', marginBottom:8}}>All Lessons in {course.title}:</div>
-        <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(140px, 1fr))', gap:8}}>
-          {course.lessons?.map((l:any) => (
-            <Link key={l.id} href={`/courses/${course.slug}/${l.id}`} 
-              style={{
-                padding:'8px 10px', borderRadius:8, fontSize:12, textDecoration:'none',
-                background: String(l.id)===String(params.lessonId) ? '#fde047' : 'white',
-                border: String(l.id)===String(params.lessonId) ? '2px solid #eab308' : '1px solid #e5e7eb',
-                color: '#111827', display:'block', lineHeight:'1.3'
-              }}>
-              <div style={{fontWeight: String(l.id)===String(params.lessonId) ? 700 : 500}}>{l.id}. {l.title?.substring(0,32)}{l.title?.length>32?'...':''}</div>
-              <div style={{fontSize:10, color:'#6b7280', marginTop:2}}>{l.duration}</div>
-            </Link>
-          ))}
-        </div>
-      </div>
-
-      <div style={{maxWidth:800, margin:'0 auto', padding:'0 20px'}}>
-        {/* Title */}
-        <div style={{background:'white', padding:'20px', borderRadius:16, marginBottom:16, boxShadow:'0 1px 3px rgba(0,0,0,0.1)'}}>
-          <h1 style={{fontSize:26, fontWeight:800, lineHeight:1.2, margin:0}}>{lesson.title}</h1>
-          <div style={{fontSize:14, color:'#6b7280', marginTop:8}}>Simple English • 2 Solved Examples • Hands-on Lab • Kpata Bot scores 80% to unlock</div>
-          <div style={{marginTop:12, display:'flex', gap:8, flexWrap:'wrap'}}>
-            <span style={{fontSize:12, background:'#f3f4f6', padding:'4px 8px', borderRadius:6}}>👵🏾 Mama Nkechi 68 & 👨🏾‍💻 Musa 22 learning together</span>
-            <span style={{fontSize:12, background:'#fef3c7', padding:'4px 8px', borderRadius:6}}>Whether you're 18 or 68, Your experience + AI = New opportunity</span>
-          </div>
-        </div>
-
-        {/* Visual 1 - Messy Data */}
-        <div style={{background:'white', borderRadius:16, padding:16, marginBottom:16, border:'2px dashed #f59e0b'}}>
-          <div style={{fontSize:13, fontWeight:700, marginBottom:8}}>📊 Visual 1: Messy Data = Messy Room</div>
-          <div style={{background:'#fef3c7', padding:12, borderRadius:8, fontSize:14, lineHeight:1.6}}>
-            Imagine your room with clothes on floor (duplicates), wrong date on wall calendar (invalid dates), empty cup (missing data). Same as dirty spreadsheet! 
-            <br/><br/>
-            <strong>Our illustration:</strong> Grandpa (68) and granddaughter looking at spreadsheet with yellow warning signs, crumpled papers — cleaning together. <em>Picture: / illustrations/messy-data.png</em>
-          </div>
-        </div>
-
-        {/* Main Lesson Chunks */}
-        {chunks.map((chunk, idx) => (
-          <div key={idx}>
-            <div style={{background:'white', padding:'18px', borderRadius:12, marginBottom:12, boxShadow:'0 1px 2px rgba(0,0,0,0.05)', fontSize:18, lineHeight:1.8, color:'#1f2937'}}>
-              {chunk}
-            </div>
-            {/* Fellow Student Checkpoint every 2 chunks */}
-            {(idx+1) % 2 === 0 && (
-              <div style={{background:'#fef9c3', borderLeft:'4px solid #eab308', padding:'12px 16px', borderRadius:8, marginBottom:16}}>
-                <div style={{fontSize:14, fontWeight:700}}>🤔 Fellow Student Check: Did you understand this part?</div>
-                <div style={{fontSize:14, marginTop:6, lineHeight:1.6}}>
-                  {idx===1 ? "This part confused me at first — I thought 'John' with space is different person. But TRIM makes ' John ' become 'John'. Same person! Did you get it? Extra space trick appears in Google exam." : 
-                   idx===3 ? "I had to read twice — why does duplicate make sales double? If John appears twice with N500 each, you think N1000 but real N500. That was my confusion. Did you understand?" :
-                   "Mama Nkechi asked: 'Why month 13 invalid?' Because calendar has only 12 months! Like writing February 31st. Did this part make sense to you?"}
-                </div>
-                <div style={{marginTop:8, display:'flex', gap:8}}>
-                  <button onClick={()=>setProgress(p=>Math.min(100,p+5))} style={{fontSize:12, background:'#22c55e', color:'white', border:'none', padding:'6px 12px', borderRadius:6, cursor:'pointer'}}>Yes, I got it ✓</button>
-                  <button style={{fontSize:12, background:'white', border:'1px solid #e5e7eb', padding:'6px 12px', borderRadius:6}}>Explain again</button>
-                </div>
-              </div>
-            )}
-            {/* Visual 2 after chunk 3 */}
-            {idx===2 && (
-              <div style={{background:'white', borderRadius:16, padding:16, marginBottom:16, border:'2px dashed #22c55e'}}>
-                <div style={{fontSize:13, fontWeight:700, marginBottom:8}}>🧹 Visual 2: 4 Simple Steps to Clean Data</div>
-                <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:8, fontSize:13}}>
-                  <div style={{background:'#dbeafe', padding:8, borderRadius:6}}><strong>1. FIND DUPLICATES</strong><br/>Look for repeated entries</div>
-                  <div style={{background:'#dcfce7', padding:8, borderRadius:6}}><strong>2. FIX DATES</strong><br/>Check YYYY-MM-DD format</div>
-                  <div style={{background:'#ffedd5', padding:8, borderRadius:6}}><strong>3. FILL BLANKS</strong><br/>Fill missing with Unknown</div>
-                  <div style={{background:'#e9d5ff', padding:8, borderRadius:6}}><strong>4. TRIM SPACES</strong><br/>Remove extra spaces</div>
-                </div>
-                <div style={{marginTop:8, fontSize:12, color:'#6b7280'}}>Tip: Always save backup copy before cleaning!</div>
-              </div>
-            )}
-            {idx===4 && (
-              <div style={{background:'white', borderRadius:16, padding:16, marginBottom:16, border:'2px dashed #3b82f6'}}>
-                <div style={{fontSize:13, fontWeight:700, marginBottom:8}}>✨ Visual 3: Before Messy → After Clean</div>
-                <div style={{display:'grid', gridTemplateColumns:'1fr auto 1fr', gap:8, alignItems:'center', fontSize:12}}>
-                  <div style={{background:'#fee2e2', padding:8, borderRadius:6}}>BEFORE: Messy<br/>• john / John duplicates<br/>• 2024-13-01 invalid<br/>• Missing email<br/>• Extra spaces</div>
-                  <div style={{fontSize:20}}>→</div>
-                  <div style={{background:'#dcfce7', padding:8, borderRadius:6}}>AFTER: Clean<br/>• John ✓<br/>• 2024-12-01 ✓<br/>• All filled ✓<br/>• No spaces ✓</div>
-                </div>
-                <div style={{marginTop:8, fontSize:12, background:'#eff6ff', padding:6, borderRadius:6}}>Great teamwork! Data is now clean, organized, ready to use. Mama Nkechi & Musa celebrating!</div>
-              </div>
-            )}
-          </div>
-        ))}
-
-        {/* Worked Examples */}
-        <div style={{background:'#eff6ff', border:'2px solid #3b82f6', borderRadius:16, padding:16, marginBottom:16, marginTop:20}}>
-          <div style={{fontSize:14, fontWeight:800, color:'#1e40af'}}>📝 WORKED EXAMPLE 1 - PAST GOOGLE CERTIFICATION EXAM QUESTION (2024) SOLVED</div>
-          <div style={{fontSize:14, marginTop:10, lineHeight:1.7, whiteSpace:'pre-wrap'}}>{lesson.workedExample || 'Worked Example 1 - Past exam question: What is dirty data? Solved step-by-step...'}</div>
-        </div>
-
-        <div style={{background:'#eff6ff', border:'2px solid #3b82f6', borderRadius:16, padding:16, marginBottom:16}}>
-          <div style={{fontSize:14, fontWeight:800, color:'#1e40af'}}>📝 WORKED EXAMPLE 2 - PAST EXAM SCENARIO 2 SOLVED</div>
-          <div style={{fontSize:14, marginTop:10, lineHeight:1.7, whiteSpace:'pre-wrap'}}>{lesson.workedExample2 || 'Scenario: Minna shop sales data with 5 rows containing duplicates, invalid dates, missing phones. List issues and fix...'}</div>
-        </div>
-
-        {/* Lab */}
-        <div style={{background:'#f0fdf4', border:'2px solid #22c55e', borderRadius:16, padding:16, marginBottom:16}}>
-          <div style={{fontSize:15, fontWeight:800}}>🧪 Sample Lab - Hands-on (Kpata Bot scores 80% to unlock)</div>
-          <div style={{fontSize:14, marginTop:8, lineHeight:1.6, whiteSpace:'pre-wrap'}}>{lesson.sampleLab}</div>
-          <button onClick={()=>setShowLab(!showLab)} style={{marginTop:10, background:'#22c55e', color:'white', border:'none', padding:'8px 16px', borderRadius:8, cursor:'pointer'}}>Start Lab →</button>
-          {showLab && <div style={{marginTop:10, background:'white', padding:10, borderRadius:8, fontSize:13}}>Lab interface: Upload cleaned sheet, Kpata Bot checks duplicates removed, dates fixed, blanks filled, spaces trimmed. Need 80% to pass. You are doing great!</div>}
-        </div>
-
-        {/* Collapsibles */}
-        <details style={{background:'white', padding:12, borderRadius:8, marginBottom:8}}><summary style={{fontWeight:700, cursor:'pointer'}}>✅ Try Yourself</summary><div style={{marginTop:8, fontSize:14, whiteSpace:'pre-wrap'}}>{lesson.tryYourself}</div></details>
-        <details style={{background:'white', padding:12, borderRadius:8, marginBottom:8}}><summary style={{fontWeight:700, cursor:'pointer'}}>💡 Exam Tips (Past Questions)</summary><div style={{marginTop:8, fontSize:14, whiteSpace:'pre-wrap'}}>{lesson.examTips}</div></details>
-        <details style={{background:'white', padding:12, borderRadius:8, marginBottom:8}}><summary style={{fontWeight:700, cursor:'pointer'}}>📋 Cheat Sheet</summary><div style={{marginTop:8, fontSize:14, whiteSpace:'pre-wrap'}}>{lesson.cheatsheet}</div></details>
-        <details style={{background:'white', padding:12, borderRadius:8, marginBottom:8}}><summary style={{fontWeight:700, cursor:'pointer'}}>❓ Quiz (Past Exam Qs)</summary><div style={{marginTop:8, fontSize:14, whiteSpace:'pre-wrap'}}>{lesson.quiz}</div></details>
-        <details style={{background:'white', padding:12, borderRadius:8, marginBottom:16}}><summary style={{fontWeight:700, cursor:'pointer'}}>🏁 Final Project / Homework</summary><div style={{marginTop:8, fontSize:14, whiteSpace:'pre-wrap'}}>{lesson.finalProject}</div></details>
-
-        {/* Next */}
-        <div style={{display:'flex', justifyContent:'space-between', marginBottom:30}}>
-          <Link href={`/courses/${course.slug}`} style={{padding:'10px 16px', background:'white', borderRadius:8, textDecoration:'none', color:'#111', border:'1px solid #e5e7eb'}}>← All Lessons</Link>
-          <Link href={`/courses/${course.slug}/${lessonIdNum < (course.lessons?.length||15) ? lessonIdNum+1 : 1}`} style={{padding:'10px 16px', background:'#111827', color:'white', borderRadius:8, textDecoration:'none'}}>Next Lesson →</Link>
-        </div>
-
-        <div style={{textAlign:'center', fontSize:12, color:'#9ca3af', padding:20}}>Whether you're 18 or 68, Kpata Academy makes AI simple. Retirees can learn spreadsheets, cybersecurity, data analytics to start small online businesses or work remotely. Your experience + AI = New opportunity. | Time tracking: {timeSpent} mins • Progress {progress}% • Self-paced, take breaks!</div>
-      </div>
+      <script dangerouslySetInnerHTML={{__html: `
+        let start = Date.now(); let maxScroll=0;
+        window.addEventListener('scroll', ()=> {
+          let scrolled = (window.scrollY / (document.body.scrollHeight - window.innerHeight))*100;
+          if(scrolled>maxScroll) maxScroll=scrolled;
+          let mins = Math.floor((Date.now()-start)/60000);
+          let el = document.getElementById('progress'); let bar=document.getElementById('bar');
+          if(el) el.innerText = Math.floor(maxScroll)+'% complete • '+mins+' mins spent (live)';
+          if(bar) bar.style.width = Math.floor(maxScroll)+'%';
+        });
+      `}} />
     </div>
   )
 }
