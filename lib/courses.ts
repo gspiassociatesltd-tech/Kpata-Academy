@@ -170,6 +170,7 @@ Fellow Check`,
   { slug: 'python-for-data', title: 'Python for Data', provider: 'Kpata', level: 'Beginner', duration: '3 months', lessonsCount: 15, description: 'Python', lessons: Array.from({length:15}, (_,i)=>({ id: i+1, title: `Python Lesson ${i+1}`, duration: '15 mins', type: 'theory', content: `Content`, workedExample: 'WE1', workedExample2: 'WE2', sampleLab: 'Lab', tryYourself: 'Try', examTips: 'Tips', cheatsheet: 'Cheat', quiz: 'Quiz', finalProject: 'HW' })) },
 ];
 
+export const COURSES = courses;
 export function getAllCourses() { return courses; }
 export function getCourse(slug: string) { return courses.find(c => c.slug === slug); }
 export function getLesson(slug: string, lessonId: string | number) {
