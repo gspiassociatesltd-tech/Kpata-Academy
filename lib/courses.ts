@@ -173,9 +173,9 @@ Fellow Check`,
 
 export const COURSES = courses;
 export function getAllCourses() { return courses; }
-export function getCourse(slug: string) { return courses.find(c => c.slug === slug); }
+export function getCourse(slug: string) { return courses.find((c:any) => c.slug === slug); }
 export function getLesson(slug: string, lessonId: string | number) {
   const course = getCourse(slug);
   if (!course) return null;
-  return course.lessons.find(l => String(l.id) === String(lessonId)) || null;
+  return course.lessons.find((l:any) => String(l.id) === String(lessonId)) || null;
 }
