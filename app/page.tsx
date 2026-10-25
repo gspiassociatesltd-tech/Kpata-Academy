@@ -1,67 +1,77 @@
-import { COURSES } from '@/lib/courses'
 import Link from 'next/link'
+import { courses } from '@/lib/courses'
 
-export default function Home() {
+export default function HomePage() {
+  const allCourses = courses || []
   return (
-    <div className="min-h-screen bg-[#fcfcf9]">
-      {/* HEADER */}
-      <header className="sticky top-0 z-20 bg-white/90 backdrop-blur border-b">
-        <div className="max-w-[1280px] mx-auto px-6 h-[64px] flex items-center justify-between">
-          <div className="flex items-center gap-2"><div className="w-9 h-9 bg-black text-white rounded-full grid place-items-center font-black">K</div><span className="font-black text-[18px]">Kpata Academy</span></div>
-          <div className="flex gap-2"><Link href="/courses/google-data-analytics" className="bg-black text-white px-5 py-2.5 rounded-full font-bold text-[13px]">Start Free →</Link></div>
-        </div>
-      </header>
+    <div style={{minHeight:'100vh', background:'#fcfcf9', fontFamily:'system-ui'}}>
+      {/* Header */}
+      <div style={{background:'white', borderBottom:'1px solid #e5e7eb', padding:'12px 20px', display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+        <div style={{fontWeight:800, fontSize:20}}>K Kpata Academy</div>
+        <Link href="/academy" style={{background:'#111827', color:'white', padding:'8px 16px', borderRadius:8, textDecoration:'none', fontSize:14}}>Start Free →</Link>
+      </div>
 
-      {/* HERO - AI TRAINING TO CERTIFICATION */}
-      <div className="bg-black text-white">
-        <div className="max-w-[1280px] mx-auto px-6 py-16 md:py-24 grid md:grid-cols-2 gap-8 items-center">
-          <div>
-            <div className="inline-flex bg-[#fde047] text-black text-[11px] font-black px-3 py-1 rounded-full mb-4">100% FREE TO START • NO CARD NEEDED</div>
-            <h1 className="text-[36px] md:text-[56px] font-black leading-[0.9] tracking-tight">FREE AI Training<br/>to <span className="text-[#fde047]">Certification</span><br/>in Simple English</h1>
-            <p className="text-zinc-400 mt-4 text-[15px] leading-relaxed max-w-[520px]">We take you from zero to certified. Start with free Google, IBM courses in simple Minna English. Every lesson has 2 solved examples + hands-on lab. Kpata Bot scores you. Get certificate.</p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <Link href="/courses/google-data-analytics" className="bg-[#fde047] text-black px-7 py-3 rounded-full font-black text-[14px]">Start Learning Free →</Link>
-              <a href="https://wa.me/2340000000000" className="border border-white/20 px-7 py-3 rounded-full font-bold text-[14px]">Join WhatsApp</a>
-            </div>
-            <div className="mt-6 flex gap-4 text-[12px] text-zinc-500"><span>✓ No registration to learn</span><span>✓ 8 Courses</span><span>✓ 120 Lessons</span><span>✓ Simple English</span></div>
+      {/* Hero - NOT retiree friendly on homepage per your request, only marketing materials */}
+      <div style={{maxWidth:1000, margin:'0 auto', padding:'40px 20px'}}>
+        <div style={{background:'#fde047', display:'inline-block', padding:'4px 10px', borderRadius:20, fontSize:12, fontWeight:700, marginBottom:12}}>100% FREE TO START • NO CARD NEEDED</div>
+        <h1 style={{fontSize:48, fontWeight:900, lineHeight:1.1, maxWidth:600, margin:0}}>
+          FREE AI Training<br/>to Certification<br/>in Simple English
+        </h1>
+        <p style={{fontSize:18, color:'#4b5563', maxWidth:600, marginTop:16, lineHeight:1.6}}>
+          We take you from zero to certified. Start with free Google, IBM courses in simple Minna English. 
+          Every lesson has 2 solved examples + hands-on lab. Kpata Bot scores you. Get certificate.
+        </p>
+        <div style={{display:'flex', gap:12, marginTop:20, flexWrap:'wrap'}}>
+          <Link href="/academy" style={{background:'#111827', color:'white', padding:'14px 24px', borderRadius:10, textDecoration:'none', fontWeight:700}}>Start Learning Free →</Link>
+          <a href="https://whatsapp.com" style={{background:'white', border:'1px solid #e5e7eb', padding:'14px 24px', borderRadius:10, textDecoration:'none', color:'#111'}}>Join WhatsApp</a>
+        </div>
+        <div style={{display:'flex', gap:16, marginTop:16, fontSize:13, color:'#6b7280'}}>
+          <span>✓ No registration to learn</span><span>✓ 8 Courses</span><span>✓ 120 Lessons</span><span>✓ Simple English</span>
+        </div>
+      </div>
+
+      {/* How it works */}
+      <div style={{maxWidth:1000, margin:'0 auto', padding:'20px'}}>
+        <div style={{fontSize:13, fontWeight:700, letterSpacing:1, color:'#6b7280', marginBottom:16}}>HOW IT WORKS</div>
+        <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(280px, 1fr))', gap:16}}>
+          <div style={{background:'white', padding:20, borderRadius:16, boxShadow:'0 1px 3px rgba(0,0,0,0.1)'}}>
+            <div style={{width:32, height:32, background:'#fde047', borderRadius:8, display:'flex', alignItems:'center', justifyContent:'center', fontWeight:800}}>1</div>
+            <div style={{fontWeight:800, marginTop:12}}>Phase 1: FREE Foundation</div>
+            <div style={{fontSize:14, color:'#6b7280', marginTop:6, lineHeight:1.5}}>Google Data Analytics, IBM Data Science - 60 lessons free, simplest form, solved examples. Mama Nkechi & Musa story, visuals, past exam questions.</div>
           </div>
-          <div className="bg-white text-black rounded-[24px] p-6 md:p-8">
-            <div className="text-[11px] font-black bg-black text-white inline-block px-3 py-1 rounded-full mb-3">HOW IT WORKS</div>
-            <div className="space-y-4">
-              <div className="flex gap-3"><div className="w-8 h-8 bg-[#fde047] rounded-full grid place-items-center font-black text-[14px]">1</div><div><h4 className="font-black text-[14px]">Phase 1: FREE Foundation</h4><p className="text-[12px] text-zinc-500">Google Data Analytics, IBM Data Science - 60 lessons free, simplest form, solved examples</p></div></div>
-              <div className="flex gap-3"><div className="w-8 h-8 bg-black text-white rounded-full grid place-items-center font-black text-[14px]">2</div><div><h4 className="font-black text-[14px]">Phase 2: AI Core</h4><p className="text-[12px] text-zinc-500">AI Fundamentals, Generative AI, Prompt Engineering, ML Basics - hands-on with free tools</p></div></div>
-              <div className="flex gap-3"><div className="w-8 h-8 bg-[#25D366] text-white rounded-full grid place-items-center font-black text-[14px]">3</div><div><h4 className="font-black text-[14px]">Phase 3: Certification</h4><p className="text-[12px] text-zinc-500">Final project + Kpata Certificate + Guide to Google/IBM external certs</p></div></div>
-            </div>
+          <div style={{background:'white', padding:20, borderRadius:16, boxShadow:'0 1px 3px rgba(0,0,0,0.1)'}}>
+            <div style={{width:32, height:32, background:'#111827', color:'white', borderRadius:8, display:'flex', alignItems:'center', justifyContent:'center', fontWeight:800}}>2</div>
+            <div style={{fontWeight:800, marginTop:12}}>Phase 2: AI Core</div>
+            <div style={{fontSize:14, color:'#6b7280', marginTop:6, lineHeight:1.5}}>AI Fundamentals, Generative AI, Prompt Engineering, ML Basics - hands-on with free tools, enjoyable chunks, fellow student checks.</div>
+          </div>
+          <div style={{background:'white', padding:20, borderRadius:16, boxShadow:'0 1px 3px rgba(0,0,0,0.1)'}}>
+            <div style={{width:32, height:32, background:'#22c55e', color:'white', borderRadius:8, display:'flex', alignItems:'center', justifyContent:'center', fontWeight:800}}>3</div>
+            <div style={{fontWeight:800, marginTop:12}}>Phase 3: Certification</div>
+            <div style={{fontSize:14, color:'#6b7280', marginTop:6, lineHeight:1.5}}>Final projects, mock exams with past questions, register for free Google/IBM exam, get certificate + remote job prep.</div>
           </div>
         </div>
       </div>
 
-      {/* COURSE GRID */}
-      <div className="max-w-[1280px] mx-auto px-6 py-12">
-        <div className="flex justify-between items-end mb-6"><div><h2 className="text-[28px] font-black">8 Courses • 120 Lessons • All in Simple English</h2><p className="text-[14px] text-zinc-500">Phase 1 free, Phase 2 AI, Phase 3 certificate. Every lesson has 2 solved examples + lab.</p></div></div>
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
-          {COURSES.map((c:any)=>(
-            <Link key={c.slug} href={`/courses/${c.slug}`} className="bg-white border rounded-[20px] p-5 hover:border-black hover:shadow-lg transition group">
-              <div className="flex justify-between mb-3"><span className="bg-[#fde047] text-black text-[10px] font-black px-2 py-1 rounded-full">FREE</span><span className="text-[10px] text-zinc-400">{c.lessons.length} lessons</span></div>
-              <h3 className="font-black text-[15px] leading-tight group-hover:text-black">{c.title}</h3>
-              <p className="text-[12px] text-zinc-500 mt-2 line-clamp-2">{c.description?.slice(0,80)}</p>
-              <div className="mt-4 flex gap-2"><span className="text-[10px] border px-2 py-1 rounded-full">Simple English</span><span className="text-[10px] border px-2 py-1 rounded-full">Hands-on</span></div>
-              <div className="mt-4 bg-black text-white text-[12px] font-bold py-2 rounded-full text-center group-hover:bg-zinc-800">Start →</div>
+      {/* Courses */}
+      <div style={{maxWidth:1000, margin:'0 auto', padding:'30px 20px'}}>
+        <h2 style={{fontSize:24, fontWeight:800}}>8 Free Courses • 120 Deep Lessons</h2>
+        <p style={{fontSize:14, color:'#6b7280', marginTop:6}}>Each lesson: Main lesson (Mama Nkechi story) + 2 Past Exam Worked Examples + Lab (Kpata Bot 80%) + Quiz</p>
+        <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(240px, 1fr))', gap:12, marginTop:16}}>
+          {allCourses.map((c:any) => (
+            <Link key={c.slug} href={`/courses/${c.slug}`} style={{background:'white', padding:16, borderRadius:12, textDecoration:'none', color:'#111', border:'1px solid #e5e7eb', display:'block'}}>
+              <div style={{fontSize:12, background:'#f3f4f6', display:'inline-block', padding:'2px 6px', borderRadius:4}}>{c.provider}</div>
+              <div style={{fontWeight:700, marginTop:8, fontSize:15}}>{c.title}</div>
+              <div style={{fontSize:12, color:'#6b7280', marginTop:4}}>{c.lessonsCount} lessons • {c.duration} • {c.level}</div>
+              <div style={{fontSize:12, color:'#2563eb', marginTop:8}}>Start free →</div>
             </Link>
           ))}
         </div>
       </div>
 
-      {/* FEATURES */}
-      <div className="bg-zinc-50 border-y">
-        <div className="max-w-[1280px] mx-auto px-6 py-12 grid md:grid-cols-3 gap-6">
-          <div className="bg-white border rounded-[20px] p-6"><div className="text-[24px] mb-2">📖</div><h4 className="font-black">Simplest Form</h4><p className="text-[13px] text-zinc-500 mt-1">No big grammar. Minna shop examples. 12-year-old can understand.</p></div>
-          <div className="bg-white border rounded-[20px] p-6"><div className="text-[24px] mb-2">💡</div><h4 className="font-black">2 Solved Examples</h4><p className="text-[13px] text-zinc-500 mt-1">Every lesson has 2 step-by-step solved examples, not just theory.</p></div>
-          <div className="bg-white border rounded-[20px] p-6"><div className="text-[24px] mb-2">🧪</div><h4 className="font-black">Hands-on Lab</h4><p className="text-[13px] text-zinc-500 mt-1">Lab + Kpata Bot scores 80% to unlock. Learn by doing.</p></div>
-        </div>
+      <div style={{textAlign:'center', padding:30, fontSize:12, color:'#9ca3af'}}>
+        Kpata Academy • FREE to Certification in Simple English • Simple & Enjoyable as never done before<br/>
+        Progress tracking • Time spent • Fellow student checks • Graphics & Illustrations
       </div>
-
-      <div className="max-w-[1280px] mx-auto px-6 py-8 flex justify-between text-[12px] text-zinc-400"><span>© Kpata Academy - FREE AI Training to Certification</span><span>Built in Minna • Simple English • 100% Free to start</span></div>
     </div>
   )
 }
