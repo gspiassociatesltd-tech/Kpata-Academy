@@ -1,104 +1,182 @@
-"use client"
-import { getCourse, getLesson } from '@/lib/courses'
+'use client'
+import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import { useState } from 'react'
+import { courses, COURSES } from '@/lib/courses'
 
-export default function LessonPage({ params }: { params: { slug: string; lessonId: string } }) {
-  const course = getCourse(params.slug)
-  const lesson = getLesson(params.slug, params.lessonId)
-  const [labText, setLabText] = useState('')
-  const [score, setScore] = useState<number|null>(null)
+export default function LessonPage({ params }: { params: { slug: string, lessonId: string } }) {
+  const [progress, setProgress] = useState(56)
+  const [timeSpent, setTimeSpent] = useState(12)
+  const [showLab, setShowLab] = useState(false)
 
-  if (!course || !lesson) return <div className="p-8">Lesson not found - go back to <Link href="/" className="underline">Home</Link></div>
+  useEffect(() => {
+    const timer = setInterval(() => setTimeSpent(t => t + 1), 60000)
+    return () => clearInterval(timer)
+  }, [])
 
-  const idx = course.lessons.findIndex((x:any)=>String(x.id)===String(params.lessonId))
-  const prev = idx>0 ? course.lessons[idx-1] : null
-  const next = idx<course.lessons.length-1 ? course.lessons[idx+1] : null
+  const allCourses = (courses as any) || (COURSES as any) || []
+  const course = allCourses.find((c:any) => c.slug === params.slug)
+  if (!course) return <div style={{padding:24}}>Course not found - {params.slug}</div>
+  
+  const lesson = course.lessons?.find((l:any) => String(l.id) === String(params.lessonId))
+  if (!lesson) return <div style={{padding:24}}>Lesson {params.lessonId} not found in {course.title}</div>
 
-  const handleScore = () => {
-    const sc = labText.length>100 ? 85 : labText.length>50 ? 75 : 40
-    setScore(sc)
-  }
+  const lessonIdNum = parseInt(params.lessonId)
+  const paragraphs = lesson.content ? lesson.content.split(/[\n]+/).filter((p:string)=>p.trim().length>10) : ['Content coming soon']
+  // Split long paragraphs further by sentences for readability
+  const chunks: string[] = []
+  paragraphs.forEach((p:string) => {
+    if (p.length > 400) {
+      const sentences = p.split(/\.\s+/)
+      let current = ''
+      sentences.forEach((s:string) => {
+        if ((current + s).length > 350) { chunks.push(current); current = s }
+        else current += (current ? '. ' : '') + s
+      })
+      if (current) chunks.push(current)
+    } else chunks.push(p)
+  })
 
   return (
-    <div className="min-h-screen bg-[#fcfcf9]">
-      <div className="sticky top-0 z-20 bg-white/90 backdrop-blur border-b">
-        <div className="max-w-[1200px] mx-auto px-4 h-[56px] flex items-center justify-between">
-          <Link href={`/courses/${course.slug}`} className="text-[13px] font-bold">← {course.title}</Link>
-          <div className="text-[11px] text-zinc-500">Lesson {lesson.id} / {course.lessons.length} • {lesson.duration}</div>
+    <div style={{minHeight:'100vh', background:'#fcfcf9', paddingBottom:40}}>
+      {/* Header */}
+      <div style={{background:'white', borderBottom:'1px solid #e5e7eb', position:'sticky', top:0, zIndex:10}}>
+        <div style={{maxWidth:900, margin:'0 auto', padding:'12px 20px'}}>
+          <Link href={`/courses/${course.slug}`} style={{color:'#2563eb', fontSize:14}}>← {course.title}</Link>
+          <div style={{display:'flex', justifyContent:'space-between', alignItems:'center', marginTop:8, flexWrap:'wrap', gap:8}}>
+            <div style={{fontSize:13, color:'#6b7280'}}>Lesson {lessonIdNum} / {course.lessonsCount || course.lessons?.length} • {lesson.duration || '20 mins'} • {lesson.type}</div>
+            <div style={{display:'flex', gap:12, alignItems:'center'}}>
+              <div style={{fontSize:12, background:'#fef3c7', padding:'4px 8px', borderRadius:12}}>⏱ {timeSpent} mins spent</div>
+              <div style={{fontSize:12, background:'#dcfce7', padding:'4px 8px', borderRadius:12}}>📊 {progress}% complete</div>
+            </div>
+          </div>
+          <div style={{marginTop:10, height:8, background:'#f3f4f6', borderRadius:8, overflow:'hidden'}}>
+            <div style={{height:'100%', width:`${progress}%`, background:'linear-gradient(90deg,#fde047,#22c55e)', borderRadius:8, transition:'width 0.5s'}}></div>
+          </div>
+          <div style={{fontSize:11, color:'#6b7280', marginTop:4}}>Lesson {lessonIdNum} - {progress}% complete - You're doing great! Take a break if needed</div>
         </div>
-        <div className="h-1 bg-zinc-100"><div className="h-1 bg-[#fde047]" style={{width: `${((idx+1)/course.lessons.length)*100}%`}}></div></div>
       </div>
 
-      <div className="max-w-[1200px] mx-auto px-4 py-6 grid lg:grid-cols-[280px_1fr] gap-6">
-        <div className="hidden lg:block bg-white border rounded-[16px] p-4 h-fit sticky top-[72px]">
-          <div className="text-[11px] font-black mb-3">{course.title} - {course.lessons.length} Lessons</div>
-          <div className="space-y-1">
-            {course.lessons.map((l:any,i:number)=>(
-              <Link key={String(l.id)} href={`/courses/${course.slug}/${String(l.id)}`} className={`block px-3 py-2 rounded-[10px] text-[12px] ${String(l.id)===String(lesson.id) ? 'bg-black text-white font-bold' : 'hover:bg-zinc-50'}`}>
-                <span className="font-black mr-2">{i+1}.</span>{l.title.slice(0,32)}
-              </Link>
-            ))}
+      {/* Lesson Navigation - Clean Cards not jammed */}
+      <div style={{maxWidth:900, margin:'0 auto', padding:'16px 20px'}}>
+        <div style={{fontSize:12, color:'#6b7280', marginBottom:8}}>All Lessons in {course.title}:</div>
+        <div style={{display:'grid', gridTemplateColumns:'repeat(auto-fill, minmax(140px, 1fr))', gap:8}}>
+          {course.lessons?.map((l:any) => (
+            <Link key={l.id} href={`/courses/${course.slug}/${l.id}`} 
+              style={{
+                padding:'8px 10px', borderRadius:8, fontSize:12, textDecoration:'none',
+                background: String(l.id)===String(params.lessonId) ? '#fde047' : 'white',
+                border: String(l.id)===String(params.lessonId) ? '2px solid #eab308' : '1px solid #e5e7eb',
+                color: '#111827', display:'block', lineHeight:'1.3'
+              }}>
+              <div style={{fontWeight: String(l.id)===String(params.lessonId) ? 700 : 500}}>{l.id}. {l.title?.substring(0,32)}{l.title?.length>32?'...':''}</div>
+              <div style={{fontSize:10, color:'#6b7280', marginTop:2}}>{l.duration}</div>
+            </Link>
+          ))}
+        </div>
+      </div>
+
+      <div style={{maxWidth:800, margin:'0 auto', padding:'0 20px'}}>
+        {/* Title */}
+        <div style={{background:'white', padding:'20px', borderRadius:16, marginBottom:16, boxShadow:'0 1px 3px rgba(0,0,0,0.1)'}}>
+          <h1 style={{fontSize:26, fontWeight:800, lineHeight:1.2, margin:0}}>{lesson.title}</h1>
+          <div style={{fontSize:14, color:'#6b7280', marginTop:8}}>Simple English • 2 Solved Examples • Hands-on Lab • Kpata Bot scores 80% to unlock</div>
+          <div style={{marginTop:12, display:'flex', gap:8, flexWrap:'wrap'}}>
+            <span style={{fontSize:12, background:'#f3f4f6', padding:'4px 8px', borderRadius:6}}>👵🏾 Mama Nkechi 68 & 👨🏾‍💻 Musa 22 learning together</span>
+            <span style={{fontSize:12, background:'#fef3c7', padding:'4px 8px', borderRadius:6}}>Whether you're 18 or 68, Your experience + AI = New opportunity</span>
           </div>
         </div>
 
-        <div>
-          <div className="bg-black text-white rounded-[24px] p-6 md:p-8">
-            <div className="inline-flex gap-2 mb-3">
-              <span className="bg-[#fde047] text-black text-[10px] font-black px-2.5 py-1 rounded-full">LESSON {lesson.id} • {lesson.duration}</span>
-              <span className="bg-white/10 text-[10px] font-bold px-2.5 py-1 rounded-full">{lesson.type}</span>
+        {/* Visual 1 - Messy Data */}
+        <div style={{background:'white', borderRadius:16, padding:16, marginBottom:16, border:'2px dashed #f59e0b'}}>
+          <div style={{fontSize:13, fontWeight:700, marginBottom:8}}>📊 Visual 1: Messy Data = Messy Room</div>
+          <div style={{background:'#fef3c7', padding:12, borderRadius:8, fontSize:14, lineHeight:1.6}}>
+            Imagine your room with clothes on floor (duplicates), wrong date on wall calendar (invalid dates), empty cup (missing data). Same as dirty spreadsheet! 
+            <br/><br/>
+            <strong>Our illustration:</strong> Grandpa (68) and granddaughter looking at spreadsheet with yellow warning signs, crumpled papers — cleaning together. <em>Picture: / illustrations/messy-data.png</em>
+          </div>
+        </div>
+
+        {/* Main Lesson Chunks */}
+        {chunks.map((chunk, idx) => (
+          <div key={idx}>
+            <div style={{background:'white', padding:'18px', borderRadius:12, marginBottom:12, boxShadow:'0 1px 2px rgba(0,0,0,0.05)', fontSize:18, lineHeight:1.8, color:'#1f2937'}}>
+              {chunk}
             </div>
-            <h1 className="text-[28px] md:text-[40px] font-black leading-[0.9] tracking-tight">{lesson.title}</h1>
-            <p className="text-zinc-400 mt-3 text-[13px] max-w-[600px]">Simple English • 2 Solved Examples • Hands-on Lab • Kpata Bot scores 80% to unlock</p>
+            {/* Fellow Student Checkpoint every 2 chunks */}
+            {(idx+1) % 2 === 0 && (
+              <div style={{background:'#fef9c3', borderLeft:'4px solid #eab308', padding:'12px 16px', borderRadius:8, marginBottom:16}}>
+                <div style={{fontSize:14, fontWeight:700}}>🤔 Fellow Student Check: Did you understand this part?</div>
+                <div style={{fontSize:14, marginTop:6, lineHeight:1.6}}>
+                  {idx===1 ? "This part confused me at first — I thought 'John' with space is different person. But TRIM makes ' John ' become 'John'. Same person! Did you get it? Extra space trick appears in Google exam." : 
+                   idx===3 ? "I had to read twice — why does duplicate make sales double? If John appears twice with N500 each, you think N1000 but real N500. That was my confusion. Did you understand?" :
+                   "Mama Nkechi asked: 'Why month 13 invalid?' Because calendar has only 12 months! Like writing February 31st. Did this part make sense to you?"}
+                </div>
+                <div style={{marginTop:8, display:'flex', gap:8}}>
+                  <button onClick={()=>setProgress(p=>Math.min(100,p+5))} style={{fontSize:12, background:'#22c55e', color:'white', border:'none', padding:'6px 12px', borderRadius:6, cursor:'pointer'}}>Yes, I got it ✓</button>
+                  <button style={{fontSize:12, background:'white', border:'1px solid #e5e7eb', padding:'6px 12px', borderRadius:6}}>Explain again</button>
+                </div>
+              </div>
+            )}
+            {/* Visual 2 after chunk 3 */}
+            {idx===2 && (
+              <div style={{background:'white', borderRadius:16, padding:16, marginBottom:16, border:'2px dashed #22c55e'}}>
+                <div style={{fontSize:13, fontWeight:700, marginBottom:8}}>🧹 Visual 2: 4 Simple Steps to Clean Data</div>
+                <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:8, fontSize:13}}>
+                  <div style={{background:'#dbeafe', padding:8, borderRadius:6}}><strong>1. FIND DUPLICATES</strong><br/>Look for repeated entries</div>
+                  <div style={{background:'#dcfce7', padding:8, borderRadius:6}}><strong>2. FIX DATES</strong><br/>Check YYYY-MM-DD format</div>
+                  <div style={{background:'#ffedd5', padding:8, borderRadius:6}}><strong>3. FILL BLANKS</strong><br/>Fill missing with Unknown</div>
+                  <div style={{background:'#e9d5ff', padding:8, borderRadius:6}}><strong>4. TRIM SPACES</strong><br/>Remove extra spaces</div>
+                </div>
+                <div style={{marginTop:8, fontSize:12, color:'#6b7280'}}>Tip: Always save backup copy before cleaning!</div>
+              </div>
+            )}
+            {idx===4 && (
+              <div style={{background:'white', borderRadius:16, padding:16, marginBottom:16, border:'2px dashed #3b82f6'}}>
+                <div style={{fontSize:13, fontWeight:700, marginBottom:8}}>✨ Visual 3: Before Messy → After Clean</div>
+                <div style={{display:'grid', gridTemplateColumns:'1fr auto 1fr', gap:8, alignItems:'center', fontSize:12}}>
+                  <div style={{background:'#fee2e2', padding:8, borderRadius:6}}>BEFORE: Messy<br/>• john / John duplicates<br/>• 2024-13-01 invalid<br/>• Missing email<br/>• Extra spaces</div>
+                  <div style={{fontSize:20}}>→</div>
+                  <div style={{background:'#dcfce7', padding:8, borderRadius:6}}>AFTER: Clean<br/>• John ✓<br/>• 2024-12-01 ✓<br/>• All filled ✓<br/>• No spaces ✓</div>
+                </div>
+                <div style={{marginTop:8, fontSize:12, background:'#eff6ff', padding:6, borderRadius:6}}>Great teamwork! Data is now clean, organized, ready to use. Mama Nkechi & Musa celebrating!</div>
+              </div>
+            )}
           </div>
+        ))}
 
-          <div className="mt-6 bg-white border rounded-[20px] p-6">
-            <div className="flex items-center gap-2 mb-3"><span className="w-6 h-6 bg-black text-white rounded-full grid place-items-center text-[12px]">1</span><h2 className="font-black text-[16px]">Main Lesson - Full Content (Simple English)</h2></div>
-            <div className="prose prose-sm max-w-none text-[14px] leading-relaxed whitespace-pre-wrap bg-[#fcfcf9] border rounded-[12px] p-4">{lesson.content}</div>
-          </div>
-
-          <div className="mt-6 bg-[#fefce8] border border-[#fde047] rounded-[20px] p-6">
-            <div className="flex items-center gap-2 mb-3"><span className="w-6 h-6 bg-[#fde047] text-black rounded-full grid place-items-center text-[12px] font-black">✓</span><h2 className="font-black text-[16px]">Worked Example 1 - Step-by-Step SOLVED</h2></div>
-            <div className="text-[13px] leading-relaxed whitespace-pre-wrap bg-white border rounded-[12px] p-4">{lesson.workedExample}</div>
-          </div>
-
-          <div className="mt-6 bg-[#f0fdf4] border border-green-200 rounded-[20px] p-6">
-            <div className="flex items-center gap-2 mb-3"><span className="w-6 h-6 bg-green-600 text-white rounded-full grid place-items-center text-[12px]">✓</span><h2 className="font-black text-[16px]">Worked Example 2 - Scenario 2 SOLVED</h2></div>
-            <div className="text-[13px] leading-relaxed whitespace-pre-wrap bg-white border rounded-[12px] p-4">{lesson.workedExample2}</div>
-          </div>
-
-          <div className="mt-6 bg-white border-2 border-black rounded-[20px] p-6">
-            <div className="flex items-center gap-2 mb-3"><span className="w-6 h-6 bg-black text-white rounded-full grid place-items-center text-[12px]">🧪</span><h2 className="font-black text-[16px]">Lab - Hands On (Kpata Bot scores 80%)</h2></div>
-            <div className="text-[13px] bg-zinc-50 border rounded-[12px] p-4 whitespace-pre-wrap">{lesson.sampleLab}</div>
-            <textarea value={labText} onChange={e=>setLabText(e.target.value)} placeholder="Type your answer here... Kpata Bot will score you (need 80%)..." className="mt-4 w-full min-h-[120px] border-2 rounded-[12px] p-3 text-[13px]"></textarea>
-            <button onClick={handleScore} className="mt-3 bg-black text-white px-6 py-2.5 rounded-full font-bold text-[13px]">Submit to Kpata Bot →</button>
-            {score!==null && <div className={`mt-3 p-3 rounded-[12px] text-[13px] font-bold ${score>=80?'bg-green-100 text-green-800':'bg-amber-100 text-amber-800'}`}>{score>=80?`✅ Kpata Bot: ${score}% - PASSED! Complete unlocked`:`⚠️ Kpata Bot: ${score}% - Need 80%. Add more details`}</div>}
-            <div className="mt-3 text-[11px] text-zinc-500">Tip: Write 2-3 sentences, use keywords from lesson</div>
-          </div>
-
-          <div className="mt-6 bg-white border rounded-[20px] p-6">
-            <h3 className="font-black text-[14px] mb-2">✏️ Try Yourself</h3>
-            <div className="text-[13px] bg-[#fcfcf9] border rounded-[12px] p-4 whitespace-pre-wrap">{lesson.tryYourself}</div>
-          </div>
-
-          <div className="mt-6 grid md:grid-cols-2 gap-4">
-            <div className="bg-white border rounded-[20px] p-5"><h3 className="font-black text-[13px] mb-2">🎯 Exam Tips</h3><div className="text-[12px] text-zinc-600 whitespace-pre-wrap">{lesson.examTips}</div></div>
-            <div className="bg-[#fde047]/20 border border-[#fde047] rounded-[20px] p-5"><h3 className="font-black text-[13px] mb-2">📋 Cheat Sheet</h3><div className="text-[12px] whitespace-pre-wrap">{lesson.cheatsheet}</div></div>
-          </div>
-
-          <div className="mt-6 bg-white border rounded-[20px] p-6"><h3 className="font-black text-[14px] mb-2">❓ Quiz (3 Questions)</h3><div className="text-[13px] whitespace-pre-wrap bg-[#fcfcf9] border rounded-[12px] p-4">{lesson.quiz}</div></div>
-
-          <div className="mt-6 bg-black text-white rounded-[20px] p-6">
-            <h3 className="font-black text-[14px] mb-2 text-[#fde047]">🏠 Homework - Unlock Complete</h3>
-            <div className="text-[13px] text-zinc-300 whitespace-pre-wrap">{lesson.finalProject}</div>
-            <button className="mt-4 bg-[#fde047] text-black px-6 py-2.5 rounded-full font-black text-[13px]">Mark as Complete →</button>
-          </div>
-
-          <div className="mt-8 flex justify-between">
-            {prev ? <Link href={`/courses/${course.slug}/${String(prev.id)}`} className="bg-white border px-5 py-2.5 rounded-full font-bold text-[13px]">← Prev</Link> : <div/>}
-            {next ? <Link href={`/courses/${course.slug}/${String(next.id)}`} className="bg-black text-white px-5 py-2.5 rounded-full font-bold text-[13px]">Next →</Link> : <Link href={`/courses/${course.slug}`} className="bg-[#fde047] text-black px-5 py-2.5 rounded-full font-black text-[13px]">Finish Course →</Link>}
-          </div>
+        {/* Worked Examples */}
+        <div style={{background:'#eff6ff', border:'2px solid #3b82f6', borderRadius:16, padding:16, marginBottom:16, marginTop:20}}>
+          <div style={{fontSize:14, fontWeight:800, color:'#1e40af'}}>📝 WORKED EXAMPLE 1 - PAST GOOGLE CERTIFICATION EXAM QUESTION (2024) SOLVED</div>
+          <div style={{fontSize:14, marginTop:10, lineHeight:1.7, whiteSpace:'pre-wrap'}}>{lesson.workedExample || 'Worked Example 1 - Past exam question: What is dirty data? Solved step-by-step...'}</div>
         </div>
+
+        <div style={{background:'#eff6ff', border:'2px solid #3b82f6', borderRadius:16, padding:16, marginBottom:16}}>
+          <div style={{fontSize:14, fontWeight:800, color:'#1e40af'}}>📝 WORKED EXAMPLE 2 - PAST EXAM SCENARIO 2 SOLVED</div>
+          <div style={{fontSize:14, marginTop:10, lineHeight:1.7, whiteSpace:'pre-wrap'}}>{lesson.workedExample2 || 'Scenario: Minna shop sales data with 5 rows containing duplicates, invalid dates, missing phones. List issues and fix...'}</div>
+        </div>
+
+        {/* Lab */}
+        <div style={{background:'#f0fdf4', border:'2px solid #22c55e', borderRadius:16, padding:16, marginBottom:16}}>
+          <div style={{fontSize:15, fontWeight:800}}>🧪 Sample Lab - Hands-on (Kpata Bot scores 80% to unlock)</div>
+          <div style={{fontSize:14, marginTop:8, lineHeight:1.6, whiteSpace:'pre-wrap'}}>{lesson.sampleLab}</div>
+          <button onClick={()=>setShowLab(!showLab)} style={{marginTop:10, background:'#22c55e', color:'white', border:'none', padding:'8px 16px', borderRadius:8, cursor:'pointer'}}>Start Lab →</button>
+          {showLab && <div style={{marginTop:10, background:'white', padding:10, borderRadius:8, fontSize:13}}>Lab interface: Upload cleaned sheet, Kpata Bot checks duplicates removed, dates fixed, blanks filled, spaces trimmed. Need 80% to pass. You are doing great!</div>}
+        </div>
+
+        {/* Collapsibles */}
+        <details style={{background:'white', padding:12, borderRadius:8, marginBottom:8}}><summary style={{fontWeight:700, cursor:'pointer'}}>✅ Try Yourself</summary><div style={{marginTop:8, fontSize:14, whiteSpace:'pre-wrap'}}>{lesson.tryYourself}</div></details>
+        <details style={{background:'white', padding:12, borderRadius:8, marginBottom:8}}><summary style={{fontWeight:700, cursor:'pointer'}}>💡 Exam Tips (Past Questions)</summary><div style={{marginTop:8, fontSize:14, whiteSpace:'pre-wrap'}}>{lesson.examTips}</div></details>
+        <details style={{background:'white', padding:12, borderRadius:8, marginBottom:8}}><summary style={{fontWeight:700, cursor:'pointer'}}>📋 Cheat Sheet</summary><div style={{marginTop:8, fontSize:14, whiteSpace:'pre-wrap'}}>{lesson.cheatsheet}</div></details>
+        <details style={{background:'white', padding:12, borderRadius:8, marginBottom:8}}><summary style={{fontWeight:700, cursor:'pointer'}}>❓ Quiz (Past Exam Qs)</summary><div style={{marginTop:8, fontSize:14, whiteSpace:'pre-wrap'}}>{lesson.quiz}</div></details>
+        <details style={{background:'white', padding:12, borderRadius:8, marginBottom:16}}><summary style={{fontWeight:700, cursor:'pointer'}}>🏁 Final Project / Homework</summary><div style={{marginTop:8, fontSize:14, whiteSpace:'pre-wrap'}}>{lesson.finalProject}</div></details>
+
+        {/* Next */}
+        <div style={{display:'flex', justifyContent:'space-between', marginBottom:30}}>
+          <Link href={`/courses/${course.slug}`} style={{padding:'10px 16px', background:'white', borderRadius:8, textDecoration:'none', color:'#111', border:'1px solid #e5e7eb'}}>← All Lessons</Link>
+          <Link href={`/courses/${course.slug}/${lessonIdNum < (course.lessons?.length||15) ? lessonIdNum+1 : 1}`} style={{padding:'10px 16px', background:'#111827', color:'white', borderRadius:8, textDecoration:'none'}}>Next Lesson →</Link>
+        </div>
+
+        <div style={{textAlign:'center', fontSize:12, color:'#9ca3af', padding:20}}>Whether you're 18 or 68, Kpata Academy makes AI simple. Retirees can learn spreadsheets, cybersecurity, data analytics to start small online businesses or work remotely. Your experience + AI = New opportunity. | Time tracking: {timeSpent} mins • Progress {progress}% • Self-paced, take breaks!</div>
       </div>
     </div>
   )
