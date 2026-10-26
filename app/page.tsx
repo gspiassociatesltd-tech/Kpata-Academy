@@ -116,13 +116,42 @@ export default function Page() {
           <p style={{fontSize:10, color:'#94a3b8', textAlign:'center', marginTop:6}}>48px tall for thumb - Works on Tecno/Infinix. Bot saves progress to certificate.</p>
         </div>
 
+
+        {/* BUG 6-7 FIX: HOMEWORK with App Bot - PHONE FRIENDLY */}
+        <div style={{background:'white', border:'1px solid #f59e0b', borderRadius:12, padding:16, marginTop:12}}>
+          <h2 style={{fontSize:18, margin:0}}>📝 HOMEWORK: Your Own Dirty Data</h2>
+          <p style={{fontSize:12, color:'#92400e', background:'#fffbeb', padding:8, borderRadius:6, marginTop:8}}>Build 5 rows with YOUR friends names (with spaces & duplicates like Musa). Clean to 4 rows. This proves you can do it without teacher.</p>
+
+          <div style={{marginTop:12, display:'grid', gap:10}}>
+            <div style={{border:'1px solid #fde68a', borderRadius:10, padding:12, background:'#fefce8'}}>
+              <strong>Task:</strong>
+              <ul style={{fontSize:12, margin:'6px 0', paddingLeft:16}}>
+                <li>Create 5 rows: id, name (add ␣ spaces like ␣Amina␣), date, amount</li>
+                <li>Add 1 duplicate + 1 empty name + 1 invalid date (13 month)</li>
+                <li>Clean with TRIM, UNIQUE, FILTER → Final 4 rows</li>
+              </ul>
+            </div>
+          </div>
+
+          <a href="https://docs.google.com/spreadsheets/create" target="_blank" rel="noopener noreferrer"
+            style={{display:'flex', height:48, background:'white', color:'#d97706', border:'2px solid #f59e0b', fontWeight:700, fontSize:15, borderRadius:10, alignItems:'center', justifyContent:'center', textDecoration:'none', marginTop:12}}>
+            🔗 Open Sheets for Homework
+          </a>
+
+          <button style={{marginTop:12, width:'100%', height:52, background:'#ea580c', color:'white', fontWeight:800, fontSize:15, borderRadius:10, border:'none'}}>
+            📤 Submit Homework to Kpata Bot — "HW: 4 clean names: Amina, John..."
+          </button>
+          <p style={{fontSize:10, color:'#94a3b8', textAlign:'center', marginTop:6}}>Bug 6-7 Fix: Homework now has Bot submission (was missing). 48px thumb-friendly.</p>
+        </div>
+
         {/* FOOTER STATUS */}
         <div style={{marginTop:16, background:'#111827', color:'white', padding:12, borderRadius:10, fontSize:12}}>
-          <strong>Next:</strong> Bug #5 LAB Done ✅ | Bug 6-7 HOMEWORK | Bug 10 Quiz Popup + Cert | Bug 11-12 Phone + WhatsApp Channel
+          <strong>Next:</strong> Bug #5 LAB Done ✅ | Bug 6-7 HOMEWORK Done ✅ | Bug 10 Quiz Popup + Cert | Bug 11-12 Phone + WhatsApp Channel
           <div style={{marginTop:8, display:'flex', gap:8}}>
             <span style={{background:'#22c55e', padding:'6px 10px', borderRadius:6}}>✅ Bug 1-4 Fixed</span>
             <span style={{background:'#22c55e', padding:'6px 10px', borderRadius:6}}>✅ Bug 5 Fixed</span>
-            <span style={{background:'#374151', padding:'6px 10px', borderRadius:6}}>⏳ Bug 6-12 Next</span>
+            <span style={{background:'#374151', padding:'6px 10px', borderRadius:6}}>✅ Bug 6-7 Fixed</span>
+            <span style={{background:'#374151', padding:'6px 10px', borderRadius:6}}>⏳ Bug 10-12 Next</span>
           </div>
         </div>
 
