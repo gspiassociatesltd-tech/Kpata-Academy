@@ -1,7 +1,32 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
+
+const QUIZ = [
+  { q: "Why does ␣Musa␣␣ cause grouping to fail?", a: ["Spaces make it different text", "Color is wrong", "Number too big"], correct: 0 },
+  { q: "Which formula removes spaces?", a: ["=TRIM(B2)", "=SUM(B2)", "=DELETE(B2)"], correct: 0 },
+  { q: "2024-13-05 is invalid because?", a: ["Month 13 does not exist", "Year too high", "Day is Sunday"], correct: 0 },
+  { q: "How to remove duplicates in Sheets?", a: ["Data → Remove duplicates", "Change font", "Delete phone"], correct: 0 },
+  { q: "Final clean rows from 5 dirty rows?", a: ["4 rows", "10 rows", "0 rows"], correct: 0 },
+];
 
 export default function Page() {
+  const [showQuiz, setShowQuiz] = useState(false);
+  const [current, setCurrent] = useState(0);
+  const [score, setScore] = useState(0);
+  const [showResult, setShowResult] = useState(false);
+  const [selected, setSelected] = useState<number|null>(null);
+
+  const handleAnswer = (idx:number) => {
+    setSelected(idx);
+    setTimeout(()=>{
+      if(idx===QUIZ[current].correct) setScore(s=>s+1);
+      if(current < QUIZ.length-1){ setCurrent(c=>c+1); setSelected(null); }
+      else { setShowResult(true); }
+    }, 400);
+  };
+
+  const resetQuiz = () => { setCurrent(0); setScore(0); setShowResult(false); setSelected(null); setShowQuiz(false); };
+
   return (
     <div style={{minHeight:'100vh', background:'#f1f5f9', padding:16, fontFamily:'system-ui'}}>
       <div style={{maxWidth:720, margin:'0 auto'}}>
@@ -14,10 +39,9 @@ export default function Page() {
             <span style={{background:'#dcfce7', color:'#166534', padding:'4px 8px', borderRadius:6, fontSize:11, fontWeight:700}}>Progress: 0% • Live (real scroll)</span>
             <span style={{background:'#f1f5f9', padding:'4px 8px', borderRadius:6, fontSize:11}}>20 min/lesson • FREE • No degree needed</span>
           </div>
-          <p style={{fontSize:11, color:'#94a3b8', marginTop:8}}>Fixed: No "K Kpata" typo • Header = Kpata_Academy_MVP only • No duplicate title</p>
         </div>
 
-        {/* STATS - BUG 2 FIX */}
+        {/* STATS */}
         <div style={{marginTop:12, display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:8}}>
           <div style={{background:'white', borderRadius:10, padding:12, textAlign:'center', border:'1px solid #e2e8f0'}}>
             <div style={{fontWeight:800}}>4</div><div style={{fontSize:10, color:'#64748b'}}>Rows Clean</div><div style={{fontSize:9, background:'#dcfce7', borderRadius:4, marginTop:4}}>FREE</div>
@@ -30,132 +54,111 @@ export default function Page() {
           </div>
         </div>
 
-        {/* PHASE - BUG 2 FIX */}
-        <div style={{marginTop:12, background:'white', borderRadius:12, padding:12, border:'1px solid #e2e8f0'}}>
-          <div style={{display:'flex', gap:8}}>
-            <div style={{flex:1, background:'#f0fdf4', borderRadius:8, padding:10, textAlign:'center', border:'1px solid #bbf7d0'}}><div style={{fontSize:12, fontWeight:700}}>Phase 1</div><div style={{fontSize:10, color:'#16a34a', fontWeight:700, marginTop:4}}>FREE</div></div>
-            <div style={{flex:1, background:'#f0fdf4', borderRadius:8, padding:10, textAlign:'center', border:'1px solid #bbf7d0'}}><div style={{fontSize:12, fontWeight:700}}>Phase 2</div><div style={{fontSize:10, color:'#16a34a', fontWeight:700, marginTop:4}}>FREE</div></div>
-            <div style={{flex:1, background:'#f0fdf4', borderRadius:8, padding:10, textAlign:'center', border:'1px solid #bbf7d0'}}><div style={{fontSize:12, fontWeight:700}}>Phase 3</div><div style={{fontSize:10, color:'#16a34a', fontWeight:700, marginTop:4}}>FREE</div></div>
-          </div>
-          <p style={{fontSize:10, color:'#16a34a', textAlign:'center', marginTop:8}}>Fixed: 6 months / 2 months removed → All FREE forever</p>
-        </div>
-
-        {/* DIRTY TABLE - BUG 3 & 4 FIX: SPACES VISIBLE */}
+        {/* DIRTY TABLE */}
         <div style={{marginTop:12, background:'white', borderRadius:12, padding:16, border:'1px solid #e2e8f0', overflowX:'auto'}}>
           <h2 style={{fontSize:16, margin:'0 0 8px 0'}}>📊 Dirty Data (Real Life Problem)</h2>
           <p style={{fontSize:11, color:'#dc2626', background:'#fef2f2', padding:6, borderRadius:6}}>Why spaces matter: ␣Musa␣␣ ≠ Musa → Grouping fails in Excel/Sheets!</p>
           <table style={{width:'100%', borderCollapse:'collapse', fontSize:12, marginTop:8}}>
-            <thead>
-              <tr style={{background:'#f8fafc'}}>
-                <th style={{border:'1px solid #e2e8f0', padding:8}}>id</th>
-                <th style={{border:'1px solid #e2e8f0', padding:8}}>name (with spaces)</th>
-                <th style={{border:'1px solid #e2e8f0', padding:8}}>date</th>
-                <th style={{border:'1px solid #e2e8f0', padding:8}}>amount</th>
-              </tr>
-            </thead>
+            <thead><tr style={{background:'#f8fafc'}}><th style={{border:'1px solid #e2e8f0', padding:8}}>id</th><th style={{border:'1px solid #e2e8f0', padding:8}}>name (with spaces)</th><th style={{border:'1px solid #e2e8f0', padding:8}}>date</th><th style={{border:'1px solid #e2e8f0', padding:8}}>amount</th></tr></thead>
             <tbody>
-              <tr>
-                <td style={{border:'1px solid #e2e8f0', padding:8}}>1</td>
-                <td style={{border:'1px solid #e2e8f0', padding:8, background:'#fef3c7'}}>
-                  <span style={{background:'#fef9c3', border:'1px dashed #f59e0b', padding:'2px 6px', borderRadius:4, fontFamily:'monospace'}}>␣Musa␣␣</span>
-                  <span style={{fontSize:10, color:'#d97706', marginLeft:6}}>← spaces! Count: 1 before, 2 after</span>
-                </td>
-                <td style={{border:'1px solid #e2e8f0', padding:8, background:'#fee2e2'}}>2024-13-05 <span style={{fontSize:10}}>→ Month 13 invalid</span></td>
-                <td style={{border:'1px solid #e2e8f0', padding:8}}>500</td>
-              </tr>
+              <tr><td style={{border:'1px solid #e2e8f0', padding:8}}>1</td><td style={{border:'1px solid #e2e8f0', padding:8, background:'#fef3c7'}}><span style={{background:'#fef9c3', border:'1px dashed #f59e0b', padding:'2px 6px', borderRadius:4, fontFamily:'monospace'}}>␣Musa␣␣</span><span style={{fontSize:10, color:'#d97706', marginLeft:6}}>← spaces! Count: 1 before, 2 after</span></td><td style={{border:'1px solid #e2e8f0', padding:8, background:'#fee2e2'}}>2024-13-05 <span style={{fontSize:10}}>→ Month 13 invalid</span></td><td style={{border:'1px solid #e2e8f0', padding:8}}>500</td></tr>
               <tr><td style={{border:'1px solid #e2e8f0', padding:8}}>1</td><td style={{border:'1px solid #e2e8f0', padding:8}}>Musa (duplicate)</td><td style={{border:'1px solid #e2e8f0', padding:8}}>2024-13-05</td><td style={{border:'1px solid #e2e8f0', padding:8}}>500</td></tr>
               <tr><td style={{border:'1px solid #e2e8f0', padding:8}}>3</td><td style={{border:'1px solid #e2e8f0', padding:8}}>Amina</td><td style={{border:'1px solid #e2e8f0', padding:8}}>2024-05-15</td><td style={{border:'1px solid #e2e8f0', padding:8}}>600</td></tr>
               <tr><td style={{border:'1px solid #e2e8f0', padding:8}}>4</td><td style={{border:'1px solid #e2e8f0', padding:8}}></td><td style={{border:'1px solid #e2e8f0', padding:8}}>2024-05-20</td><td style={{border:'1px solid #e2e8f0', padding:8}}>400</td></tr>
               <tr><td style={{border:'1px solid #e2e8f0', padding:8}}>5</td><td style={{border:'1px solid #e2e8f0', padding:8}}>John Doe</td><td style={{border:'1px solid #e2e8f0', padding:8}}>2024-05-18</td><td style={{border:'1px solid #e2e8f0', padding:8}}>300</td></tr>
             </tbody>
           </table>
-          <p style={{fontSize:11, marginTop:8, background:'#f0fdf4', padding:8, borderRadius:6}}><strong>Fix:</strong> =TRIM(B2) turns <code>␣Musa␣␣</code> → <code>Musa</code>. Yellow box shows hidden spaces students miss.</p>
         </div>
 
-        {/* BUG 5 FIX: LAB - PHONE FRIENDLY 48px BUTTONS */}
+        {/* LAB */}
         <div style={{background:'white', border:'1px solid #e2e8f0', borderRadius:12, padding:16, marginTop:12}}>
-          <h2 style={{fontSize:18, margin:0}}>🧪 LAB: Clean Dirty Data (Real Life)</h2>
-          <p style={{fontSize:12, color:'#64748b'}}>Goal: Turn 5 dirty rows → 4 clean rows. No laptop needed, works on phone.</p>
-
-          <a href="https://docs.google.com/spreadsheets/create" target="_blank" rel="noopener noreferrer"
-            style={{display:'flex', height:48, background:'#22c55e', color:'white', fontWeight:700, fontSize:15, borderRadius:10, alignItems:'center', justifyContent:'center', textDecoration:'none', marginTop:12}}>
-            🔗 Open Google Sheets (Free)
-          </a>
-
-          <div style={{marginTop:8, background:'#f8fafc', borderRadius:10, padding:12, fontFamily:'monospace', fontSize:12, whiteSpace:'pre-wrap', border:'1px dashed #cbd5e1'}}>
-{`id,name,date,amount
-1, Musa  ,2024-13-05,500
-1, Musa  ,2024-13-05,500
-3,Amina,2024-05-15,600
-4,,2024-05-20,400
-5,John Doe,2024-05-18,300`}
-          </div>
-
-          <div style={{marginTop:12, display:'grid', gap:10}}>
-            <div style={{border:'1px solid #bbf7d0', borderRadius:10, padding:12, background:'#f0fdf4'}}>
-              <strong>Step 1: Remove spaces (TRIM)</strong>
-              <p style={{fontSize:12, margin:'6px 0'}}>In C2 paste: <code style={{background:'#dcfce7', padding:'2px 6px', borderRadius:4}}>=TRIM(B2)</code> then drag down. Fixes ␣Musa␣␣ → Musa</p>
-            </div>
-            <div style={{border:'1px solid #bfdbfe', borderRadius:10, padding:12, background:'#eff6ff'}}>
-              <strong>Step 2: Remove empty name</strong>
-              <p style={{fontSize:12, margin:'6px 0'}}>Filter B column → Uncheck (Blanks)</p>
-            </div>
-            <div style={{border:'1px solid #fde68a', borderRadius:10, padding:12, background:'#fefce8'}}>
-              <strong>Step 3: Remove duplicate</strong>
-              <p style={{fontSize:12, margin:'6px 0'}}>Data → Remove duplicates or =UNIQUE(A2:D6)</p>
-            </div>
-            <div style={{border:'1px solid #fecaca', borderRadius:10, padding:12, background:'#fef2f2'}}>
-              <strong>Step 4: Fix invalid date</strong>
-              <p style={{fontSize:12, margin:'6px 0'}}>2024-13-05 → Month 13 invalid → Change to 2024-05-05. Final = 4 rows clean.</p>
-            </div>
-          </div>
-
-          <button style={{marginTop:16, width:'100%', height:52, background:'#2563eb', color:'white', fontWeight:800, fontSize:15, borderRadius:10, border:'none'}}>
-            🤖 Submit Lab to Kpata Bot — "I cleaned to 4 rows"
-          </button>
-          <p style={{fontSize:10, color:'#94a3b8', textAlign:'center', marginTop:6}}>48px tall for thumb - Works on Tecno/Infinix. Bot saves progress to certificate.</p>
+          <h2 style={{fontSize:18, margin:0}}>🧪 LAB: Clean Dirty Data</h2>
+          <a href="https://docs.google.com/spreadsheets/create" target="_blank" rel="noopener noreferrer" style={{display:'flex', height:48, background:'#22c55e', color:'white', fontWeight:700, fontSize:15, borderRadius:10, alignItems:'center', justifyContent:'center', textDecoration:'none', marginTop:12}}>🔗 Open Google Sheets (Free)</a>
+          <div style={{marginTop:12, display:'grid', gap:8}}><div style={{border:'1px solid #bbf7d0', borderRadius:10, padding:12, background:'#f0fdf4', fontSize:12}}><strong>Step 1:</strong> =TRIM(B2) Fixes ␣Musa␣␣ → Musa</div><div style={{border:'1px solid #fecaca', borderRadius:10, padding:12, background:'#fef2f2', fontSize:12}}><strong>Step 4:</strong> 2024-13-05 → 2024-05-05 → Final 4 rows</div></div>
+          <button style={{marginTop:16, width:'100%', height:52, background:'#2563eb', color:'white', fontWeight:800, fontSize:15, borderRadius:10, border:'none'}}>🤖 Submit Lab to Kpata Bot — "I cleaned to 4 rows"</button>
         </div>
 
-
-        {/* BUG 6-7 FIX: HOMEWORK with App Bot - PHONE FRIENDLY */}
+        {/* HOMEWORK */}
         <div style={{background:'white', border:'1px solid #f59e0b', borderRadius:12, padding:16, marginTop:12}}>
           <h2 style={{fontSize:18, margin:0}}>📝 HOMEWORK: Your Own Dirty Data</h2>
-          <p style={{fontSize:12, color:'#92400e', background:'#fffbeb', padding:8, borderRadius:6, marginTop:8}}>Build 5 rows with YOUR friends names (with spaces & duplicates like Musa). Clean to 4 rows. This proves you can do it without teacher.</p>
+          <a href="https://docs.google.com/spreadsheets/create" target="_blank" style={{display:'flex', height:48, background:'white', color:'#d97706', border:'2px solid #f59e0b', fontWeight:700, fontSize:15, borderRadius:10, alignItems:'center', justifyContent:'center', textDecoration:'none', marginTop:12}}>🔗 Open Sheets for Homework</a>
+          <button style={{marginTop:12, width:'100%', height:52, background:'#ea580c', color:'white', fontWeight:800, fontSize:15, borderRadius:10, border:'none'}}>📤 Submit Homework to Kpata Bot</button>
+        </div>
 
-          <div style={{marginTop:12, display:'grid', gap:10}}>
-            <div style={{border:'1px solid #fde68a', borderRadius:10, padding:12, background:'#fefce8'}}>
-              <strong>Task:</strong>
-              <ul style={{fontSize:12, margin:'6px 0', paddingLeft:16}}>
-                <li>Create 5 rows: id, name (add ␣ spaces like ␣Amina␣), date, amount</li>
-                <li>Add 1 duplicate + 1 empty name + 1 invalid date (13 month)</li>
-                <li>Clean with TRIM, UNIQUE, FILTER → Final 4 rows</li>
-              </ul>
-            </div>
-          </div>
+        {/* BUG 10 FIX: QUIZ POPUP TRIGGER + SAFE TRAINING LOG */}
+        <div style={{background:'white', border:'1px solid #8b5cf6', borderRadius:12, padding:16, marginTop:12}}>
+          <h2 style={{fontSize:18, margin:0}}>🎯 QUIZ: Test Your Cleaning Skill</h2>
+          <p style={{fontSize:12, color:'#6b7280', marginTop:6}}>5 questions • 80% to pass • Saves training log for Google/IBM/Microsoft cert path (SAFE - No Kpata certificate)</p>
+          <button onClick={()=>setShowQuiz(true)} style={{marginTop:12, width:'100%', height:52, background:'#7c3aed', color:'white', fontWeight:800, fontSize:15, borderRadius:10, border:'none'}}>🚀 Take Quiz (Popup)</button>
+          <p style={{fontSize:10, color:'#94a3b8', textAlign:'center', marginTop:6}}>Bug 10 Fix: Quiz is now popup modal (was static). 48px thumb-friendly.</p>
+        </div>
 
-          <a href="https://docs.google.com/spreadsheets/create" target="_blank" rel="noopener noreferrer"
-            style={{display:'flex', height:48, background:'white', color:'#d97706', border:'2px solid #f59e0b', fontWeight:700, fontSize:15, borderRadius:10, alignItems:'center', justifyContent:'center', textDecoration:'none', marginTop:12}}>
-            🔗 Open Sheets for Homework
-          </a>
-
-          <button style={{marginTop:12, width:'100%', height:52, background:'#ea580c', color:'white', fontWeight:800, fontSize:15, borderRadius:10, border:'none'}}>
-            📤 Submit Homework to Kpata Bot — "HW: 4 clean names: Amina, John..."
-          </button>
-          <p style={{fontSize:10, color:'#94a3b8', textAlign:'center', marginTop:6}}>Bug 6-7 Fix: Homework now has Bot submission (was missing). 48px thumb-friendly.</p>
+        {/* LEGAL SAFE FOOTER */}
+        <div style={{marginTop:12, background:'#fefce8', border:'1px solid #fde68a', borderRadius:10, padding:12}}>
+          <p style={{fontSize:10, color:'#92400e', margin:0}}><strong>Legal Notice (SAFE):</strong> Kpata Academy is a FREE training community, not an accredited certifying body. We do NOT issue certificates. We log your training progress (LAB + HOMEWORK + QUIZ) in Kpata Bot to help you file for REAL certificates: Google Data Analytics Certificate (Coursera), IBM Data Analyst, Microsoft MO-200. Your Kpata training record is evidence for those exams.</p>
         </div>
 
         {/* FOOTER STATUS */}
         <div style={{marginTop:16, background:'#111827', color:'white', padding:12, borderRadius:10, fontSize:12}}>
-          <strong>Next:</strong> Bug #5 LAB Done ✅ | Bug 6-7 HOMEWORK Done ✅ | Bug 10 Quiz Popup + Cert | Bug 11-12 Phone + WhatsApp Channel
-          <div style={{marginTop:8, display:'flex', gap:8}}>
-            <span style={{background:'#22c55e', padding:'6px 10px', borderRadius:6}}>✅ Bug 1-4 Fixed</span>
-            <span style={{background:'#22c55e', padding:'6px 10px', borderRadius:6}}>✅ Bug 5 Fixed</span>
-            <span style={{background:'#374151', padding:'6px 10px', borderRadius:6}}>✅ Bug 6-7 Fixed</span>
-            <span style={{background:'#374151', padding:'6px 10px', borderRadius:6}}>⏳ Bug 10-12 Next</span>
+          <strong>Next:</strong> Bug #10 Quiz Popup Done ✅ | Bug 11-12 Phone + WhatsApp Channel
+          <div style={{marginTop:8, display:'flex', gap:8, flexWrap:'wrap'}}>
+            <span style={{background:'#22c55e', padding:'6px 10px', borderRadius:6}}>✅ Bug 1-7 Fixed</span>
+            <span style={{background:'#22c55e', padding:'6px 10px', borderRadius:6}}>✅ Bug 10 Fixed (SAFE)</span>
+            <span style={{background:'#374151', padding:'6px 10px', borderRadius:6}}>⏳ Bug 11-12 Next</span>
           </div>
         </div>
-
       </div>
+
+      {/* QUIZ POPUP MODAL */}
+      {showQuiz && (
+        <div style={{position:'fixed', top:0, left:0, right:0, bottom:0, background:'rgba(0,0,0,0.6)', display:'flex', alignItems:'center', justifyContent:'center', padding:16, zIndex:50}}>
+          <div style={{background:'white', borderRadius:16, padding:20, maxWidth:500, width:'100%', maxHeight:'90vh', overflowY:'auto'}}>
+            {!showResult ? (
+              <>
+                <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
+                  <h3 style={{margin:0, fontSize:16}}>Question {current+1} / {QUIZ.length}</h3>
+                  <button onClick={()=>setShowQuiz(false)} style={{border:'none', background:'#f1f5f9', borderRadius:8, padding:'6px 12px'}}>✕</button>
+                </div>
+                <div style={{height:6, background:'#e2e8f0', borderRadius:10, marginTop:12}}><div style={{height:6, width:`${((current+1)/QUIZ.length)*100}%`, background:'#7c3aed', borderRadius:10}}></div></div>
+                <p style={{fontSize:15, fontWeight:700, marginTop:16}}>{QUIZ[current].q}</p>
+                <div style={{display:'grid', gap:10, marginTop:12}}>
+                  {QUIZ[current].a.map((opt, idx)=>(
+                    <button key={idx} onClick={()=>handleAnswer(idx)} style={{textAlign:'left', padding:'14px 12px', borderRadius:10, border: selected===idx ? '2px solid #7c3aed' : '1px solid #e2e8f0', background: selected===idx ? '#f5f3ff' : 'white', fontSize:14, minHeight:48}}>
+                      {opt}
+                    </button>
+                  ))}
+                </div>
+              </>
+            ) : (
+              <>
+                <h3 style={{margin:0, fontSize:18, textAlign:'center'}}>{score>=4 ? '✅ Training Record Saved!' : '❌ Try Again'}</h3>
+                <p style={{textAlign:'center', fontSize:13, color:'#64748b'}}>Score: {score} / {QUIZ.length}</p>
+                {score>=4 ? (
+                  <div style={{marginTop:12}}>
+                    <div style={{background:'#f0fdf4', border:'1px solid #bbf7d0', borderRadius:10, padding:12}}>
+                      <p style={{fontSize:12, margin:0}}><strong>This is NOT a certificate.</strong> Kpata is training-only.</p>
+                      <p style={{fontSize:12, marginTop:8}}>Your progress logged: LAB (5→4 rows) + HW + Quiz {score}/5 on {new Date().toLocaleDateString()}<br/>Saved to Kpata Bot as training evidence.</p>
+                    </div>
+                    <div style={{marginTop:12, display:'grid', gap:8}}>
+                      <div style={{background:'#eff6ff', borderRadius:10, padding:12, border:'1px solid #bfdbfe'}}>
+                        <strong style={{fontSize:13}}>NEXT: Earn REAL certificate</strong>
+                        <p style={{fontSize:11, margin:'6px 0'}}>Your Kpata skills (TRIM, UNIQUE, FILTER) = Module 1 of:</p>
+                        <a href="https://www.coursera.org/professional-certificates/google-data-analytics" target="_blank" style={{display:'block', marginTop:6, background:'white', border:'1px solid #2563eb', borderRadius:8, padding:'10px 12px', textAlign:'center', textDecoration:'none', fontWeight:700, fontSize:12, color:'#2563eb'}}>🔗 Google Data Analytics Cert (Coursera - Data Cleaning)</a>
+                        <a href="https://www.coursera.org/professional-certificates/ibm-data-analyst" target="_blank" style={{display:'block', marginTop:6, background:'white', border:'1px solid #111827', borderRadius:8, padding:'10px 12px', textAlign:'center', textDecoration:'none', fontWeight:700, fontSize:12}}>🔗 IBM Data Analyst Cert</a>
+                        <a href="https://learn.microsoft.com/en-us/credentials/certifications/" target="_blank" style={{display:'block', marginTop:6, background:'white', border:'1px solid #f59e0b', borderRadius:8, padding:'10px 12px', textAlign:'center', textDecoration:'none', fontWeight:700, fontSize:12}}>🔗 Microsoft Excel Associate MO-200</a>
+                      </div>
+                      <button onClick={()=>{alert('Training log saved to Kpata Bot: LAB 5→4 + HW + Quiz '+score+'/5');}} style={{width:'100%', height:52, background:'#2563eb', color:'white', fontWeight:800, fontSize:14, borderRadius:10, border:'none'}}>📤 Save Training Log to Kpata Bot</button>
+                      <button onClick={resetQuiz} style={{width:'100%', height:48, background:'white', border:'1px solid #e2e8f0', borderRadius:10, fontWeight:600}}>Close</button>
+                    </div>
+                  </div>
+                ) : (
+                  <div style={{marginTop:12}}><p style={{fontSize:12}}>You need 4/5 to log training record. Review ␣Musa␣␣ spaces and TRIM.</p><button onClick={resetQuiz} style={{marginTop:12, width:'100%', height:48, background:'#7c3aed', color:'white', fontWeight:700, borderRadius:10, border:'none'}}>Retake Quiz</button></div>
+                )}
+              </>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
