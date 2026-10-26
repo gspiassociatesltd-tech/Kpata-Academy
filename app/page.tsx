@@ -112,7 +112,7 @@ export default function Page() {
             <p style={{fontSize:12, margin:0, fontWeight:700}}>📢 WhatsApp Training Channel</p>
             <p style={{fontSize:11, color:'#166534', marginTop:4}}>Get daily 5-min cleaning tips • LAB reminders • Bot progress logs</p>
             {/* TODO: Replace with real WhatsApp Channel link */}
-            <a href="https://whatsapp.com/channel/0029VaKpataAcademy" target="_blank" style={{display:'flex', height:48, background:'#25D366', color:'white', fontWeight:800, fontSize:14, borderRadius:10, alignItems:'center', justifyContent:'center', textDecoration:'none', marginTop:10}}>
+            <a href="https://whatsapp.com/channel/0029Vb7eUeBGzzKTHPIaoe0b" target="_blank" style={{display:'flex', height:48, background:'#25D366', color:'white', fontWeight:800, fontSize:14, borderRadius:10, alignItems:'center', justifyContent:'center', textDecoration:'none', marginTop:10}}>
               📱 Join WhatsApp Channel (FREE)
             </a>
             <p style={{fontSize:9, color:'#94a3b8', marginTop:6, textAlign:'center'}}>REPLACE LINK: Edit page.tsx line with your real channel: whatsapp.com/channel/...</p>
@@ -138,7 +138,7 @@ export default function Page() {
 
       {/* STICKY BOTTOM BAR - PHONE */}
       <div style={{position:'fixed', bottom:0, left:0, right:0, background:'white', borderTop:'1px solid #e2e8f0', padding:'10px 16px', display:'flex', gap:8, zIndex:40, boxShadow:'0 -2px 10px rgba(0,0,0,0.1)'}}>
-        <a href="https://whatsapp.com/channel/0029VaKpataAcademy" target="_blank" style={{flex:2, height:44, background:'#25D366', color:'white', fontWeight:800, fontSize:13, borderRadius:10, display:'flex', alignItems:'center', justifyContent:'center', textDecoration:'none'}}>📱 WhatsApp</a>
+        <a href="https://whatsapp.com/channel/0029Vb7eUeBGzzKTHPIaoe0b" target="_blank" style={{flex:2, height:44, background:'#25D366', color:'white', fontWeight:800, fontSize:13, borderRadius:10, display:'flex', alignItems:'center', justifyContent:'center', textDecoration:'none'}}>📱 WhatsApp</a>
         <button onClick={()=>window.scrollTo({top:0, behavior:'smooth'})} style={{flex:1, height:44, background:'#111827', color:'white', fontWeight:700, fontSize:13, borderRadius:10, border:'none'}}>Top ↑</button>
         <button onClick={()=>setShowQuiz(true)} style={{flex:1, height:44, background:'#7c3aed', color:'white', fontWeight:700, fontSize:13, borderRadius:10, border:'none'}}>Quiz</button>
       </div>
