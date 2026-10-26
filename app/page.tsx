@@ -99,14 +99,31 @@ export default function Page() {
         </div>
 
         <div style={{background:'white', border:'1px solid #e2e8f0', borderRadius:12, padding:16, marginTop:12}}>
-          <h2 style={{fontSize:18, margin:0}}>🧪 LAB: Clean Dirty Data</h2>
+          <h2 style={{fontSize:18, margin:0}}>🧪 LAB: Clean Dirty Data (20-min Lesson)</h2>
+          <p style={{fontSize:12, color:'#64748b', marginTop:6}}>Follow these 5 steps in Google Sheets — FREE, no laptop needed, phone OK</p>
+          
+          <div style={{background:'#f8fafc', borderRadius:10, padding:12, marginTop:12}}>
+            <p style={{fontSize:13, fontWeight:700, margin:0}}>Step 1: TRIM spaces</p>
+            <p style={{fontSize:11, margin:'4px 0 0 0'}}>Formula: <code style={{background:'white', padding:'2px 6px', borderRadius:4, border:'1px solid #e2e8f0'}}>=TRIM(B2)</code> — removes ␣Musa␣␣ → Musa</p>
+            <p style={{fontSize:11, margin:'8px 0 0 0', fontWeight:700}}>Step 2: Fix invalid date</p>
+            <p style={{fontSize:11, margin:'4px 0 0 0'}}>2024-13-05 → 2024-05-13 (Month 13 no exist!)</p>
+            <p style={{fontSize:11, margin:'8px 0 0 0', fontWeight:700}}>Step 3: Remove duplicates</p>
+            <p style={{fontSize:11, margin:'4px 0 0 0'}}>Data → Remove duplicates → Select id column</p>
+            <p style={{fontSize:11, margin:'8px 0 0 0', fontWeight:700}}>Step 4: Fill empty name</p>
+            <p style={{fontSize:11, margin:'4px 0 0 0'}}>Row 4 empty → Filter blanks → Type "Unknown" or delete row</p>
+            <p style={{fontSize:11, margin:'8px 0 0 0', fontWeight:700}}>Step 5: Count final</p>
+            <p style={{fontSize:11, margin:'4px 0 0 0'}}>5 dirty → 4 clean rows = 100% practical</p>
+          </div>
+
           <a href="https://docs.google.com/spreadsheets/create" target="_blank" style={{display:'flex', height:48, background:'#22c55e', color:'white', fontWeight:700, fontSize:15, borderRadius:10, alignItems:'center', justifyContent:'center', textDecoration:'none', marginTop:12}}>🔗 Open Google Sheets (Free)</a>
           <button onClick={()=>openLog("LAB")} style={{marginTop:12, width:'100%', height:52, background:'#2563eb', color:'white', fontWeight:800, fontSize:15, borderRadius:10, border:'none'}}>🤖 Submit LAB to Google Sheet — 3B</button>
-          <p style={{fontSize:10, color:'#16a34a', textAlign:'center', marginTop:6}}>3B: Saves Name + Phone + LAB 5→4 → Google Sheet Kpata_Students_Log</p>
+          <p style={{fontSize:10, color:'#16a34a', textAlign:'center', marginTop:6}}>3B Active: Saves Name + Phone + LAB 5→4 → Google Sheet Kpata_Students_Log</p>
         </div>
 
         <div style={{background:'white', border:'1px solid #f59e0b', borderRadius:12, padding:16, marginTop:12}}>
-          <h2 style={{fontSize:18, margin:0}}>📝 HOMEWORK</h2>
+          <h2 style={{fontSize:18, margin:0}}>📝 HOMEWORK: Clean 4 Names</h2>
+          <p style={{fontSize:12, color:'#64748b', marginTop:6}}>Create new sheet: Remove spaces, duplicates, blanks — Screenshot as evidence</p>
+          <div style={{background:'#fffbeb', borderRadius:8, padding:8, marginTop:8, fontSize:11}}>Task: List 4 clean Nigerian names (Musa, Amina, John Doe, Unknown) — Use TRIM + UNIQUE</div>
           <button onClick={()=>openLog("HW")} style={{marginTop:12, width:'100%', height:52, background:'#ea580c', color:'white', fontWeight:800, fontSize:15, borderRadius:10, border:'none'}}>📤 Submit Homework to Google Sheet — 3B</button>
         </div>
 
