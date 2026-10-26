@@ -28,7 +28,7 @@ export default function Page() {
   const resetQuiz = () => { setCurrent(0); setScore(0); setShowResult(false); setSelected(null); setShowQuiz(false); };
 
   return (
-    <div style={{minHeight:'100vh', background:'#f1f5f9', padding:16, fontFamily:'system-ui'}}>
+    <div style={{minHeight:'100vh', background:'#f1f5f9', padding:'16px 16px 80px 16px', fontFamily:'system-ui'}}>
       <div style={{maxWidth:720, margin:'0 auto'}}>
         
         {/* HEADER - BUG 1 FIX */}
@@ -93,6 +93,33 @@ export default function Page() {
           <p style={{fontSize:10, color:'#94a3b8', textAlign:'center', marginTop:6}}>Bug 10 Fix: Quiz is now popup modal (was static). 48px thumb-friendly.</p>
         </div>
 
+
+        {/* BUG 11-12 FIX: SOCIALS + WHATSAPP CHANNEL + PHONE STICKY */}
+        <div style={{background:'white', border:'1px solid #e2e8f0', borderRadius:12, padding:16, marginTop:12}}>
+          <h2 style={{fontSize:16, margin:0}}>📱 Connect with Kpata Academy</h2>
+          <p style={{fontSize:11, color:'#64748b', marginTop:6}}>Follow training updates • Ask questions • Join community</p>
+          
+          <div style={{marginTop:12, display:'grid', gridTemplateColumns:'1fr 1fr', gap:8}}>
+            <a href="https://www.facebook.com/abaniwog" target="_blank" style={{background:'#1877f2', color:'white', padding:'12px', borderRadius:10, textAlign:'center', textDecoration:'none', fontWeight:700, fontSize:12}}>Facebook</a>
+            <a href="https://instagram.com/gspiassociatesltd" target="_blank" style={{background:'linear-gradient(45deg,#feda75,#fa7e1e,#d62976,#962fbf)', color:'white', padding:'12px', borderRadius:10, textAlign:'center', textDecoration:'none', fontWeight:700, fontSize:12}}>Instagram</a>
+            <a href="https://youtube.com/@godwinabaniwo6755" target="_blank" style={{background:'#ff0000', color:'white', padding:'12px', borderRadius:10, textAlign:'center', textDecoration:'none', fontWeight:700, fontSize:12}}>YouTube</a>
+            <a href="https://x.com/AbaniwoGodwin" target="_blank" style={{background:'#000', color:'white', padding:'12px', borderRadius:10, textAlign:'center', textDecoration:'none', fontWeight:700, fontSize:12}}>X (Twitter)</a>
+            <a href="https://www.tiktok.com/@user4981039143171" target="_blank" style={{background:'#000', color:'white', padding:'12px', borderRadius:10, textAlign:'center', textDecoration:'none', fontWeight:700, fontSize:12, border:'1px solid #333'}}>TikTok</a>
+            <a href="https://www.linkedin.com/in/godwin-abaniwo-803268296" target="_blank" style={{background:'#0a66c2', color:'white', padding:'12px', borderRadius:10, textAlign:'center', textDecoration:'none', fontWeight:700, fontSize:12}}>LinkedIn</a>
+          </div>
+
+          <div style={{marginTop:12, background:'#f0fdf4', border:'1px solid #bbf7d0', borderRadius:10, padding:12}}>
+            <p style={{fontSize:12, margin:0, fontWeight:700}}>📢 WhatsApp Training Channel</p>
+            <p style={{fontSize:11, color:'#166534', marginTop:4}}>Get daily 5-min cleaning tips • LAB reminders • Bot progress logs</p>
+            {/* TODO: Replace with real WhatsApp Channel link */}
+            <a href="https://whatsapp.com/channel/0029VaKpataAcademy" target="_blank" style={{display:'flex', height:48, background:'#25D366', color:'white', fontWeight:800, fontSize:14, borderRadius:10, alignItems:'center', justifyContent:'center', textDecoration:'none', marginTop:10}}>
+              📱 Join WhatsApp Channel (FREE)
+            </a>
+            <p style={{fontSize:9, color:'#94a3b8', marginTop:6, textAlign:'center'}}>REPLACE LINK: Edit page.tsx line with your real channel: whatsapp.com/channel/...</p>
+          </div>
+        </div>
+
+
         {/* LEGAL SAFE FOOTER */}
         <div style={{marginTop:12, background:'#fefce8', border:'1px solid #fde68a', borderRadius:10, padding:12}}>
           <p style={{fontSize:10, color:'#92400e', margin:0}}><strong>Legal Notice (SAFE):</strong> Kpata Academy is a FREE training community, not an accredited certifying body. We do NOT issue certificates. We log your training progress (LAB + HOMEWORK + QUIZ) in Kpata Bot to help you file for REAL certificates: Google Data Analytics Certificate (Coursera), IBM Data Analyst, Microsoft MO-200. Your Kpata training record is evidence for those exams.</p>
@@ -100,14 +127,22 @@ export default function Page() {
 
         {/* FOOTER STATUS */}
         <div style={{marginTop:16, background:'#111827', color:'white', padding:12, borderRadius:10, fontSize:12}}>
-          <strong>Next:</strong> Bug #10 Quiz Popup Done ✅ | Bug 11-12 Phone + WhatsApp Channel
+          <strong>Next:</strong> All Bugs Fixed ✅✅✅
           <div style={{marginTop:8, display:'flex', gap:8, flexWrap:'wrap'}}>
             <span style={{background:'#22c55e', padding:'6px 10px', borderRadius:6}}>✅ Bug 1-7 Fixed</span>
             <span style={{background:'#22c55e', padding:'6px 10px', borderRadius:6}}>✅ Bug 10 Fixed (SAFE)</span>
-            <span style={{background:'#374151', padding:'6px 10px', borderRadius:6}}>⏳ Bug 11-12 Next</span>
+            <span style={{background:'#22c55e', padding:'6px 10px', borderRadius:6}}>✅ Bug 11-12 Fixed</span>
           </div>
         </div>
       </div>
+
+      {/* STICKY BOTTOM BAR - PHONE */}
+      <div style={{position:'fixed', bottom:0, left:0, right:0, background:'white', borderTop:'1px solid #e2e8f0', padding:'10px 16px', display:'flex', gap:8, zIndex:40, boxShadow:'0 -2px 10px rgba(0,0,0,0.1)'}}>
+        <a href="https://whatsapp.com/channel/0029VaKpataAcademy" target="_blank" style={{flex:2, height:44, background:'#25D366', color:'white', fontWeight:800, fontSize:13, borderRadius:10, display:'flex', alignItems:'center', justifyContent:'center', textDecoration:'none'}}>📱 WhatsApp</a>
+        <button onClick={()=>window.scrollTo({top:0, behavior:'smooth'})} style={{flex:1, height:44, background:'#111827', color:'white', fontWeight:700, fontSize:13, borderRadius:10, border:'none'}}>Top ↑</button>
+        <button onClick={()=>setShowQuiz(true)} style={{flex:1, height:44, background:'#7c3aed', color:'white', fontWeight:700, fontSize:13, borderRadius:10, border:'none'}}>Quiz</button>
+      </div>
+      <div style={{height:70}}></div>
 
       {/* QUIZ POPUP MODAL */}
       {showQuiz && (
