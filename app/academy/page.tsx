@@ -87,13 +87,7 @@ export default function Page(){
           <a href="https://www.coursera.org/professional-certificates/google-data-analytics" target="_blank" style={{display:'flex', height:44, background:'#1a73e8', color:'white', fontWeight:700, fontSize:12, borderRadius:10, alignItems:'center', justifyContent:'center', textDecoration:'none', marginTop:12}}>🔗 Backup: Google Data Analytics Official — Same Curriculum</a>
         </div>
 
-        <div style={{marginTop:12, display:'grid', gridTemplateColumns:'1fr 1fr 1fr', gap:8}}>
-          <div style={{background:'white', borderRadius:10, padding:12, textAlign:'center', border:'1px solid #e2e8f0'}}><div style={{fontWeight:800}}>4</div><div style={{fontSize:10, color:'#64748b'}}>Rows Clean</div><div style={{fontSize:9, background:'#dcfce7', borderRadius:4, marginTop:4}}>FREE</div></div>
-          <div style={{background:'white', borderRadius:10, padding:12, textAlign:'center', border:'1px solid #e2e8f0'}}><div style={{fontWeight:800}}>N500</div><div style={{fontSize:10, color:'#64748b'}}>Earn / Job</div><div style={{fontSize:9, background:'#fef3c7', borderRadius:4, marginTop:4}}>Gig LIVE</div></div>
-          <div style={{background:'white', borderRadius:10, padding:12, textAlign:'center', border:'1px solid #e2e8f0'}}><div style={{fontWeight:800}}>Google</div><div style={{fontSize:10, color:'#64748b'}}>Cert Path SAFE</div><div style={{fontSize:9, background:'#dcfce7', borderRadius:4, marginTop:4}}>Training Only</div></div>
-        </div>
-
-        <div style={{marginTop:12, background:'white', borderRadius:12, padding:16, border:'1px solid #e2e8f0'}}>
+                <div style={{marginTop:12, background:'white', borderRadius:12, padding:16, border:'1px solid #e2e8f0'}}>
           <h2 style={{margin:0, fontSize:16}}>📖 Lesson 1 Deep: Dirty Room Analogy — Morning Lesson</h2>
           <p style={{fontSize:13, lineHeight:1.7, marginTop:10, color:'#1e293b'}}>Dirty data is like a <strong>dirty room with clothes on the ground</strong> — you cannot find your shoes until you arrange the room. Shirts on chair, trousers on floor, socks under bed.</p>
           <p style={{fontSize:12, lineHeight:1.7, marginTop:8, color:'#334155'}}>Same with data. You write "Musa" 2 times, leave name empty, type month 13. Excel counts " Musa  " and "Musa" as different. Report says 5 customers, real is 4. Wrong decision.</p>
