@@ -78,7 +78,6 @@ export default function Page(){
             <span style={{background:'#dcfce7', color:'#166534', padding:'4px 8px', borderRadius:6, fontSize:11, fontWeight:700}}>Progress: 0% • Live</span>
             <span style={{background:'#f1f5f9', padding:'4px 8px', borderRadius:6, fontSize:11}}>Self-paced • 2G • Tecno/Infinix OK</span>
           </div>
-          <a href="https://www.coursera.org/professional-certificates/google-data-analytics" target="_blank" style={{display:'flex', height:44, background:'#1a73e8', color:'white', fontWeight:700, fontSize:12, borderRadius:10, alignItems:'center', justifyContent:'center', textDecoration:'none', marginTop:12}}>🔗 Backup: Google Data Analytics Official</a>
         </div>
 
         <div style={{marginTop:12, background:'white', borderRadius:12, padding:16, border:'1px solid #e2e8f0'}}>
@@ -86,7 +85,6 @@ export default function Page(){
           <p style={{fontSize:13, lineHeight:1.7, marginTop:10, color:'#1e293b'}}>Dirty data is like a <strong>dirty room with clothes on the ground</strong> — you cannot find your shoes until you arrange the room. You have shirts on chair, trousers on floor, socks under bed. You want to go out, you cannot find your belt. Why? Room is dirty, not arranged.</p>
           <p style={{fontSize:12, lineHeight:1.7, marginTop:8, color:'#334155'}}>Same with data. You have sales in book. You write "Musa" 2 times, you leave customer name empty, you type month 13 (no month 13). Excel counts " Musa  " and "Musa" as different customers. Your sales report says you have 5 customers, but real is 4. Wrong decision because data dirty.</p>
           <div style={{background:'#fffbeb', border:'1px solid #fde68a', padding:10, borderRadius:8, marginTop:10, fontSize:12}}><strong>Simple English — Dirty Room:</strong> Clothes on ground = duplicate data. Empty space where shoe should be = blank data. Shirt with wrong size tag = invalid date 2024-13-05. You must arrange room first: fold clothes (remove spaces), throw away duplicate shirt (remove duplicates), fill empty box (fill blanks), fix wrong tag (fix date). Then room clean, you can find everything fast. Same with data — clean first, then analyze.</div>
-          <div style={{background:'#eff6ff', border:'1px solid #bfdbfe', padding:10, borderRadius:8, marginTop:8, fontSize:11}}><strong>🎯 Google Mapping:</strong> This = Google Course 2 + 3 — Skill: Data Cleansing, Data Validation, Tool: Spreadsheet Software. Same curriculum, simple English.</div>
         </div>
 
         <div style={{marginTop:12, background:'white', borderRadius:12, padding:16, border:'1px solid #e2e8f0', overflowX:'auto'}}>
